@@ -1,10 +1,9 @@
 import React from 'react'
+import Test from "./Test";
 
 const App: React.FC = () => {
   return (
-    <h1>
-      QQ
-    </h1>
+    <Test/>
   )
 }
 
