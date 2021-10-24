@@ -1,24 +1,15 @@
-interface IColor {
-  main: string,
-  light: string
-}
+import {DefaultTheme} from "styled-components";
 
-export interface IColors {
-  primary: IColor,
-  danger: IColor
-}
-
-const LIGHT_THEME_COLORS: IColors = {
-  primary: {
-    main: '#899441',
-    light: '#a8b64f'
+export const LIGHT_THEME: DefaultTheme = {
+  colors: {
+    primary: {
+      main: '#899441',
+      light: '#a8b64f'
+    },
+    danger: {
+      main: '#dc3e22',
+      light: '#ee735d'
+    }
   },
-  danger: {
-    main: '#dc3e22',
-    light: '#ee735d'
-  }
-}
-
-export const LIGHT_THEME = {
-  colors: LIGHT_THEME_COLORS
+  fontColor: '#fff'
 }

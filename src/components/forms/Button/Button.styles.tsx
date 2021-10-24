@@ -1,5 +1,4 @@
-import styled, {css} from 'styled-components'
-import {IColors} from "../../../utils/constants/themes.constants";
+import styled, {css, IColors} from 'styled-components'
 
 interface StyledButtonProps {
   readonly color?: keyof IColors,
@@ -11,18 +10,20 @@ export const Button = styled.button<StyledButtonProps>`
   border: none;
   font-size: 16px;
   font-weight: 500;
-  color: #fff;
   transition-duration: .3s;
   transition-property: background-color, color, border-color;
   
-  ${({color = 'primary', theme: {colors}, transparent}) => css`
+  ${({color = 'primary', theme: {colors, fontColor}}) =>
+  css`
+    color: ${fontColor};
     background-color: ${colors[color].light};
     
     :hover {
       background-color: ${colors[color].main};
     }
-    
-    ${transparent && css`
+  `}
+  
+  ${({color = 'primary', theme: {colors, fontColor}, transparent}) => transparent && css`
       padding: 17px 48px;
       background-color: transparent;
       border: 2px solid ${colors[color].light};
@@ -30,9 +31,8 @@ export const Button = styled.button<StyledButtonProps>`
       
       :hover {
         border-color: transparent;
-        color: #fff;
+        color: ${fontColor};
         background-color: ${colors[color].main};
       }
-    `}
   `}
 `
