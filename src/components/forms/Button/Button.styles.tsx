@@ -1,7 +1,9 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
+import {COLORS} from "../../../utils/constants/themes.constants";
 
 interface StyledButtonProps {
-  readonly danger?: boolean
+  readonly color?: keyof typeof COLORS,
+  readonly transparent?: boolean
 }
 
 export const Button = styled.button<StyledButtonProps>`
@@ -10,22 +12,22 @@ export const Button = styled.button<StyledButtonProps>`
   font-size: 16px;
   font-weight: 500;
   color: #fff;
-  background-color: ${props => props.danger ? '#ee735d' : '#a8b64f'};
+  background-color: ${({color}) => color ? COLORS[color].light : COLORS.primary.light};
   transition-duration: .3s;
   transition-property: background-color, color, border-color;
   :hover {
-    background-color: ${props => props.danger ? '#dc3e22' : '#899441'};
+    background-color: ${({color}) => color ? COLORS[color].main : COLORS.primary.main};
   }
-`
-
-export const TransparentButton = styled(Button)<StyledButtonProps>`
+  
+  ${({transparent, color}) => transparent && css`
     padding: 17px 48px;
-    border: 2px solid ${props => props.danger ? '#ee735d' : '#a8b64f'};
-    color: ${props => props.danger ? '#ee735d' : '#a8b64f'};
+    border: 2px solid ${color ? COLORS[color].main : COLORS.primary.main};
+    color: ${color ? COLORS[color].main : COLORS.primary.main};
     background-color: transparent;
     :hover {
       border-color: transparent;
       color: #fff;
-      background-color: ${props => props.danger ? '#dc3e22' : '#899441'};
+      background-color: ${color ? COLORS[color].main : COLORS.primary.main};
     }
+  `}
 `
