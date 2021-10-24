@@ -1,15 +1,14 @@
 interface IColor {
   main: string,
-  light?: string
+  light: string
 }
 
-// this function is needed in order to force TypeScript to recognize object keys as separate elements during typing
-function makeObjectKeysKeyofable<T extends Record<any, IColor>>(cfg: T) : T {
-  return cfg;
+export interface IColors {
+  primary: IColor,
+  danger: IColor
 }
-// todo по по окончании сделать отдельный интерфейс для типов цветов и захардкодить их
 
-export const COLORS = makeObjectKeysKeyofable({
+const LIGHT_THEME_COLORS: IColors = {
   primary: {
     main: '#899441',
     light: '#a8b64f'
@@ -18,8 +17,8 @@ export const COLORS = makeObjectKeysKeyofable({
     main: '#dc3e22',
     light: '#ee735d'
   }
-})
+}
 
-export const defaultTheme = {
-  colors: COLORS
+export const LIGHT_THEME = {
+  colors: LIGHT_THEME_COLORS
 }
