@@ -1,16 +1,11 @@
 import React from 'react'
 import {
   StyledHeaderContainer,
-  StyledHeaderContentContainer,
+  StyledHeaderContentContainer, StyledStatistic,
 } from './Header.styles'
 import { ReactComponent as TomatoSVG } from '../../../assets/images/tomato.svg'
-import { StyledLink } from '../../typography/Link/Link.styles'
 import { ReactComponent as StatisticSVG } from '../../../assets/images/statistic.svg'
-import styled from 'styled-components'
-
-const StyledStatistic = styled(StyledLink)`
-  margin-left: auto;
-`
+import { StyledLink } from '../../typography'
 
 const Header = () => {
   return (

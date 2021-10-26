@@ -13,9 +13,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-weight: 500;
   transition-property: background-color, color, border-color;
 
-  ${({ color = 'primary', theme: { colors, fontColor , transitionDuration } }) => css`
+  ${({ color = 'primary', theme: { colors, invertedTextColor , transitionDuration } }) => css`
     transition-duration: ${transitionDuration}ms;
-    color: ${fontColor};
+    color: ${invertedTextColor};
     background-color: ${colors[color].normal};
 
     :hover {
@@ -23,7 +23,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     }
   `}
 
-  ${({ color = 'primary', theme: { colors, fontColor }, transparent }) => transparent && css`
+  ${({ color = 'primary', theme: { colors, invertedTextColor }, transparent }) => transparent && css`
     padding: 17px 48px;
     background-color: transparent;
     border: 2px solid ${colors[color].normal};
@@ -31,7 +31,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
     :hover {
       border-color: transparent;
-      color: ${fontColor};
+      color: ${invertedTextColor};
       background-color: ${colors[color].dark};
     }
   `}

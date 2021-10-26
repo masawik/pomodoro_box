@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { StyledLink } from '../../typography'
 
 export const StyledHeaderContainer = styled.div`
   height: 70px;
@@ -14,4 +15,8 @@ export const StyledHeaderContentContainer = styled.div`
   ${({ theme: { layoutWidth } }) => css`
     max-width: ${layoutWidth}px;
   `}
+`
+
+export const StyledStatistic = styled(StyledLink)`
+  margin-left: auto;
 `

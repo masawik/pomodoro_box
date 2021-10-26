@@ -11,7 +11,8 @@ export interface IColors {
 
 export interface Theme {
   colors: IColors,
-  fontColor: string,
+  textColor: string,
+  invertedTextColor: string,
   layoutWidth: number,
   linkColor: keyof IColors,
   transitionDuration: number
@@ -31,7 +32,8 @@ const LIGHT_THEME_COLORS: IColors = {
 
 export const LIGHT_THEME: Theme = {
   colors: LIGHT_THEME_COLORS,
-  fontColor: '#fff',
+  textColor: '#333',
+  invertedTextColor: '#fff',
   layoutWidth: 1280,
   linkColor: 'danger',
   transitionDuration: 300
