@@ -1,17 +1,6 @@
 import 'styled-components'
-interface IColor {
-  main: string,
-  light: string
-}
+import { Theme } from './utils/constants/themes.constants'
 
 declare module 'styled-components' {
-  export interface IColors {
-    primary: IColor,
-    danger: IColor
-  }
-
-  export interface DefaultTheme {
-    colors: IColors,
-    fontColor: string
-  }
+  export interface DefaultTheme extends Theme {}
 }
