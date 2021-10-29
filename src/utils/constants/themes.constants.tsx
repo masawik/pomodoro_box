@@ -6,7 +6,8 @@ interface IColor {
 
 export interface IColors {
   primary: IColor,
-  danger: IColor
+  danger: IColor,
+  secondary: IColor
 }
 
 export interface Theme {
@@ -28,6 +29,11 @@ const LIGHT_THEME_COLORS: IColors = {
     normal: '#dc3e22',
     light: '#ee735d'
   },
+  secondary: {
+    dark: '#999999',
+    normal: '#C4C4C4',
+    light: '#F4F4F4'
+  }
 }
 
 export const LIGHT_THEME: Theme = {
