@@ -7,7 +7,8 @@ import {
 } from '../../components/typography/List/List.styles'
 import StyledH1 from '../../components/typography/H1/H1.styles'
 import { LeftSide } from './TimerPage.styles'
-import NewTargetForm from '../../components/NewTargetForm/NewTargetForm'
+import NewTaskForm from '../../components/NewTaskForm/NewTaskForm'
+
 
 const InstructionListContent = [
   'Выберите категорию и напишите название текущей задачи',
@@ -32,7 +33,7 @@ const TimerPage = () => {
           {InstructionListContent}
         </StyledUl>
 
-        <NewTargetForm />
+        <NewTaskForm />
       </LeftSide>
     </PageContentContainer>
   )

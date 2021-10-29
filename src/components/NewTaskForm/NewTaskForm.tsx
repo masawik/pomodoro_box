@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import {
   StyledNewTargetFormInput,
-} from './NewTargetForm.styles'
+} from './NewTaskForm.styles'
 import { StyledButton } from '../forms'
 
-const NewTargetForm = () => {
+const NewTaskForm = () => {
   
   const [targetName, setTargetName] = useState<string>('')
 
@@ -37,4 +37,4 @@ const NewTargetForm = () => {
   )
 }
 
-export default NewTargetForm
+export default NewTaskForm
