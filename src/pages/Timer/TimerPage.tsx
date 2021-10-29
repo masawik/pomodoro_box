@@ -7,6 +7,7 @@ import {
 } from '../../components/typography/List/List.styles'
 import StyledH1 from '../../components/typography/H1/H1.styles'
 import { LeftSide } from './TimerPage.styles'
+import NewTargetForm from '../../components/NewTargetForm/NewTargetForm'
 
 const InstructionListContent = [
   'Выберите категорию и напишите название текущей задачи',
@@ -19,14 +20,19 @@ const InstructionListContent = [
   <StyledLi key={`_${index}`}>{li}</StyledLi>
 ))
 
+
 const TimerPage = () => {
   return (
     <PageContentContainer>
       <LeftSide>
         <StyledH1>Ура! Теперь можно начать работать:</StyledH1>
-        <StyledUl>
+        <StyledUl
+          style={{ 'marginTop': '16px' }}
+        >
           {InstructionListContent}
         </StyledUl>
+
+        <NewTargetForm />
       </LeftSide>
     </PageContentContainer>
   )
