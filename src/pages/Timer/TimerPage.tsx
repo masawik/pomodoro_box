@@ -6,8 +6,9 @@ import {
   StyledUl,
 } from '../../components/typography/List/List.styles'
 import StyledH1 from '../../components/typography/H1/H1.styles'
-import { LeftSide } from './TimerPage.styles'
+import { LeftSide, TaskListContainer } from './TimerPage.styles'
 import NewTaskForm from '../../components/NewTaskForm/NewTaskForm'
+import TaskList from '../../components/TaskList/TaskList'
 
 
 const InstructionListContent = [
@@ -33,7 +34,10 @@ const TimerPage = () => {
           {InstructionListContent}
         </StyledUl>
 
-        <NewTaskForm />
+        <TaskListContainer>
+          <NewTaskForm />
+          <TaskList />
+        </TaskListContainer>
       </LeftSide>
     </PageContentContainer>
   )
