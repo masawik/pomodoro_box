@@ -5,7 +5,10 @@ import { TaskListUl, TotalTimeSum } from './TaskList.styles'
 const TaskList = () => {
   return (
     <div>
-      <TaskListUl>
+      <TaskListUl
+        onClick={(e) => { // @ts-ignore
+          window.t = e}}
+      >
         <TaskListItem
           name='Тестовое название'
           count={1}

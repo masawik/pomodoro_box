@@ -1,16 +1,14 @@
 import React from 'react'
 import {
   TaskListLi,
-  Count, MenuBtn, MenuBtnDot,
+  Count,
 } from './TaskListItem.styles'
-import Popup from '../../layout/Popup/Popup'
+import TaskListItemMenu from './TaskListItemMenu/TaskListItemMenu'
 
 export interface ItaskListItemProps {
   name: string,
   count: number
 }
-
-const $menuBtn = (<MenuBtn><MenuBtnDot /><MenuBtnDot /><MenuBtnDot /></MenuBtn>)
 
 const TaskListItem = ({ count, name }: ItaskListItemProps) => {
   return (
@@ -19,13 +17,7 @@ const TaskListItem = ({ count, name }: ItaskListItemProps) => {
         {count}
       </Count>
       {name}
-
-
-      <Popup
-        button={$menuBtn}
-      >
-        qq
-      </Popup>
+      <TaskListItemMenu />
     </TaskListLi>
   )
 }

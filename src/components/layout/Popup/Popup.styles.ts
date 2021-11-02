@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
 export const StyledPopup = styled.div`
-  padding: 15px;
   position: absolute;
+  padding: 6px 0;
   
   ${({ theme: { colors, backgroundColor } }) => css`
     &, ::after {

@@ -27,7 +27,7 @@ const Popup: React.FC<IPopupProps> = ({
     const coords = btnRef.current.children[0].getBoundingClientRect()
     setBtnPosition({
       top: coords.bottom + window.scrollY + 10,
-      left: coords.left,
+      left: coords.left - 60,
     })
     setIsOpened(true)
   }
