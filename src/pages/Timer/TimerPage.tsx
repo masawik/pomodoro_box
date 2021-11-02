@@ -12,6 +12,7 @@ const TimerPage = () => {
       <LeftSide>
 
         <Instruction />
+
         <TaskListContainer>
           <NewTaskForm />
           <TaskList />

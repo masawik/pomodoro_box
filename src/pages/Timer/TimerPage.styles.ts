@@ -6,4 +6,9 @@ export const LeftSide = styled.div`
 
 export const TaskListContainer = styled.div`
   max-width: 370px;
+  
+  ul {
+    margin-top: 25px;
+  }
 `
+

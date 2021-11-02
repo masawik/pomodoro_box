@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import {
-  StyledNewTargetFormInput,
+  NewTaskInput,
 } from './NewTaskForm.styles'
 import { StyledButton } from '../forms'
 
@@ -23,7 +23,7 @@ const NewTaskForm = () => {
     <form
       onSubmit={onSubmit}
     >
-      <StyledNewTargetFormInput
+      <NewTaskInput
         value={targetName}
         onChange={inputHandler}
         placeholder='Название задачи'

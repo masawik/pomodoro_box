@@ -1,9 +1,20 @@
 import styled, { css } from 'styled-components'
 
-export const StyledLi = styled.li`
+export const TaskListLi = styled.li`
   display: flex;
   align-items: center;
   list-style: none;
+  padding: 15px 0;
+
+  ${({ theme: { colors } }) => css`
+    border-top: 1px solid ${colors.secondary.light};
+    
+    :last-child {
+      border-bottom: 1px solid ${colors.secondary.light};
+    }
+  `}
+  
+  
 `
 
 export const Count = styled.div`
@@ -15,7 +26,7 @@ export const Count = styled.div`
   width: 23px;
   height: 23px;
   font-size: 16px;
-  
+
   ${({ theme: { colors } }) => css`
     border: 1px solid ${colors.secondary.normal};
   `}
@@ -28,7 +39,7 @@ export const MenuBtn = styled.button`
   border: none;
   background: none;
   transform: translateX(10px);
-  
+
   span:not(:last-child) {
     margin-right: 4px;
   }
@@ -38,7 +49,7 @@ export const MenuBtnDot = styled.span`
   border-radius: 50%;
   width: 6px;
   height: 6px;
-  
+
   ${({ theme: { colors } }) => css`
     background-color: ${colors.secondary.normal};
   `}
