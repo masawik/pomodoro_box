@@ -23,3 +23,7 @@ export const StyledPopup = styled.div`
     }
   `}
 `
+
+export const BtnWrapper = styled.div`
+  display: contents;
+`

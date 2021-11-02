@@ -10,6 +10,8 @@ export interface ItaskListItemProps {
   count: number
 }
 
+const $menuBtn = (<MenuBtn><MenuBtnDot /><MenuBtnDot /><MenuBtnDot /></MenuBtn>)
+
 const TaskListItem = ({ count, name }: ItaskListItemProps) => {
   return (
     <TaskListLi>
@@ -17,11 +19,13 @@ const TaskListItem = ({ count, name }: ItaskListItemProps) => {
         {count}
       </Count>
       {name}
-      <MenuBtn>
-        <MenuBtnDot />
-        <MenuBtnDot />
-        <MenuBtnDot />
-      </MenuBtn>
+
+
+      <Popup
+        button={$menuBtn}
+      >
+        qq
+      </Popup>
     </TaskListLi>
   )
 }
