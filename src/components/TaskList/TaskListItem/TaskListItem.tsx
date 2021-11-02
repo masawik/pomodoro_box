@@ -3,6 +3,7 @@ import {
   TaskListLi,
   Count, MenuBtn, MenuBtnDot,
 } from './TaskListItem.styles'
+import Popup from '../../layout/Popup/Popup'
 
 export interface ItaskListItemProps {
   name: string,
@@ -16,7 +17,6 @@ const TaskListItem = ({ count, name }: ItaskListItemProps) => {
         {count}
       </Count>
       {name}
-
       <MenuBtn>
         <MenuBtnDot />
         <MenuBtnDot />
