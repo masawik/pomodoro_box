@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
 import { StyledLink } from '../../typography'
 
-export const StyledHeaderContainer = styled.div`
+export const HeaderWrapper = styled.div`
   height: 70px;
   box-shadow: 0 2px 40px 50px #f6f6f6;
 `
 
-export const StyledHeaderContentContainer = styled.div`
+export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -17,6 +17,14 @@ export const StyledHeaderContentContainer = styled.div`
   `}
 `
 
-export const StyledStatistic = styled(StyledLink)`
+export const StatisticContainer = styled(StyledLink)`
   margin-left: auto;
+`
+
+export const LogoContainer = styled(StyledLink)`
+  font-size: 24px;
+
+  svg {
+    margin-right: 13px;
+  }
 `
