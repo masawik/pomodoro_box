@@ -5,6 +5,9 @@ import SFUIDisplayBoldWoff from './../assets/fonts/SFUI/SFUIDisplay-Bold.woff'
 import SFUIDisplayBoldWoff2 from './../assets/fonts/SFUI/SFUIDisplay-Bold.woff2'
 import SFUIDisplayLightWoff from '../assets/fonts/SFUI/SFUIDisplay-Light.woff'
 import SFUIDisplayLightWoff2 from '../assets/fonts/SFUI/SFUIDisplay-Light.woff2'
+import SFUIDisplayThinWoff from '../assets/fonts/SFUI/SFUIDisplay-Thin.woff'
+import SFUIDisplayThinWoff2 from '../assets/fonts/SFUI/SFUIDisplay-Thin.woff2'
+
 
 const GlobalFonts = createGlobalStyle`
   @font-face {
@@ -31,6 +34,15 @@ const GlobalFonts = createGlobalStyle`
     url(${SFUIDisplayLightWoff2}) format('woff2'),
     url(${SFUIDisplayLightWoff}) format('woff');
     font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SF UI Display';
+    src: local('SF UI Display'), local('SF UI Display'),
+    url(${SFUIDisplayThinWoff2}) format('woff2'),
+    url(${SFUIDisplayThinWoff}) format('woff');
+    font-weight: 200;
     font-style: normal;
   }
 `

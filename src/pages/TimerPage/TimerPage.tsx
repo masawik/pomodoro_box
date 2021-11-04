@@ -1,14 +1,13 @@
 import React from 'react'
-import PageContentContainer
-  from '../../components/layout/PageContentContainer/PageContentContainer.styles'
-import { LeftSide, TaskListContainer } from './TimerPage.styles'
+import { LeftSide, TaskListContainer, TimerPageContainer } from './TimerPage.styles'
 import NewTaskForm from '../../components/NewTaskForm/NewTaskForm'
 import TaskList from '../../components/TaskList/TaskList'
 import Instruction from '../../components/layout/Instruction/Instruction'
+import Timer from '../../components/Timer/Timer'
 
 const TimerPage = () => {
   return (
-    <PageContentContainer>
+    <TimerPageContainer>
       <LeftSide>
 
         <Instruction />
@@ -18,7 +17,9 @@ const TimerPage = () => {
           <TaskList />
         </TaskListContainer>
       </LeftSide>
-    </PageContentContainer>
+
+      <Timer />
+    </TimerPageContainer>
   )
 }
 

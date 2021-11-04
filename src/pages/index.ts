@@ -1,3 +1,3 @@
-import TimerPage from "./Timer/TimerPage"
+import TimerPage from "./TimerPage/TimerPage"
 
 export { TimerPage }
