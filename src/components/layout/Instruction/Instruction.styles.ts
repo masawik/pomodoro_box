@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { StyledLi } from '../../typography/List/List.styles'
+import { SLi } from '../../typography/List/List.styles'
 
-export const InstructionLi = styled(StyledLi)`
+export const InstructionLi = styled(SLi)`
   line-height: 33px;
 `

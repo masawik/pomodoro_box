@@ -2,16 +2,16 @@ import styled from 'styled-components'
 import PageContentContainer
   from '../../components/layout/PageContentContainer/PageContentContainer.styles'
 
-export const TimerPageContainer = styled(PageContentContainer)`
+export const STimerPageContainer = styled(PageContentContainer)`
   display: flex;
 `
 
-export const LeftSide = styled.div`
-  max-width: 528px;
+export const STimerPageLeftSide = styled.div`
   margin-right: 19px;
+  max-width: 528px;
 `
 
-export const TaskListContainer = styled.div`
+export const STimerPageTaskListContainer = styled.div`
   max-width: 370px;
   
   ul {

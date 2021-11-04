@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { StyledLink } from '../../typography'
+import { SLink } from '../../typography'
 
 export const HeaderWrapper = styled.div`
   height: 70px;
@@ -17,11 +17,11 @@ export const HeaderContainer = styled.div`
   `}
 `
 
-export const StatisticContainer = styled(StyledLink)`
+export const StatisticContainer = styled(SLink)`
   margin-left: auto;
 `
 
-export const LogoContainer = styled(StyledLink)`
+export const LogoContainer = styled(SLink)`
   font-size: 24px;
 
   svg {

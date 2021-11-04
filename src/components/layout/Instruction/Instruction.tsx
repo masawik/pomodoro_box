@@ -1,6 +1,6 @@
 import React from 'react'
-import StyledH1 from '../../typography/H1/H1.styles'
-import { StyledUl } from '../../typography/List/List.styles'
+import SH1 from '../../typography/H1/H1.styles'
+import { SUl } from '../../typography/List/List.styles'
 import { InstructionLi } from './Instruction.styles'
 
 const InstructionListContent = [
@@ -17,10 +17,10 @@ const InstructionListContent = [
 const Instruction = () => {
   return (
     <>
-      <StyledH1>Ура! Теперь можно начать работать:</StyledH1>
-      <StyledUl>
+      <SH1>Ура! Теперь можно начать работать:</SH1>
+      <SUl>
         {InstructionListContent}
-      </StyledUl>
+      </SUl>
     </>
   )
 }

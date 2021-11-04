@@ -1,11 +1,11 @@
 import React from 'react'
 import TaskListItem from './TaskListItem/TaskListItem'
-import { TaskListUl, TotalTimeSum } from './TaskList.styles'
+import { STaskListUl, STaskListTotalTimeSum } from './TaskList.styles'
 
 const TaskList = () => {
   return (
     <div>
-      <TaskListUl
+      <STaskListUl
         onClick={(e) => { // @ts-ignore
           window.t = e}}
       >
@@ -21,10 +21,10 @@ const TaskList = () => {
           name='Тестовое название 3'
           count={10}
         />
-      </TaskListUl>
-      <TotalTimeSum>
+      </STaskListUl>
+      <STaskListTotalTimeSum>
         25 мин
-      </TotalTimeSum>
+      </STaskListTotalTimeSum>
     </div>
   )
 }

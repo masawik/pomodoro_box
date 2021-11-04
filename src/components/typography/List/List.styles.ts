@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 
-export const StyledUl = styled.ul`
+export const SUl = styled.ul`
     padding-left: 18px;
     margin: 0;
 `
 
-export const StyledLi = styled.li`
+export const SLi = styled.li`
   ::marker {
     ${({ theme: { colors } }) => css`
       color: ${colors.danger.dark};

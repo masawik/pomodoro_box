@@ -1,13 +1,13 @@
 import React from 'react'
 import Popup from '../../../layout/Popup/Popup'
-import { MenuBtn, MenuBtnDot, MenuItemBtn } from './TaskListItemMenu.styles'
-import { ClearLi, ClearUl } from '../../../typography/List/ClearList.styles'
+import { SMenuBtn, SMenuBtnDot, SMenuItemBtn } from './TaskListItemMenu.styles'
+import { SClearLi, SClearUl } from '../../../typography/List/ClearList.styles'
 import { ReactComponent as PlusSVG } from '../../../../assets/images/circle_plus.svg'
 import { ReactComponent as MinusSVG } from '../../../../assets/images/circle_minus.svg'
 import { ReactComponent as PencilSVG } from '../../../../assets/images/pencil.svg'
 import { ReactComponent as TrashBinSVG } from '../../../../assets/images/trash_bin.svg'
 
-const $menuBtn = (<MenuBtn><MenuBtnDot /><MenuBtnDot /><MenuBtnDot /></MenuBtn>)
+const $menuBtn = (<SMenuBtn><SMenuBtnDot /><SMenuBtnDot /><SMenuBtnDot /></SMenuBtn>)
 
 interface ITaskListMenuItem {
   icon: React.ReactNode,
@@ -34,12 +34,12 @@ const menuItems: Array<ITaskListMenuItem> = [
 ]
 
 const $menuList = menuItems.map(({ icon, text }, index) => (
-  <ClearLi key={index}>
-    <MenuItemBtn>
+  <SClearLi key={index}>
+    <SMenuItemBtn>
       {icon}
       {text}
-    </MenuItemBtn>
-  </ClearLi>
+    </SMenuItemBtn>
+  </SClearLi>
 ))
 
 const TaskListItemMenu = () => {
@@ -47,9 +47,9 @@ const TaskListItemMenu = () => {
     <Popup
       button={$menuBtn}
     >
-      <ClearUl>
+      <SClearUl>
         {$menuList}
-      </ClearUl>
+      </SClearUl>
     </Popup>
   )
 }

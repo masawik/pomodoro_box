@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components'
 
-// todo убрать это и сделать просто кастомный компонент если это больше нигде не понадобится
-interface StyledLinkProps {
+interface ISLinkProps {
   hoverPaintItem?: {
     selector: string,
     property: string
   };
 }
 
-export const StyledLink = styled.a<StyledLinkProps>`
+export const SLink = styled.a<ISLinkProps>`
   text-decoration: none;
   ${({ theme: { linkColor, colors, transitionDuration } }) => css`
     display: flex;
@@ -31,8 +30,8 @@ export const StyledLink = styled.a<StyledLinkProps>`
        theme: { linkColor, colors, transitionDuration },
      }) => hoverPaintItem && css`
     ${hoverPaintItem.selector} {
-      transition-property: ${hoverPaintItem.property};
       transition-duration: ${transitionDuration}ms;
+      transition-property: ${hoverPaintItem.property};
     }
 
     :hover {

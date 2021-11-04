@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-  TaskListLi,
-  Count,
+  STaskListLi,
+  STaskListItemCount,
 } from './TaskListItem.styles'
 import TaskListItemMenu from './TaskListItemMenu/TaskListItemMenu'
 
@@ -12,13 +12,13 @@ export interface ItaskListItemProps {
 
 const TaskListItem = ({ count, name }: ItaskListItemProps) => {
   return (
-    <TaskListLi>
-      <Count>
+    <STaskListLi>
+      <STaskListItemCount>
         {count}
-      </Count>
+      </STaskListItemCount>
       {name}
       <TaskListItemMenu />
-    </TaskListLi>
+    </STaskListLi>
   )
 }
 

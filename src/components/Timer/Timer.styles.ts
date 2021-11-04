@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components'
 import { StyledButton } from '../forms'
 
-export const TimerContainer = styled.div`
+export const STimerContainer = styled.div`
   height: 507px;
   ${({ theme: { colors } }) => css`
     background-color: ${colors.secondary.light};
   `}
 `
 
-export const TimerHeader = styled.div`
+export const STimerHeader = styled.div`
   padding: 18px 40px;
   display: flex;
   justify-content: space-between;
@@ -18,11 +18,11 @@ export const TimerHeader = styled.div`
   `}
 `
 
-export const TimerHeaderTaskName = styled.span`
+export const STimerHeaderTaskName = styled.span`
   font-weight: bold;
 `
 
-export const TimerBody = styled.div`
+export const STimerBody = styled.div`
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -31,7 +31,7 @@ export const TimerBody = styled.div`
   height: 100%;
 `
 
-export const TimerDisplayContainer = styled.div`
+export const STimerDisplayContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@ export const TimerDisplayContainer = styled.div`
   font-weight: 200;
 `
 
-export const PlusBtn = styled.button`
+export const SPlusBtn = styled.button`
   position: absolute;
   top: calc(50% - 25px);
   right: -82px;
@@ -54,8 +54,8 @@ export const PlusBtn = styled.button`
 
   ${({ theme: { colors, transitionDuration } }) => css`
     svg circle {
-      transition-property: fill;
       transition-duration: ${transitionDuration}ms;
+      transition-property: fill;
       fill: ${colors.secondary.normal}
     }
 
@@ -67,14 +67,14 @@ export const PlusBtn = styled.button`
   `}
 `
 
-export const TimerDescriptionTaskCount = styled.span`
+export const STimerDescriptionTaskCount = styled.span`
   color: ${({ theme: { colors } }) => colors.secondary.dark};
 `
 
-export const TimerControls = styled.div`
+export const STimerControls = styled.div`
   margin-top: 32px;
 `
 
-export const TimerStartButton = styled(StyledButton)`
+export const STimerStartButton = styled(StyledButton)`
   margin-right: 25px;
 `

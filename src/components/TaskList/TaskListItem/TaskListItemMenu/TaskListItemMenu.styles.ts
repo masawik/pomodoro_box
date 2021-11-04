@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const MenuBtn = styled.button`
+export const SMenuBtn = styled.button`
   display: flex;
   margin-left: auto;
   padding: 10px;
@@ -13,7 +13,7 @@ export const MenuBtn = styled.button`
   }
 `
 
-export const MenuBtnDot = styled.span`
+export const SMenuBtnDot = styled.span`
   border-radius: 50%;
   width: 6px;
   height: 6px;
@@ -23,18 +23,18 @@ export const MenuBtnDot = styled.span`
   `}
 `
 
-interface IMenuItemBtnProps {
+interface ISMenuItemBtnProps {
   disabled?: boolean
 }
 
-export const MenuItemBtn = styled.button<IMenuItemBtnProps>`
+export const SMenuItemBtn = styled.button<ISMenuItemBtnProps>`
+  display: flex;
+  align-items: center;
+  padding: 9px 15px;
   border: none;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
   background: none;
-  padding: 9px 15px;
   
   svg {
     height: 16px;

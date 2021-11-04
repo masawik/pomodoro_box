@@ -1,58 +1,58 @@
 import React from 'react'
 import {
-  TimerDisplayContainer,
-  TimerContainer,
-  TimerHeader,
-  TimerHeaderTaskName,
-  TimerBody,
-  PlusBtn,
-  TimerDescriptionTaskCount, TimerStartButton, TimerControls,
+  STimerDisplayContainer,
+  STimerContainer,
+  STimerHeader,
+  STimerHeaderTaskName,
+  STimerBody,
+  SPlusBtn,
+  STimerDescriptionTaskCount, STimerStartButton, STimerControls,
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../assets/images/circle_plus_filled.svg'
 import { StyledButton } from '../forms'
 
 const Timer = () => {
   return (
-    <TimerContainer>
-      <TimerHeader>
-        <TimerHeaderTaskName>
+    <STimerContainer>
+      <STimerHeader>
+        <STimerHeaderTaskName>
           Тестовое название
-        </TimerHeaderTaskName>
+        </STimerHeaderTaskName>
 
         <span>
           Помидор 1
         </span>
-      </TimerHeader>
+      </STimerHeader>
 
-      <TimerBody>
-        <TimerDisplayContainer>
+      <STimerBody>
+        <STimerDisplayContainer>
           <span>
             25:00
           </span>
 
-          <PlusBtn>
+          <SPlusBtn>
             <FilledPlusSVG/>
-          </PlusBtn>
-        </TimerDisplayContainer>
+          </SPlusBtn>
+        </STimerDisplayContainer>
 
         <div>
-          <TimerDescriptionTaskCount>
+          <STimerDescriptionTaskCount>
             Задача 1 -
-          </TimerDescriptionTaskCount>
+          </STimerDescriptionTaskCount>
           Тестовое название
         </div>
 
-        <TimerControls>
-          <TimerStartButton>
+        <STimerControls>
+          <STimerStartButton>
             Старт
-          </TimerStartButton>
+          </STimerStartButton>
 
           <StyledButton color='secondary' transparent disabled>
             Стоп
           </StyledButton>
-        </TimerControls>
-      </TimerBody>
-    </TimerContainer>
+        </STimerControls>
+      </STimerBody>
+    </STimerContainer>
   )
 }
 

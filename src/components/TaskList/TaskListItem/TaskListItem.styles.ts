@@ -1,23 +1,20 @@
 import styled, { css } from 'styled-components'
 
-export const TaskListLi = styled.li`
+export const STaskListLi = styled.li`
   display: flex;
   align-items: center;
-  list-style: none;
   padding: 15px 0;
-
+  list-style: none;
   ${({ theme: { colors } }) => css`
     border-top: 1px solid ${colors.secondary.light};
     
     :last-child {
       border-bottom: 1px solid ${colors.secondary.light};
     }
-  `}
-  
-  
+  `}  
 `
 
-export const Count = styled.div`
+export const STaskListItemCount = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
