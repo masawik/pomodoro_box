@@ -8,6 +8,7 @@ import {
   SStatisticPageBody,
 } from './StatisticPage.styles'
 import DayAndTotalTimeTile from './Tile/DayAndTotalTimeTile'
+import PomodoroCountTile from './Tile/PomodoroCountTile'
 
 
 const StatisticPage = () => {
@@ -30,6 +31,11 @@ const StatisticPage = () => {
           dayOfWeek='Суббота'
           totalTime={51}
         />
+
+        <PomodoroCountTile
+          count={2}
+        />
+
 
       </SStatisticPageBody>
     </PageContentContainer>
