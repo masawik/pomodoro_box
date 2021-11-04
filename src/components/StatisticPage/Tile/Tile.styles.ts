@@ -5,7 +5,7 @@ export const STileContainer = styled.div`
   position: relative;
   padding: 25px;
   display: inline-block;
-  max-width: 296px;
+  width: 296px;
   line-height: 28px;
 
   :not(:last-child) {
@@ -16,6 +16,10 @@ export const STileContainer = styled.div`
   ${({ theme: { colors } }) => css`
     background-color: ${colors.secondary.light};
   `}
+`
+
+export const DayAndTotalTimeTileContainer = styled(STileContainer)`
+  height: 260px;
 `
 
 export const STileTitle = styled.div`
@@ -72,7 +76,7 @@ interface ISStatisticTileProps {
 
 export const SStatisticTile = styled(STileContainer)<ISStatisticTileProps>`
   position: relative;
-  max-width: 405px;
+  width: 405px;
   height: 179px;
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ import SH1 from '../typography/H1/H1.styles'
 import {
   SStatisticPagePeriodSelector,
   SStatisticPageHeader,
-  SStatisticPageBody,
+  SStatisticPageBody, SStatisticTilesRow,
 } from './StatisticPage.styles'
 import DayAndTotalTimeTile from './Tile/DayAndTotalTimeTile'
 import PomodoroCountTile from './Tile/PomodoroCountTile'
@@ -40,27 +40,28 @@ const StatisticPage = () => {
           count={2}
         />
 
-        <StatisticTile
-          title='Фокус'
-          text='35%'
-          color={'focus'}
-          svg={(<FocusSVG/>)}
-        />
+        <SStatisticTilesRow>
+          <StatisticTile
+            title='Фокус'
+            text='35%'
+            color={'focus'}
+            svg={(<FocusSVG />)}
+          />
 
-        <StatisticTile
-          title='Время на паузе'
-          text='9м'
-          color={'info'}
-          svg={(<ClockSVG/>)}
-        />
+          <StatisticTile
+            title='Время на паузе'
+            text='9м'
+            color={'info'}
+            svg={(<ClockSVG />)}
+          />
 
-        <StatisticTile
-          title='Остановки'
-          text='3'
-          color={'pauses'}
-          svg={(<StopSVG/>)}
-        />
-
+          <StatisticTile
+            title='Остановки'
+            text='3'
+            color={'pauses'}
+            svg={(<StopSVG />)}
+          />
+        </SStatisticTilesRow>
       </SStatisticPageBody>
     </PageContentContainer>
   )

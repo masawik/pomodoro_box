@@ -1,5 +1,8 @@
 import React from 'react'
-import { STileContainer, STileTitle } from './Tile.styles'
+import {
+  DayAndTotalTimeTileContainer,
+  STileTitle,
+} from './Tile.styles'
 import { HighlightedText } from '../../typography/highlightedText/HighlightedText.styles'
 
 interface IDayAndTotalTimeTile {
@@ -12,7 +15,7 @@ const DayAndTotalTimeTile: React.FC<IDayAndTotalTimeTile> = ({
                                                                totalTime,
                                                              }) => {
   return (
-    <STileContainer>
+    <DayAndTotalTimeTileContainer>
       <STileTitle>
         {dayOfWeek}
       </STileTitle>
@@ -34,7 +37,7 @@ const DayAndTotalTimeTile: React.FC<IDayAndTotalTimeTile> = ({
           )
       }
 
-    </STileContainer>
+    </DayAndTotalTimeTileContainer>
   )
 }
 

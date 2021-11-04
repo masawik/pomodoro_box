@@ -15,3 +15,7 @@ export const SStatisticPageBody = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const SStatisticTilesRow = styled.div`
+  display: flex;
+`
