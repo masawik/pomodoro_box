@@ -7,7 +7,10 @@ interface IColor {
 export interface IColors {
   primary: IColor,
   danger: IColor,
-  secondary: IColor
+  secondary: IColor,
+  focus: IColor,
+  info: IColor,
+  pauses: IColor
 }
 
 export interface Theme {
@@ -34,6 +37,18 @@ const LIGHT_THEME_COLORS: IColors = {
     dark: '#999999',
     normal: '#C4C4C4',
     light: '#F4F4F4'
+  },
+  focus: {
+    normal: '#FFAE35',
+    light: '#FFDDA9'
+  },
+  info: {
+    normal: '#9C97D7',
+    light: '#DFDCFE'
+  },
+  pauses: {
+    normal: '#7FC2D7',
+    light: '#C5F1FF'
   }
 }
 

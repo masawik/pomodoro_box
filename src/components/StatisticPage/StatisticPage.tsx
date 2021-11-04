@@ -9,6 +9,10 @@ import {
 } from './StatisticPage.styles'
 import DayAndTotalTimeTile from './Tile/DayAndTotalTimeTile'
 import PomodoroCountTile from './Tile/PomodoroCountTile'
+import StatisticTile from './Tile/StatisticTile'
+import { ReactComponent as FocusSVG } from '../../assets/images/focus.svg'
+import { ReactComponent as ClockSVG } from '../../assets/images/clock.svg'
+import { ReactComponent as StopSVG } from '../../assets/images/stop.svg'
 
 
 const StatisticPage = () => {
@@ -36,6 +40,26 @@ const StatisticPage = () => {
           count={2}
         />
 
+        <StatisticTile
+          title='Фокус'
+          text='35%'
+          color={'focus'}
+          svg={(<FocusSVG/>)}
+        />
+
+        <StatisticTile
+          title='Время на паузе'
+          text='9м'
+          color={'info'}
+          svg={(<ClockSVG/>)}
+        />
+
+        <StatisticTile
+          title='Остановки'
+          text='3'
+          color={'pauses'}
+          svg={(<StopSVG/>)}
+        />
 
       </SStatisticPageBody>
     </PageContentContainer>

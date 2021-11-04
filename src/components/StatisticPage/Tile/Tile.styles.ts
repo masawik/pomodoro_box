@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components'
+import { IColors } from '../../../utils/constants/themes.constants'
 
 export const STileContainer = styled.div`
   position: relative;
   padding: 25px;
   display: inline-block;
   max-width: 296px;
+  line-height: 28px;
 
   :not(:last-child) {
     margin-bottom: 32px;
@@ -19,11 +21,7 @@ export const STileContainer = styled.div`
 export const STileTitle = styled.div`
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 15px;
-`
-
-export const STileText = styled.div`
-  line-height: 28px;
+  margin-bottom: 14px;
 `
 
 export const SPomodoroCountContainer = styled(STileContainer)`
@@ -64,5 +62,43 @@ export const SPomodoroCountFooter = styled.div`
   ${({ theme: { colors, invertedTextColor } }) => css`
     background-color: ${colors.danger.normal};
     color: ${invertedTextColor};
+  `}
+`
+
+
+interface ISStatisticTileProps {
+  color?: keyof IColors
+}
+
+export const SStatisticTile = styled(STileContainer)<ISStatisticTileProps>`
+  position: relative;
+  max-width: 405px;
+  height: 179px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  svg {
+    position: absolute;
+    right: 25px;
+    top: 35px;
+  }
+  
+  span {
+    font-size: 64px;
+    line-height: 50px;
+  }
+
+  ${STileTitle} {
+    margin-bottom: 20px;
+  }
+  
+  ${({ color = 'secondary', theme: { colors } }) => css`
+    background-color: ${colors[color].light};
+    
+    svg path {
+      stroke: ${colors[color].normal};
+    }
+    
   `}
 `
