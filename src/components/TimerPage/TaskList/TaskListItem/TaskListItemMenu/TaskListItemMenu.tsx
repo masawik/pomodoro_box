@@ -1,13 +1,22 @@
 import React from 'react'
-import Popup from '../../../layout/Popup/Popup'
+import Popup from '../../../../layout/Popup/Popup'
 import { SMenuBtn, SMenuBtnDot, SMenuItemBtn } from './TaskListItemMenu.styles'
-import { SClearLi, SClearUl } from '../../../typography/List/ClearList.styles'
-import { ReactComponent as PlusSVG } from '../../../../assets/images/circle_plus.svg'
-import { ReactComponent as MinusSVG } from '../../../../assets/images/circle_minus.svg'
-import { ReactComponent as PencilSVG } from '../../../../assets/images/pencil.svg'
-import { ReactComponent as TrashBinSVG } from '../../../../assets/images/trash_bin.svg'
+import {
+  SClearLi,
+  SClearUl,
+} from '../../../../typography/List/ClearList.styles'
+import { ReactComponent as PlusSVG } from '../../../../../assets/images/circle_plus.svg'
+import { ReactComponent as MinusSVG } from '../../../../../assets/images/circle_minus.svg'
+import { ReactComponent as PencilSVG } from '../../../../../assets/images/pencil.svg'
+import { ReactComponent as TrashBinSVG } from '../../../../../assets/images/trash_bin.svg'
 
-const $menuBtn = (<SMenuBtn><SMenuBtnDot /><SMenuBtnDot /><SMenuBtnDot /></SMenuBtn>)
+const $menuBtn = (
+  <SMenuBtn>
+    <SMenuBtnDot />
+    <SMenuBtnDot />
+    <SMenuBtnDot />
+  </SMenuBtn>
+)
 
 interface ITaskListMenuItem {
   icon: React.ReactNode,
@@ -16,19 +25,19 @@ interface ITaskListMenuItem {
 
 const menuItems: Array<ITaskListMenuItem> = [
   {
-    icon: (<PlusSVG/>),
+    icon: (<PlusSVG />),
     text: 'Увеличить',
   },
   {
-    icon: (<MinusSVG/>),
+    icon: (<MinusSVG />),
     text: 'Уменьшить',
   },
   {
-    icon: (<PencilSVG/>),
+    icon: (<PencilSVG />),
     text: 'Редактировать',
   },
   {
-    icon: (<TrashBinSVG/>),
+    icon: (<TrashBinSVG />),
     text: 'Удалить',
   },
 ]

@@ -1,9 +1,13 @@
 import React from 'react'
-import { STimerPageLeftSide, STimerPageTaskListContainer, STimerPageContainer } from './TimerPage.styles'
-import NewTaskForm from '../../components/NewTaskForm/NewTaskForm'
-import TaskList from '../../components/TaskList/TaskList'
-import Instruction from '../../components/layout/Instruction/Instruction'
-import Timer from '../../components/Timer/Timer'
+import {
+  STimerPageLeftSide,
+  STimerPageTaskListContainer,
+  STimerPageContainer,
+} from './TimerPage.styles'
+import TaskList from './TaskList/TaskList'
+import Instruction from './Instruction/Instruction'
+import Timer from './Timer/Timer'
+import NewTaskForm from './NewTaskForm/NewTaskForm'
 
 const TimerPage = () => {
   return (

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import PageContentContainer
-  from '../../components/layout/PageContentContainer/PageContentContainer.styles'
+  from '../layout/PageContentContainer/PageContentContainer.styles'
 
 export const STimerPageContainer = styled(PageContentContainer)`
   display: flex;

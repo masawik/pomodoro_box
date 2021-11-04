@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { StyledButton } from '../forms'
+import { StyledButton } from '../../forms'
 
 export const STimerContainer = styled.div`
   height: 507px;

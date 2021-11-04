@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { StyledInput } from '../forms'
+import { StyledInput } from '../../forms'
 
 export const NewTaskInput = styled(StyledInput)`
   width: 100%;

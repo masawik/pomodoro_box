@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import {
   NewTaskInput,
 } from './NewTaskForm.styles'
-import { StyledButton } from '../forms'
+import { StyledButton } from '../../forms'
 
 const NewTaskForm = () => {
   
