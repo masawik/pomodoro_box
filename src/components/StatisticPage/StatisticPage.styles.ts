@@ -8,5 +8,10 @@ export const SStatisticPagePeriodSelector = styled(SSelect)`
 export const SStatisticPageHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
 `
 
+export const SStatisticPageBody = styled.div`
+  display: flex;
+  flex-direction: column;
+`

@@ -1,7 +1,14 @@
 import React from 'react'
-import PageContentContainer from '../layout/PageContentContainer/PageContentContainer.styles'
+import PageContentContainer
+  from '../layout/PageContentContainer/PageContentContainer.styles'
 import SH1 from '../typography/H1/H1.styles'
-import { SStatisticPagePeriodSelector, SStatisticPageHeader } from './StatisticPage.styles'
+import {
+  SStatisticPagePeriodSelector,
+  SStatisticPageHeader,
+  SStatisticPageBody,
+} from './StatisticPage.styles'
+import DayAndTotalTimeTile from './Tile/DayAndTotalTimeTile'
+
 
 const StatisticPage = () => {
   return (
@@ -18,7 +25,13 @@ const StatisticPage = () => {
         </SStatisticPagePeriodSelector>
       </SStatisticPageHeader>
 
+      <SStatisticPageBody>
+        <DayAndTotalTimeTile
+          dayOfWeek='Суббота'
+          totalTime={51}
+        />
 
+      </SStatisticPageBody>
     </PageContentContainer>
   )
 }
