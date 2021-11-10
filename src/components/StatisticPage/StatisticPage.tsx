@@ -5,7 +5,10 @@ import SH1 from '../typography/H1/H1.styles'
 import {
   SStatisticPagePeriodSelector,
   SStatisticPageHeader,
-  SStatisticPageBody, SStatisticTilesRow,
+  SStatisticPageBody,
+  SStatisticTilesRow,
+  SWidgetColumnContainer,
+  SWidgetColumnAndChart,
 } from './StatisticPage.styles'
 import DayAndTotalTimeTile from './Tile/DayAndTotalTimeTile'
 import PomodoroCountTile from './Tile/PomodoroCountTile'
@@ -13,6 +16,7 @@ import StatisticTile from './Tile/StatisticTile'
 import { ReactComponent as FocusSVG } from '../../assets/images/focus.svg'
 import { ReactComponent as ClockSVG } from '../../assets/images/clock.svg'
 import { ReactComponent as StopSVG } from '../../assets/images/stop.svg'
+import StatisticChart from './StatisticChart/StatisticChart'
 
 
 const StatisticPage = () => {
@@ -31,14 +35,19 @@ const StatisticPage = () => {
       </SStatisticPageHeader>
 
       <SStatisticPageBody>
-        <DayAndTotalTimeTile
-          dayOfWeek='Суббота'
-          totalTime={51}
-        />
+        <SWidgetColumnAndChart>
+          <SWidgetColumnContainer>
+            <DayAndTotalTimeTile
+              dayOfWeek='Суббота'
+              totalTime={51}
+            />
 
-        <PomodoroCountTile
-          count={2}
-        />
+            <PomodoroCountTile count={2}/>
+          </SWidgetColumnContainer>
+
+          <StatisticChart />
+        </SWidgetColumnAndChart>
+
 
         <SStatisticTilesRow>
           <StatisticTile
@@ -63,6 +72,7 @@ const StatisticPage = () => {
           />
         </SStatisticTilesRow>
       </SStatisticPageBody>
+
     </PageContentContainer>
   )
 }

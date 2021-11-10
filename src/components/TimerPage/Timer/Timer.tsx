@@ -8,7 +8,7 @@ import {
   SPlusBtn,
   STimerDescriptionTaskCount, STimerStartButton, STimerControls,
 } from './Timer.styles'
-import { ReactComponent as FilledPlusSVG } from '../../assets/images/circle_plus_filled.svg'
+import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
 import { StyledButton } from '../../forms'
 
 const Timer = () => {

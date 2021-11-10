@@ -6,13 +6,14 @@ import Header from './components/layout/Header/Header'
 import GlobalStyle from './globalStyles/globalStyles'
 import GlobalFonts from './globalStyles/globalFonts'
 import StatisticPage from './components/StatisticPage/StatisticPage'
+import TimerPage from './components/TimerPage/TimerPage'
 
 const App: React.FC = () => (
   <ThemeProvider theme={LIGHT_THEME}>
     <GlobalFonts />
     <GlobalStyle />
     <Header />
-    {/*<TimerPage />*/}
+    <TimerPage />
     <StatisticPage />
   </ThemeProvider>
 )

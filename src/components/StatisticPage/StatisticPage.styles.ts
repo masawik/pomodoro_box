@@ -19,3 +19,13 @@ export const SStatisticPageBody = styled.div`
 export const SStatisticTilesRow = styled.div`
   display: flex;
 `
+
+export const SWidgetColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const SWidgetColumnAndChart = styled.div`
+  display: flex;
+  margin-bottom: 32px;
+`

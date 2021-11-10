@@ -1,0 +1,40 @@
+.chartBarRectangle {
+  transition-duration: 300ms;
+  transition-property: fill;
+  fill: #ee735d;
+}
+
+.chartBarRectangle:hover {
+  fill: #dc3e22;
+}
+
+.ChartBarRectangle_active, .ChartBarRectangle_active:hover {
+  fill: #b7280f;
+}
+
+.ChartBarRectangle_disabled {
+  height: 5px;
+  fill: #C4C4C4;
+}
+
+.ChartBarRectangle_disabled:hover {
+  fill: #999;
+}
+
+.container {
+  position: relative;
+  background-color: #f4f4f4;
+}
+
+.XAxisTick {
+  fill: #999999;
+  font-size: 24px;
+}
+
+.XAxisTick_active {
+  fill: #DC3E22;
+}
+
+.chartBarRectangle:hover .XAxisTick {
+  fill: #DC3E22;
+}
