@@ -3,10 +3,12 @@ import {
   NewTaskInput,
 } from './NewTaskForm.styles'
 import { StyledButton } from '../../forms'
+import { useDispatch } from 'react-redux'
+import { taskAdd } from '../../../store/task/taskActions'
 
 const NewTaskForm = () => {
-  
   const [targetName, setTargetName] = useState<string>('')
+  const dispatch = useDispatch()
 
   const inputHandler = (
     { target: { value } }: ChangeEvent<HTMLInputElement>
@@ -16,7 +18,8 @@ const NewTaskForm = () => {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log(`targetName: ${targetName}`)
+    dispatch(taskAdd(targetName))
+    setTargetName('')
   }
 
   return (

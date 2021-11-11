@@ -42,6 +42,7 @@ const Popup: React.FC<IPopupProps> = ({
       const handleClick = (e: MouseEvent) => {
         const isClickInside = e.target instanceof Node &&
           popupRef.current?.contains(e.target)
+
         if (!isClickInside) {
           setIsOpened(false)
           document.removeEventListener('click', handleClick)
@@ -49,6 +50,7 @@ const Popup: React.FC<IPopupProps> = ({
       }
 
       document.addEventListener('click', handleClick)
+      return () => document.removeEventListener('click', handleClick)
     }
   }, [closeOnClickOutside, isOpened])
 
