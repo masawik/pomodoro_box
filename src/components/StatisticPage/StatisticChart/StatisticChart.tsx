@@ -4,10 +4,13 @@ import {
   Bar,
   XAxis,
   YAxis,
-  ResponsiveContainer, Rectangle, CartesianGrid,
+  CartesianGrid,
 } from 'recharts'
-import styles from './StatisticChart.module.css'
 import { secondsToHoursAndMinutesString } from '../../../utils/stringProcessing'
+import {
+  SChartBarRectangle,
+  SResponsiveContainer, SXAxisTickText,
+} from './StatisticChart.styles'
 
 const data = [
   { dayOfWeek: 'Пн', time: 51 * 60 },
@@ -47,46 +50,40 @@ const CustomXAxisTick = (props: IAxisCustomTickerProps) => {
     clickHandler = () => {}
   } = props
 
-  const textClassnames = [styles.XAxisTick]
-  if (activeBarIndex === index) textClassnames.push(styles.XAxisTick_active)
+  const isActive = activeBarIndex === index
 
   return (
-    <text
-      className={textClassnames.join(' ')}
+    <SXAxisTickText
       onClick={() => clickHandler(index)}
       x={x}
       y={y}
       dy={25}
-      textAnchor='middle'>
+      active={isActive}
+    >
       {value}
-    </text>
+    </SXAxisTickText>
   )
 }
 
 const CustomBarShape = (props: ICustomBarShapeProps) => {
-  const rectangleClassnames = [styles.chartBarRectangle]
   const {
     activeBarIndex,
     index = 0,
+    height,
     clickHandler = () => {}
   } = props
 
-  if (activeBarIndex === index) {
-    rectangleClassnames.push(styles.ChartBarRectangle_active)
-  }
-
-  let height = props.height
-  if (!height) {
-    rectangleClassnames.push(styles.ChartBarRectangle_disabled)
-    height = -5
-  }
+  const isActive = activeBarIndex === index
+  const isDisabled = !height
+  const visibleHeight = isDisabled ? -5 : height
 
   return (
-    <Rectangle
+    <SChartBarRectangle
       {...props}
-      className={rectangleClassnames.join(' ')}
       onClick={() => clickHandler(index)}
-      height={height}
+      height={visibleHeight}
+      disabled={isDisabled}
+      active={isActive}
     />
   )
 }
@@ -116,10 +113,7 @@ const StatisticChart = () => {
   const barClickHandler = (barIndex: number) => setActiveBar(barIndex)
 
   return (
-    <ResponsiveContainer
-      height={''}
-      className={styles.container}
-    >
+    <SResponsiveContainer height={''}>
       <BarChart
         data={data}
         margin={{ bottom: 20, right: 80, top: 80 }}
@@ -160,7 +154,7 @@ const StatisticChart = () => {
           }
         />
       </BarChart>
-    </ResponsiveContainer>
+    </SResponsiveContainer>
   )
 }
 
