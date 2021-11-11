@@ -7,14 +7,17 @@ import { TRootState } from '../../../store/rootReducer'
 const TaskList = () => {
   const tasks = useSelector((state: TRootState) => state.tasks)
 
-  const $tasksList = tasks.map(({ id, count, name }) => (
-    <TaskListItem
-      key={id}
-      id={id}
-      name={name}
-      count={count}
-    />
-  ))
+  const $tasksList = Object.keys(tasks).map(id => {
+    const { count, name } = tasks[id]
+    return (
+      <TaskListItem
+        key={id}
+        id={id}
+        name={name}
+        count={count}
+      />
+    )
+  })
 
   return (
     <div>
