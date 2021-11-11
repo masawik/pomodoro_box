@@ -1,6 +1,7 @@
 .chartBarRectangle {
   transition-duration: 300ms;
   transition-property: fill;
+  cursor: pointer;
   fill: #ee735d;
 }
 
@@ -14,7 +15,7 @@
 
 .ChartBarRectangle_disabled {
   height: 5px;
-  fill: #C4C4C4;
+  fill: #c4c4c4;
 }
 
 .ChartBarRectangle_disabled:hover {
@@ -27,14 +28,15 @@
 }
 
 .XAxisTick {
-  fill: #999999;
   font-size: 24px;
+  cursor: pointer;
+  fill: #999;
 }
 
 .XAxisTick_active {
-  fill: #DC3E22;
+  fill: #dc3e22;
 }
 
 .chartBarRectangle:hover .XAxisTick {
-  fill: #DC3E22;
+  fill: #dc3e22;
 }

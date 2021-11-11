@@ -22,6 +22,7 @@ const data = [
 interface IBarAndTickerGenericProps {
   activeBarIndex?: number
   index?: number
+  clickHandler?: (barIndex: number) => void
 }
 
 interface IAxisCustomTickerProps extends IBarAndTickerGenericProps {
@@ -33,7 +34,6 @@ interface IAxisCustomTickerProps extends IBarAndTickerGenericProps {
 }
 
 interface ICustomBarShapeProps extends IBarAndTickerGenericProps {
-  clickHandler: (barIndex: number) => void
   height?: number
 }
 
@@ -43,7 +43,8 @@ const CustomXAxisTick = (props: IAxisCustomTickerProps) => {
     y,
     payload: { value } = { value: '' },
     activeBarIndex,
-    index,
+    index = 0,
+    clickHandler = () => {}
   } = props
 
   const textClassnames = [styles.XAxisTick]
@@ -52,6 +53,7 @@ const CustomXAxisTick = (props: IAxisCustomTickerProps) => {
   return (
     <text
       className={textClassnames.join(' ')}
+      onClick={() => clickHandler(index)}
       x={x}
       y={y}
       dy={25}
@@ -63,7 +65,11 @@ const CustomXAxisTick = (props: IAxisCustomTickerProps) => {
 
 const CustomBarShape = (props: ICustomBarShapeProps) => {
   const rectangleClassnames = [styles.chartBarRectangle]
-  const { activeBarIndex, index = 0 } = props
+  const {
+    activeBarIndex,
+    index = 0,
+    clickHandler = () => {}
+  } = props
 
   if (activeBarIndex === index) {
     rectangleClassnames.push(styles.ChartBarRectangle_active)
@@ -79,7 +85,7 @@ const CustomBarShape = (props: ICustomBarShapeProps) => {
     <Rectangle
       {...props}
       className={rectangleClassnames.join(' ')}
-      onClick={() => props.clickHandler(index)}
+      onClick={() => clickHandler(index)}
       height={height}
     />
   )
@@ -133,7 +139,12 @@ const StatisticChart = () => {
 
         <XAxis
           dataKey={'dayOfWeek'}
-          tick={<CustomXAxisTick activeBarIndex={activeBar} />}
+          tick={
+            <CustomXAxisTick
+              clickHandler={barClickHandler}
+              activeBarIndex={activeBar}
+            />
+          }
           padding={{ left: 56, right: 56 }}
           axisLine={false}
           tickLine={false}
