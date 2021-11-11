@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PageContentContainer
   from '../layout/PageContentContainer/PageContentContainer.styles'
 import SH1 from '../typography/H1/H1.styles'
@@ -17,9 +17,14 @@ import { ReactComponent as FocusSVG } from '../../assets/images/focus.svg'
 import { ReactComponent as ClockSVG } from '../../assets/images/clock.svg'
 import { ReactComponent as StopSVG } from '../../assets/images/stop.svg'
 import StatisticChart from './StatisticChart/StatisticChart'
+import { setDocumentTitle } from '../../utils/document'
 
 
 const StatisticPage = () => {
+  useEffect(() => {
+    setDocumentTitle('статистика')
+  }, [])
+
   return (
     <PageContentContainer>
       <SStatisticPageHeader>
