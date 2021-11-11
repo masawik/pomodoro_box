@@ -7,14 +7,22 @@ import GlobalStyle from './globalStyles/globalStyles'
 import GlobalFonts from './globalStyles/globalFonts'
 import StatisticPage from './components/StatisticPage/StatisticPage'
 import TimerPage from './components/TimerPage/TimerPage'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 const App: React.FC = () => (
   <ThemeProvider theme={LIGHT_THEME}>
     <GlobalFonts />
     <GlobalStyle />
+
     <Header />
-    <TimerPage />
-    <StatisticPage />
+
+    <Routes>
+      <Route path='/' element={<TimerPage />} />
+
+      <Route path='/statistic' element={<StatisticPage />} />
+
+      <Route path='*' element={<Navigate to='/' />} />
+    </Routes>
   </ThemeProvider>
 )
 

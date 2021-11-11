@@ -5,19 +5,24 @@ import {
 } from './Header.styles'
 import { ReactComponent as TomatoSVG } from '../../../assets/images/tomato.svg'
 import { ReactComponent as StatisticSVG } from '../../../assets/images/statistic.svg'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderContainer>
-        <LogoContainer href='#'>
+        <LogoContainer
+          as={Link}
+          to={'/'}
+        >
           <TomatoSVG />
           pomodoro_box
         </LogoContainer>
 
         <StatisticContainer
+          as={Link}
+          to={'/statistic'}
           hoverPaintItem={{ selector: 'svg path', property: 'fill' }}
-          href='#'
         >
           <StatisticSVG />
           Статистика
