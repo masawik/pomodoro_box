@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { SLink } from '../../typography'
+import { SLink } from '../typography'
 
 export const HeaderWrapper = styled.div`
   height: 70px;
@@ -19,6 +19,20 @@ export const HeaderContainer = styled.div`
 
 export const StatisticContainer = styled(SLink)`
   margin-left: auto;
+
+  ${({ theme: { colors, linkColor, transitionDuration } }) => css`
+    svg path {
+      transition-duration: ${transitionDuration}ms;
+      transition-property: fill;
+    }
+    
+    :hover svg path {
+      fill: ${colors[linkColor].dark};
+    }
+  `}
+  
+  
+  
 `
 
 export const LogoContainer = styled(SLink)`

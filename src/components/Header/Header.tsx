@@ -3,8 +3,8 @@ import {
   HeaderWrapper,
   HeaderContainer, StatisticContainer, LogoContainer,
 } from './Header.styles'
-import { ReactComponent as TomatoSVG } from '../../../assets/images/tomato.svg'
-import { ReactComponent as StatisticSVG } from '../../../assets/images/statistic.svg'
+import { ReactComponent as TomatoSVG } from '../../assets/images/tomato.svg'
+import { ReactComponent as StatisticSVG } from '../../assets/images/statistic.svg'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
@@ -22,7 +22,7 @@ const Header = () => {
         <StatisticContainer
           as={Link}
           to={'/statistic'}
-          hoverPaintItem={{ selector: 'svg path', property: 'fill' }}
+          // hoverPaintItem={{ selector: 'svg path', property: 'fill' }}
         >
           <StatisticSVG />
           Статистика

@@ -24,20 +24,4 @@ export const SLink = styled.a<ISLinkProps>`
       color: ${colors[linkColor].dark};
     }
   `}
-
-  ${({
-       hoverPaintItem,
-       theme: { linkColor, colors, transitionDuration },
-     }) => hoverPaintItem && css`
-    ${hoverPaintItem.selector} {
-      transition-duration: ${transitionDuration}ms;
-      transition-property: ${hoverPaintItem.property};
-    }
-
-    :hover {
-      ${hoverPaintItem.selector} {
-        ${hoverPaintItem.property}: ${colors[linkColor].dark};
-      }
-    }
-  `}
 `
