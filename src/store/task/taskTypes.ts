@@ -1,19 +1,31 @@
-export const TASK_ADD = 'TASK_ADD'
-export const TASK_DELETE = 'TASK_DELETE'
-export const TASK_UPDATE = 'TASK_UPDATE'
+export enum ETaskActionTypes {
+  TASK_ADD,
+  TASK_DELETE,
+  TASK_UPDATE,
+  TASK_INCREASE_COUNT,
+  TASK_REDUCE_COUNT
+}
 
 export type TTaskAdd =
-  { type: typeof TASK_ADD, payload: { name: string } }
+  { type: ETaskActionTypes.TASK_ADD, payload: { name: string } }
 
 export type TTaskDelete =
-  { type: typeof TASK_DELETE, payload: { id: string } }
+  { type: ETaskActionTypes.TASK_DELETE, payload: { id: string } }
 
 export type TTaskUpdate =
   {
-    type: typeof TASK_UPDATE,
+    type: ETaskActionTypes.TASK_UPDATE,
     payload: { id: string, name: string, count: number }
   }
+
+export type TTaskIncreaseCount =
+  { type: ETaskActionTypes.TASK_INCREASE_COUNT, payload: { id: string } }
+
+export type TTaskReduceCount =
+  { type: ETaskActionTypes.TASK_REDUCE_COUNT, payload: { id: string } }
 
 export type TTaskActionTypes = TTaskAdd
   | TTaskDelete
   | TTaskUpdate
+  | TTaskIncreaseCount
+  | TTaskReduceCount

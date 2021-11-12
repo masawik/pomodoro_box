@@ -1,10 +1,5 @@
 import { Reducer } from 'redux'
-import {
-  TASK_ADD,
-  TASK_DELETE,
-  TASK_UPDATE,
-  TTaskActionTypes,
-} from './taskTypes'
+import { ETaskActionTypes, TTaskActionTypes } from './taskTypes'
 import { v4 as uuid } from 'uuid'
 
 type TTaskStateItem = {
@@ -12,36 +7,68 @@ type TTaskStateItem = {
   name: string
 }
 
-type TTaskState = { [id: string]: TTaskStateItem }
+type TTasksList = { [id: string]: TTaskStateItem }
 
-const initialState: TTaskState = {}
+interface ITaskState {
+  tasks: TTasksList
+}
 
-export const taskReducer: Reducer<TTaskState, TTaskActionTypes> =
+const initialState: ITaskState = { tasks: {} }
+
+export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
   (
     state = initialState,
     action
-  ): TTaskState => {
-    switch (action.type) {
-      case TASK_ADD:
+  ): ITaskState => {
+    const { type } = action
+
+    switch (type) {
+      case ETaskActionTypes.TASK_ADD:
         return {
           ...state,
-          [uuid()]: {
-            name: action.payload.name,
-            count: 1,
+          tasks: {
+            ...state.tasks,
+            [uuid()]: {
+              name: action.payload.name,
+              count: 1,
+            },
           },
         }
 
-      case TASK_UPDATE:
+      case ETaskActionTypes.TASK_UPDATE:
         const { id, count, name } = action.payload
         return {
           ...state,
-          [id]: { name, count },
+          tasks: {
+            ...state.tasks,
+            [id]: { count, name },
+          },
         }
 
-      case TASK_DELETE:
-        const newState = { ...state }
-        delete newState[action.payload.id]
-        return newState
+      case ETaskActionTypes.TASK_INCREASE_COUNT:
+      case ETaskActionTypes.TASK_REDUCE_COUNT:
+        const currentTask = state.tasks[action.payload.id]
+        const prevCount = currentTask.count
+        const newCount = prevCount +
+          (type === ETaskActionTypes.TASK_INCREASE_COUNT ? 1 : -1)
+        return {
+          ...state,
+          tasks: {
+            ...state.tasks,
+            [action.payload.id]: {
+              ...currentTask,
+              count: newCount
+            },
+          },
+        }
+
+      case ETaskActionTypes.TASK_DELETE:
+        const newTasksState = { ...state.tasks }
+        delete newTasksState[action.payload.id]
+        return {
+          ...state,
+          tasks: newTasksState,
+        }
 
       default:
         return state

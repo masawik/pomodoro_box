@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   STaskListLi,
   STaskListItemCount,
@@ -12,13 +12,26 @@ export interface ITaskListItemProps {
 }
 
 const TaskListItem = ({ count, name, id }: ITaskListItemProps) => {
+  const [isEditModeOn, setIsEditModeOn] = useState(false)
+
   return (
     <STaskListLi>
       <STaskListItemCount>
         {count}
       </STaskListItemCount>
-      {name}
-      <TaskListItemMenu id={id} />
+      {
+        isEditModeOn ?
+          (
+            <input type='text' value={name} />
+          )
+          :
+          name
+      }
+
+      <TaskListItemMenu
+        id={id}
+        currentTaskPomodoroCount={count}
+      />
     </STaskListLi>
   )
 }

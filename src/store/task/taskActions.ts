@@ -1,21 +1,26 @@
 import {
-  TASK_ADD,
-  TASK_DELETE,
-  TASK_UPDATE,
+  ETaskActionTypes,
   TTaskAdd,
   TTaskDelete,
+  TTaskIncreaseCount, TTaskReduceCount,
   TTaskUpdate,
 } from './taskTypes'
 
 export const taskAdd = (name: string): TTaskAdd =>
-  ({ type: TASK_ADD, payload: { name } })
+  ({ type: ETaskActionTypes.TASK_ADD, payload: { name } })
 
 export const taskDelete = (id: string): TTaskDelete =>
-  ({ type: TASK_DELETE, payload: { id } })
+  ({ type: ETaskActionTypes.TASK_DELETE, payload: { id } })
 
 export const taskUpdate = (
   id: string,
   name: string,
   count: number
 ): TTaskUpdate =>
-  ({ type: TASK_UPDATE, payload: { id, name, count } })
+  ({ type: ETaskActionTypes.TASK_UPDATE, payload: { id, name, count } })
+
+export const taskIncreaseCount = (id: string): TTaskIncreaseCount =>
+  ({ type: ETaskActionTypes.TASK_INCREASE_COUNT, payload: { id } })
+
+export const taskReduceCount = (id: string): TTaskReduceCount =>
+  ({ type: ETaskActionTypes.TASK_REDUCE_COUNT, payload: { id } })

@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 
 const TaskList = () => {
-  const tasks = useSelector((state: TRootState) => state.tasks)
+  const tasks = useSelector((state: TRootState) => state.task.tasks)
 
-  const $tasksList = Object.keys(tasks).map(id => {
+  const $tasksList = Object.keys(tasks).reverse().map(id => {
     const { count, name } = tasks[id]
     return (
       <TaskListItem

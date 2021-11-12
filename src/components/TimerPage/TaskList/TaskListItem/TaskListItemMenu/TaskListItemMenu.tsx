@@ -10,7 +10,10 @@ import { ReactComponent as MinusSVG } from '../../../../../assets/images/circle_
 import { ReactComponent as PencilSVG } from '../../../../../assets/images/pencil.svg'
 import { ReactComponent as TrashBinSVG } from '../../../../../assets/images/trash_bin.svg'
 import { useDispatch } from 'react-redux'
-import { taskDelete } from '../../../../../store/task/taskActions'
+import {
+  taskDelete,
+  taskIncreaseCount, taskReduceCount
+} from '../../../../../store/task/taskActions'
 
 enum ETaskListItemMenuButtonNames {
   increase = 'increase',
@@ -22,7 +25,7 @@ enum ETaskListItemMenuButtonNames {
 interface ITaskListItemMenuButtons {
   icon: React.ReactNode,
   text: string,
-  name: ETaskListItemMenuButtonNames
+  name: ETaskListItemMenuButtonNames,
 }
 
 const $menuBtn = (
@@ -56,34 +59,53 @@ const menuItems: Array<ITaskListItemMenuButtons> = [
   },
 ]
 
-const $menuList = menuItems.map(({ icon, text, name }, index) => (
-  <SClearLi key={index}>
-    <SMenuItemBtn name={name}>
-      {icon}
-      {text}
-    </SMenuItemBtn>
-  </SClearLi>
-))
-
 interface ITaskListItemMenuProps {
-  id: string
+  id: string,
+  currentTaskPomodoroCount: number
 }
 
 const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
-  ({ id }) => {
+  ({ id, currentTaskPomodoroCount }) => {
     const dispatch = useDispatch()
-
     const menuButtonsClickHandler = (e: React.MouseEvent<HTMLElement>) => {
       const target = e.target as HTMLButtonElement
       if (!target.name) return
 
       switch (target.name) {
+        case ETaskListItemMenuButtonNames.increase:
+          return dispatch(taskIncreaseCount(id))
+
+        case ETaskListItemMenuButtonNames.reduce:
+          return dispatch(taskReduceCount(id))
+
         case ETaskListItemMenuButtonNames.delete:
           return dispatch(taskDelete(id))
+
         default:
           return
       }
     }
+
+    const $menuList = menuItems.map(
+      ({
+         icon,
+         text,
+         name,
+
+       }, index) => (
+        <SClearLi key={index}>
+          <SMenuItemBtn
+            disabled={
+              name === ETaskListItemMenuButtonNames.reduce
+              && currentTaskPomodoroCount === 1
+            }
+            name={name}
+          >
+            {icon}
+            {text}
+          </SMenuItemBtn>
+        </SClearLi>
+      ))
 
     return (
       <Popup
