@@ -4,14 +4,15 @@ export const STaskListLi = styled.li`
   display: flex;
   align-items: center;
   padding: 15px 0;
+  word-break: break-word;
   list-style: none;
   ${({ theme: { colors } }) => css`
     border-top: 1px solid ${colors.secondary.light};
-    
+
     :last-child {
       border-bottom: 1px solid ${colors.secondary.light};
     }
-  `}  
+  `}
 `
 
 export const STaskListItemCount = styled.div`
@@ -27,4 +28,16 @@ export const STaskListItemCount = styled.div`
   ${({ theme: { colors } }) => css`
     border: 1px solid ${colors.secondary.normal};
   `}
+`
+
+export const STaskListItemName = styled.div`
+  width: 280px;
+  padding: 1px 2px;
+`
+
+export const STaskListItemNameChangeInput = styled.input`
+  border: none;
+  outline: none;
+  width: 280px;
+  background-color: ${({ theme: { colors } }) => colors.secondary.light};
 `

@@ -57,7 +57,19 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
             ...state.tasks,
             [action.payload.id]: {
               ...currentTask,
-              count: newCount
+              count: newCount,
+            },
+          },
+        }
+
+      case ETaskActionTypes.TASK_CHANGE_NAME:
+        return {
+          ...state,
+          tasks: {
+            ...state.tasks,
+            [action.payload.id]: {
+              ...state.tasks[action.payload.id],
+              name: action.payload.name,
             },
           },
         }

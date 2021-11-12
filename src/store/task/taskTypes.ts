@@ -3,7 +3,8 @@ export enum ETaskActionTypes {
   TASK_DELETE,
   TASK_UPDATE,
   TASK_INCREASE_COUNT,
-  TASK_REDUCE_COUNT
+  TASK_REDUCE_COUNT,
+  TASK_CHANGE_NAME
 }
 
 export type TTaskAdd =
@@ -24,8 +25,15 @@ export type TTaskIncreaseCount =
 export type TTaskReduceCount =
   { type: ETaskActionTypes.TASK_REDUCE_COUNT, payload: { id: string } }
 
+export type TTaskChangeName =
+  {
+    type: ETaskActionTypes.TASK_CHANGE_NAME,
+    payload: { id: string, name: string }
+  }
+
 export type TTaskActionTypes = TTaskAdd
   | TTaskDelete
   | TTaskUpdate
   | TTaskIncreaseCount
   | TTaskReduceCount
+  | TTaskChangeName

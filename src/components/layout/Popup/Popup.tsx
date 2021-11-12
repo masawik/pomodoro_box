@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { BtnWrapper, StyledPopup } from './Popup.styles'
 import ReactDOM from 'react-dom'
 
@@ -6,21 +6,31 @@ const $popupRoot = document.querySelector('#popup-root') || document.body
 
 interface IPopupProps {
   button: React.ReactNode,
-  closeOnClickOutside?: boolean
+  closeOnClickOutside?: boolean,
+  outerIsOpened?: boolean,
+  onClose?: () => void,
+  onOpen?: () => void
 }
 
 const Popup: React.FC<IPopupProps> = ({
                                         children,
                                         button,
                                         closeOnClickOutside = true,
+                                        outerIsOpened = false,
+                                        onOpen,
+                                        onClose,
                                       }) => {
   const popupRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLDivElement>(null)
-  const [isOpened, setIsOpened] = useState<boolean>(false)
+  const [isOpened, setIsOpened] = useState<boolean>(true)
   const [btnPosition, setBtnPosition] = useState<{
     top: number,
     left: number
   }>({ top: 0, left: 0 })
+
+  useEffect(() => {
+    setIsOpened(outerIsOpened)
+  }, [outerIsOpened])
 
   const openPopup = () => {
     if (!btnRef.current) return
@@ -29,11 +39,16 @@ const Popup: React.FC<IPopupProps> = ({
       top: coords.bottom + window.scrollY + 10,
       left: coords.left - 60,
     })
-    setIsOpened(true)
+    onOpen ? onOpen() : setIsOpened(true)
   }
 
+  const closePopup = useCallback(
+    () => onClose ? onClose() : setIsOpened(false),
+    [onClose]
+  )
+
   const toggle = () => {
-    isOpened ? setIsOpened(false) : openPopup()
+    isOpened ? closePopup() : openPopup()
   }
 
   //click outside handler
@@ -44,7 +59,7 @@ const Popup: React.FC<IPopupProps> = ({
           popupRef.current?.contains(e.target)
 
         if (!isClickInside) {
-          setIsOpened(false)
+          closePopup()
           document.removeEventListener('click', handleClick)
         }
       }
@@ -52,7 +67,7 @@ const Popup: React.FC<IPopupProps> = ({
       document.addEventListener('click', handleClick)
       return () => document.removeEventListener('click', handleClick)
     }
-  }, [closeOnClickOutside, isOpened])
+  }, [closeOnClickOutside, closePopup, isOpened])
 
   return (
     <>
