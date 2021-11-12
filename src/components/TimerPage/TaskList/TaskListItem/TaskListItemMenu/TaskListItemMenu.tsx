@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Popup from '../../../../layout/Popup/Popup'
 import { SMenuBtn, SMenuBtnDot, SMenuItemBtn } from './TaskListItemMenu.styles'
 import {
@@ -12,7 +12,7 @@ import { ReactComponent as TrashBinSVG } from '../../../../../assets/images/tras
 import { useDispatch } from 'react-redux'
 import {
   taskDelete,
-  taskIncreaseCount, taskReduceCount
+  taskIncreaseCount, taskReduceCount,
 } from '../../../../../store/task/taskActions'
 
 enum ETaskListItemMenuButtonNames {
@@ -20,12 +20,6 @@ enum ETaskListItemMenuButtonNames {
   reduce = 'reduce',
   edit = 'edit',
   delete = 'delete'
-}
-
-interface ITaskListItemMenuButtons {
-  icon: React.ReactNode,
-  text: string,
-  name: ETaskListItemMenuButtonNames,
 }
 
 const $menuBtn = (
@@ -36,83 +30,79 @@ const $menuBtn = (
   </SMenuBtn>
 )
 
-const menuItems: Array<ITaskListItemMenuButtons> = [
-  {
-    icon: (<PlusSVG />),
-    text: 'Увеличить',
-    name: ETaskListItemMenuButtonNames.increase,
-  },
-  {
-    icon: (<MinusSVG />),
-    text: 'Уменьшить',
-    name: ETaskListItemMenuButtonNames.reduce,
-  },
-  {
-    icon: (<PencilSVG />),
-    text: 'Редактировать',
-    name: ETaskListItemMenuButtonNames.edit,
-  },
-  {
-    icon: (<TrashBinSVG />),
-    text: 'Удалить',
-    name: ETaskListItemMenuButtonNames.delete,
-  },
-]
-
 interface ITaskListItemMenuProps {
   id: string,
-  currentTaskPomodoroCount: number
+  currentTaskPomodoroCount: number,
+  editButtonClickHandler: () => void,
 }
 
 const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
-  ({ id, currentTaskPomodoroCount }) => {
+  ({
+     id,
+     currentTaskPomodoroCount,
+     editButtonClickHandler,
+   }) => {
+    const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false)
+    const openMenu = () => setIsMenuOpened(true)
+    const closeMenu = () => setIsMenuOpened(false)
+
     const dispatch = useDispatch()
-    const menuButtonsClickHandler = (e: React.MouseEvent<HTMLElement>) => {
-      const target = e.target as HTMLButtonElement
-      if (!target.name) return
-
-      switch (target.name) {
-        case ETaskListItemMenuButtonNames.increase:
-          return dispatch(taskIncreaseCount(id))
-
-        case ETaskListItemMenuButtonNames.reduce:
-          return dispatch(taskReduceCount(id))
-
-        case ETaskListItemMenuButtonNames.delete:
-          return dispatch(taskDelete(id))
-
-        default:
-          return
-      }
+    const increaseCount = () => dispatch(taskIncreaseCount(id))
+    const reduceCount = () => dispatch(taskReduceCount(id))
+    const edit = () => {
+      closeMenu()
+      editButtonClickHandler()
     }
-
-    const $menuList = menuItems.map(
-      ({
-         icon,
-         text,
-         name,
-
-       }, index) => (
-        <SClearLi key={index}>
-          <SMenuItemBtn
-            disabled={
-              name === ETaskListItemMenuButtonNames.reduce
-              && currentTaskPomodoroCount === 1
-            }
-            name={name}
-          >
-            {icon}
-            {text}
-          </SMenuItemBtn>
-        </SClearLi>
-      ))
+    const deleteTask = () => dispatch(taskDelete(id))
 
     return (
       <Popup
         button={$menuBtn}
+        outerIsOpened={isMenuOpened}
+        onOpen={openMenu}
+        onClose={closeMenu}
       >
-        <SClearUl onClick={menuButtonsClickHandler}>
-          {$menuList}
+        <SClearUl>
+          <SClearLi>
+            <SMenuItemBtn
+              onClick={increaseCount}
+              name={ETaskListItemMenuButtonNames.increase}
+            >
+              <PlusSVG />
+              Увеличить
+            </SMenuItemBtn>
+          </SClearLi>
+
+          <SClearLi>
+            <SMenuItemBtn
+              onClick={reduceCount}
+              disabled={currentTaskPomodoroCount === 1}
+              name={ETaskListItemMenuButtonNames.reduce}
+            >
+              <MinusSVG />
+              Уменьшить
+            </SMenuItemBtn>
+          </SClearLi>
+
+          <SClearLi>
+            <SMenuItemBtn
+              onClick={edit}
+              name={ETaskListItemMenuButtonNames.edit}
+            >
+              <PencilSVG />
+              Редактировать
+            </SMenuItemBtn>
+          </SClearLi>
+
+          <SClearLi>
+            <SMenuItemBtn
+              onClick={deleteTask}
+              name={ETaskListItemMenuButtonNames.delete}
+            >
+              <TrashBinSVG />
+              Удалить
+            </SMenuItemBtn>
+          </SClearLi>
         </SClearUl>
       </Popup>
     )

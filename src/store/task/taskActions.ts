@@ -1,6 +1,6 @@
 import {
   ETaskActionTypes,
-  TTaskAdd,
+  TTaskAdd, TTaskChangeName,
   TTaskDelete,
   TTaskIncreaseCount, TTaskReduceCount,
   TTaskUpdate,
@@ -24,3 +24,6 @@ export const taskIncreaseCount = (id: string): TTaskIncreaseCount =>
 
 export const taskReduceCount = (id: string): TTaskReduceCount =>
   ({ type: ETaskActionTypes.TASK_REDUCE_COUNT, payload: { id } })
+
+export const taskChangeName = (id: string, name: string): TTaskChangeName =>
+  ({ type: ETaskActionTypes.TASK_CHANGE_NAME, payload: { id, name } })
