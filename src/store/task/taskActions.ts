@@ -1,6 +1,6 @@
 import {
   ETaskActionTypes,
-  TTaskAdd, TTaskChangeName,
+  TTaskAdd, TTaskChangeName, TTaskChangeOrder,
   TTaskDelete,
   TTaskIncreaseCount, TTaskReduceCount,
   TTaskUpdate,
@@ -12,12 +12,9 @@ export const taskAdd = (name: string): TTaskAdd =>
 export const taskDelete = (id: string): TTaskDelete =>
   ({ type: ETaskActionTypes.TASK_DELETE, payload: { id } })
 
-export const taskUpdate = (
-  id: string,
-  name: string,
-  count: number
-): TTaskUpdate =>
-  ({ type: ETaskActionTypes.TASK_UPDATE, payload: { id, name, count } })
+export const taskUpdate =
+  (id: string, name: string, count: number): TTaskUpdate =>
+    ({ type: ETaskActionTypes.TASK_UPDATE, payload: { id, name, count } })
 
 export const taskIncreaseCount = (id: string): TTaskIncreaseCount =>
   ({ type: ETaskActionTypes.TASK_INCREASE_COUNT, payload: { id } })
@@ -27,3 +24,10 @@ export const taskReduceCount = (id: string): TTaskReduceCount =>
 
 export const taskChangeName = (id: string, name: string): TTaskChangeName =>
   ({ type: ETaskActionTypes.TASK_CHANGE_NAME, payload: { id, name } })
+
+export const taskChangeOrder =
+  (oldIndex: number, newIndex: number): TTaskChangeOrder =>
+    ({
+      type: ETaskActionTypes.TASK_CHANGE_ORDER,
+      payload: { oldIndex, newIndex },
+    })

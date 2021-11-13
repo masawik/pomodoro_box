@@ -10,10 +10,11 @@ type TTaskStateItem = {
 type TTasksList = { [id: string]: TTaskStateItem }
 
 interface ITaskState {
-  tasks: TTasksList
+  tasks: TTasksList,
+  order: Array<string>
 }
 
-const initialState: ITaskState = { tasks: {} }
+const initialState: ITaskState = { tasks: {}, order: [] }
 
 export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
   (
@@ -24,15 +25,17 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
 
     switch (type) {
       case ETaskActionTypes.TASK_ADD:
+        const newTaskUuid = uuid()
         return {
           ...state,
           tasks: {
             ...state.tasks,
-            [uuid()]: {
+            [newTaskUuid]: {
               name: action.payload.name,
               count: 1,
             },
           },
+          order: [...state.order, newTaskUuid],
         }
 
       case ETaskActionTypes.TASK_UPDATE:
@@ -80,6 +83,17 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
         return {
           ...state,
           tasks: newTasksState,
+          order: [...state.order].filter(i => i !== action.payload.id),
+        }
+
+      case ETaskActionTypes.TASK_CHANGE_ORDER:
+        const { oldIndex, newIndex } = action.payload
+        const newOrder = [...state.order]
+        const [replacingElement] = newOrder.splice(oldIndex, 1)
+        newOrder.splice(newIndex, 0, replacingElement)
+        return {
+          ...state,
+          order: newOrder,
         }
 
       default:

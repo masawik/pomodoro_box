@@ -6,8 +6,9 @@ export const STaskListLi = styled.li`
   padding: 15px 0;
   word-break: break-word;
   list-style: none;
-  ${({ theme: { colors } }) => css`
+  ${({ theme: { colors, backgroundColor } }) => css`
     border-top: 1px solid ${colors.secondary.light};
+    background-color: ${backgroundColor};
 
     :last-child {
       border-bottom: 1px solid ${colors.secondary.light};
