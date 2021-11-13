@@ -1,6 +1,6 @@
 import React from 'react'
 import TaskListItem from './TaskListItem/TaskListItem'
-import { STaskListUl, STaskListTotalTimeSum } from './TaskList.styles'
+import { STaskListUl } from './TaskList.styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import {
@@ -10,6 +10,7 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 import { taskChangeOrder } from '../../../store/task/taskActions'
+import TaskListTimeSum from './TaskListTimeSum/TaskListTimeSum'
 
 const TaskList = () => {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const TaskList = () => {
     dispatch(taskChangeOrder(source.index, destination?.index))
   }
 
-  const $tasksList = order.map((id, index) => {
+  const $tasksListItems = order.map((id, index) => {
     const { count, name } = tasks[id]
     return (
       <Draggable key={id} draggableId={id} index={index}>
@@ -56,16 +57,19 @@ const TaskList = () => {
             <STaskListUl
               ref={provided.innerRef}
             >
-              {$tasksList}
+              {$tasksListItems}
               {provided.placeholder}
             </STaskListUl>
           )}
         </Droppable>
 
       </DragDropContext>
-      <STaskListTotalTimeSum>
-        25 мин
-      </STaskListTotalTimeSum>
+
+      {
+        !!order.length
+        &&
+        <TaskListTimeSum tasks={tasks} />
+      }
     </div>
   )
 }

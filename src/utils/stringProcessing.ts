@@ -18,9 +18,10 @@ const splitSeconds = (seconds: number): IsplitSeconds => {
   return { days, hours, minutes, seconds: rest }
 }
 
-export const secondsToHoursAndMinutesString = (seconds: number): string => {
-  const { hours, minutes } = splitSeconds(seconds)
+export const secondsToFormattedString = (seconds: number): string => {
+  const { days, hours, minutes } = splitSeconds(seconds)
   let result = `${minutes} мин`
-  if (hours) result = `${hours} ч ${result}`
+  if (hours || days) result = `${hours} ч ${result}`
+  if (days) result = `${days} д ${result}`
   return result
 }

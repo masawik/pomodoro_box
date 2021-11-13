@@ -7,7 +7,7 @@ type TTaskStateItem = {
   name: string
 }
 
-type TTasksList = { [id: string]: TTaskStateItem }
+export type TTasksList = { [id: string]: TTaskStateItem }
 
 interface ITaskState {
   tasks: TTasksList,

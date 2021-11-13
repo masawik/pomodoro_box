@@ -6,7 +6,7 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts'
-import { secondsToHoursAndMinutesString } from '../../../utils/stringProcessing'
+import { secondsToFormattedString } from '../../../utils/stringProcessing'
 import {
   SChartBarRectangle,
   SResponsiveContainer, SXAxisTickText,
@@ -95,7 +95,7 @@ const CustomYAxisTick = (props: IAxisCustomTickerProps) => {
     payload: { value } = { value: '' },
   } = props
 
-  const processedValue = value ? secondsToHoursAndMinutesString(+value) : ''
+  const processedValue = value ? secondsToFormattedString(+value) : ''
 
   return (
     <text
