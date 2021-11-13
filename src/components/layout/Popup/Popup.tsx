@@ -22,7 +22,7 @@ const Popup: React.FC<IPopupProps> = ({
                                       }) => {
   const popupRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLDivElement>(null)
-  const [isOpened, setIsOpened] = useState<boolean>(true)
+  const [isOpened, setIsOpened] = useState<boolean>(outerIsOpened)
   const [btnPosition, setBtnPosition] = useState<{
     top: number,
     left: number

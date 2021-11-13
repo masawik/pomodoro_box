@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Popup from '../../../../layout/Popup/Popup'
 import { SMenuBtn, SMenuBtnDot, SMenuItemBtn } from './TaskListItemMenu.styles'
 import {
@@ -42,6 +42,7 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
      currentTaskPomodoroCount,
      editButtonClickHandler,
    }) => {
+    const [isMounted, setIsMounted] = useState(false)
     const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false)
     const openMenu = () => setIsMenuOpened(true)
     const closeMenu = () => setIsMenuOpened(false)
@@ -55,7 +56,12 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
     }
     const deleteTask = () => dispatch(taskDelete(id))
 
-    return (
+    useEffect(() => {
+      setIsMounted(true)
+      return () => setIsMounted(false)
+    }, [])
+
+    return isMounted ? (
       <Popup
         button={$menuBtn}
         outerIsOpened={isMenuOpened}
@@ -105,7 +111,7 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
           </SClearLi>
         </SClearUl>
       </Popup>
-    )
+    ) : null
   }
 
 export default TaskListItemMenu
