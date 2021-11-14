@@ -23,7 +23,7 @@ const TaskList = () => {
   }
 
   const $tasksListItems = order.map((id, index) => {
-    const { count, name } = tasks[id]
+    const { plannedCount, name } = tasks[id]
     return (
       <Draggable key={id} draggableId={id} index={index}>
         {
@@ -37,7 +37,7 @@ const TaskList = () => {
                 key={id}
                 id={id}
                 name={name}
-                count={count}
+                count={plannedCount}
               />
             </div>
 

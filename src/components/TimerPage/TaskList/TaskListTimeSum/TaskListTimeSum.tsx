@@ -14,7 +14,7 @@ const secondsPerOnePomodoro = 1500
 const TaskListTimeSum: React.FC<ISTaskListTotalTimeSumProps> =
   ({ tasks }) => {
     const totalSeconds = Object.keys(tasks)
-        .map(id => tasks[id].count)
+        .map(id => tasks[id].plannedCount)
         .reduce((acc, cur) => acc + cur)
         * secondsPerOnePomodoro
 

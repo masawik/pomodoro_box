@@ -10,8 +10,14 @@ import {
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
 import { StyledButton } from '../../forms'
+import { useSelector } from 'react-redux'
+import { TRootState } from '../../../store/rootReducer'
 
 const Timer = () => {
+  const currentTask = useSelector((state: TRootState) =>
+    state.task.tasks[state.task.order[0]]
+  )
+
   return (
     <STimerContainer>
       <STimerHeader>
@@ -31,7 +37,7 @@ const Timer = () => {
           </span>
 
           <SPlusBtn>
-            <FilledPlusSVG/>
+            <FilledPlusSVG />
           </SPlusBtn>
         </STimerDisplayContainer>
 

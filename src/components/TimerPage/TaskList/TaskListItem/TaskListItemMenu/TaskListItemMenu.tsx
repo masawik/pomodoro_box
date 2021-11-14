@@ -12,7 +12,7 @@ import { ReactComponent as TrashBinSVG } from '../../../../../assets/images/tras
 import { useDispatch } from 'react-redux'
 import {
   taskDelete,
-  taskIncreaseCount, taskReduceCount,
+  taskIncreasePlannedCount, taskReducePlannedCount,
 } from '../../../../../store/task/taskActions'
 
 enum ETaskListItemMenuButtonNames {
@@ -48,8 +48,8 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
     const closeMenu = () => setIsMenuOpened(false)
 
     const dispatch = useDispatch()
-    const increaseCount = () => dispatch(taskIncreaseCount(id))
-    const reduceCount = () => dispatch(taskReduceCount(id))
+    const increaseCount = () => dispatch(taskIncreasePlannedCount(id))
+    const reduceCount = () => dispatch(taskReducePlannedCount(id))
     const edit = () => {
       closeMenu()
       editButtonClickHandler()

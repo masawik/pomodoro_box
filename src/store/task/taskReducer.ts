@@ -3,7 +3,8 @@ import { ETaskActionTypes, TTaskActionTypes } from './taskTypes'
 import { v4 as uuid } from 'uuid'
 
 type TTaskStateItem = {
-  count: number,
+  plannedCount: number,
+  passedCount: number,
   name: string
 }
 
@@ -32,35 +33,26 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
             ...state.tasks,
             [newTaskUuid]: {
               name: action.payload.name,
-              count: 1,
+              plannedCount: 1,
+              passedCount: 0,
             },
           },
           order: [...state.order, newTaskUuid],
         }
 
-      case ETaskActionTypes.TASK_UPDATE:
-        const { id, count, name } = action.payload
-        return {
-          ...state,
-          tasks: {
-            ...state.tasks,
-            [id]: { count, name },
-          },
-        }
-
-      case ETaskActionTypes.TASK_INCREASE_COUNT:
-      case ETaskActionTypes.TASK_REDUCE_COUNT:
+      case ETaskActionTypes.TASK_INCREASE_PLANNED_COUNT:
+      case ETaskActionTypes.TASK_REDUCE_PLANNED_COUNT:
         const currentTask = state.tasks[action.payload.id]
-        const prevCount = currentTask.count
+        const prevCount = currentTask.plannedCount
         const newCount = prevCount +
-          (type === ETaskActionTypes.TASK_INCREASE_COUNT ? 1 : -1)
+          (type === ETaskActionTypes.TASK_INCREASE_PLANNED_COUNT ? 1 : -1)
         return {
           ...state,
           tasks: {
             ...state.tasks,
             [action.payload.id]: {
               ...currentTask,
-              count: newCount,
+              plannedCount: newCount,
             },
           },
         }
