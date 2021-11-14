@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { StyledButton } from '../../forms'
+import { IColors } from '../../../utils/constants/themes.constants'
 
 export const STimerContainer = styled.div`
   height: 507px;
@@ -9,12 +10,25 @@ export const STimerContainer = styled.div`
   `}
 `
 
-export const STimerHeader = styled.div`
+interface IColorableComponent {
+  color?: keyof IColors
+}
+
+export const STimerHeader = styled.div<IColorableComponent>`
   padding: 18px 40px;
   display: flex;
   justify-content: space-between;
-  ${({ theme: { colors, invertedTextColor } }) => css`
-    background-color: ${colors.secondary.normal};
+  transition-property: background-color;
+  ${({
+       color = 'secondary',
+       theme: {
+         colors,
+         invertedTextColor,
+         transitionDuration,
+       },
+     }) => css`
+    transition-duration: ${transitionDuration}ms;
+    background-color: ${colors[color].normal};
     color: ${invertedTextColor};
   `}
 `
@@ -78,4 +92,18 @@ export const STimerControls = styled.div`
 
 export const STimerStartButton = styled(StyledButton)`
   margin-right: 25px;
+`
+
+export const STimerTime = styled.span<IColorableComponent>`
+  transition-property: color;
+  ${({
+       color,
+       theme: { colors, textColor, transitionDuration },
+     }) => {
+    const localTextColor = color ? colors[color].normal : textColor
+    return css`
+      transition-duration: ${transitionDuration}ms;
+      color: ${localTextColor};
+    `
+  }}
 `

@@ -6,7 +6,7 @@ import {
   STimerHeaderTaskName,
   STimerBody,
   SPlusBtn,
-  STimerDescriptionTaskCount, STimerStartButton, STimerControls,
+  STimerDescriptionTaskCount, STimerStartButton, STimerControls, STimerTime,
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
 import { StyledButton } from '../../forms'
@@ -14,41 +14,62 @@ import { useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { useInterval } from '../../../hooks/useInterval'
 import { addZero, splitSeconds } from '../../../utils/stringProcessing'
+import { IColors } from '../../../utils/constants/themes.constants'
 
 //todo перенести в настройки таймера
 const secondsInOnePomodoro = 25 * 60
-const timerSpeedRatio = 300
+const timerSpeedRatio = 1
+
+enum ETimerStates {
+  STOPPED = 'STOPPED',
+  STARTED = 'STARTED',
+  PAUSED = 'PAUSED'
+}
 
 const Timer = () => {
   const currentTask = useSelector((state: TRootState) =>
-    state.task.tasks[state.task.order[0]]
-  )
-
+    state.task.tasks[state.task.order[0]])
   const [seconds, setSeconds] = useState(secondsInOnePomodoro)
-  const [isTimerStarted, setIsTimerStarted] = useState(false)
   const [startTime, setStartTime] = useState(0)
+  const [timerState, setTimerState] =
+    useState<ETimerStates>(ETimerStates.STOPPED)
 
+  //timer logic
   useInterval(() => {
-    const delta = Math.floor((Date.now() - startTime)
-      / (1000 / timerSpeedRatio))
-    const newSecondsValue = secondsInOnePomodoro - delta
-    const newSeconds = newSecondsValue <= 0 ? 0 : newSecondsValue
-    setSeconds(newSeconds)
+      const delta = Math.floor((Date.now() - startTime)
+        / (1000 / timerSpeedRatio))
 
-    if (newSeconds === 0) onTimerEnd()
-  }, isTimerStarted ? 500 : null)
+      let newSecondsValue = secondsInOnePomodoro - delta
+      newSecondsValue = newSecondsValue <= 0 ? 0 : newSecondsValue
 
-  const onTimerStart = () => {
-    setStartTime(Date.now())
-    setIsTimerStarted(true)
+      setSeconds(newSecondsValue)
+      if (newSecondsValue === 0) onTimerEnd()
+    },
+    timerState === ETimerStates.STARTED ? 500 : null)
+
+  const startTimer = () => {
+    const newStartTime =
+      timerState === ETimerStates.PAUSED ?
+        Math.floor(Date.now()) - (secondsInOnePomodoro - seconds) * 1000
+        : Date.now()
+
+    setStartTime(newStartTime)
+    setTimerState(ETimerStates.STARTED)
   }
-
-  const onTimerStop = () => {
-    setIsTimerStarted(false)
+  const pauseTimer = () => setTimerState(ETimerStates.PAUSED)
+  const stopTimer = () => {
+    setSeconds(secondsInOnePomodoro)
+    setTimerState(ETimerStates.STOPPED)
   }
 
   const onTimerEnd = () => {
-    setIsTimerStarted(false)
+    console.log('finish')
+    stopTimer()
+  }
+
+  const onDone = () => {
+    stopTimer()
+    console.log('done')
   }
 
   const splittedTime = splitSeconds(seconds)
@@ -69,9 +90,33 @@ const Timer = () => {
       </>
     )
   }
+
+  const startButtonOnClick =
+    timerState === ETimerStates.STOPPED
+    || timerState === ETimerStates.PAUSED
+      ? startTimer : pauseTimer
+  const startButtonText =
+    timerState === ETimerStates.STOPPED
+    || timerState === ETimerStates.PAUSED
+      ? 'Старт' : 'Пауза'
+
+  const stopButtonOnClick =
+    timerState === ETimerStates.PAUSED
+      ? onDone
+      : stopTimer
+  const stopButtonText =
+    timerState === ETimerStates.PAUSED
+      ? 'Сделано'
+      : 'Стоп'
+
+  const headerColor: keyof IColors =
+    timerState === ETimerStates.STARTED ? 'danger' : 'secondary'
+
   return (
     <STimerContainer>
-      <STimerHeader>
+      <STimerHeader
+        color={headerColor}
+      >
         <STimerHeaderTaskName>
           {taskName}
         </STimerHeaderTaskName>
@@ -82,11 +127,13 @@ const Timer = () => {
 
       <STimerBody>
         <STimerDisplayContainer>
-          <span>
+          <STimerTime
+            color={timerState === ETimerStates.STARTED ? 'danger' : undefined}
+          >
             {time}
-          </span>
+          </STimerTime>
           {
-            !isTimerStarted
+            timerState === ETimerStates.STOPPED
             &&
             (
               <SPlusBtn>
@@ -103,20 +150,20 @@ const Timer = () => {
 
         <STimerControls>
           <STimerStartButton
-            onClick={onTimerStart}
+            onClick={startButtonOnClick}
             disabled={!currentTask}
             transparent={!currentTask}
           >
-            Старт
+            {startButtonText}
           </STimerStartButton>
 
           <StyledButton
-            onClick={onTimerStop}
+            onClick={stopButtonOnClick}
             color='danger'
-            disabled={!isTimerStarted}
+            disabled={timerState === ETimerStates.STOPPED}
             transparent
           >
-            Стоп
+            {stopButtonText}
           </StyledButton>
         </STimerControls>
       </STimerBody>

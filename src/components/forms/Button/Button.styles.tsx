@@ -13,7 +13,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
   font-size: 16px;
   font-weight: 500;
   transition-property: background-color, color, border-color;
-
+  cursor: pointer;
+  
   ${({
        disabled,
        color = 'primary',
