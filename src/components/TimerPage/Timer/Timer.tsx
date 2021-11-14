@@ -16,10 +16,6 @@ import { useInterval } from '../../../hooks/useInterval'
 import { addZero, splitSeconds } from '../../../utils/stringProcessing'
 import { IColors } from '../../../utils/constants/themes.constants'
 
-//todo перенести в настройки таймера
-const secondsInOnePomodoro = 25 * 60
-const timerSpeedRatio = 1
-
 enum ETimerStates {
   STOPPED = 'STOPPED',
   STARTED = 'STARTED',
@@ -29,7 +25,9 @@ enum ETimerStates {
 const Timer = () => {
   const currentTask = useSelector((state: TRootState) =>
     state.task.tasks[state.task.order[0]])
-  const [seconds, setSeconds] = useState(secondsInOnePomodoro)
+  const { pomodoro, timerSpeedRatio } =
+    useSelector((state: TRootState) => state.settings)
+  const [seconds, setSeconds] = useState(pomodoro)
   const [startTime, setStartTime] = useState(0)
   const [timerState, setTimerState] =
     useState<ETimerStates>(ETimerStates.STOPPED)
@@ -39,7 +37,7 @@ const Timer = () => {
       const delta = Math.floor((Date.now() - startTime)
         / (1000 / timerSpeedRatio))
 
-      let newSecondsValue = secondsInOnePomodoro - delta
+      let newSecondsValue = pomodoro - delta
       newSecondsValue = newSecondsValue <= 0 ? 0 : newSecondsValue
 
       setSeconds(newSecondsValue)
@@ -50,7 +48,7 @@ const Timer = () => {
   const startTimer = () => {
     const newStartTime =
       timerState === ETimerStates.PAUSED ?
-        Math.floor(Date.now()) - (secondsInOnePomodoro - seconds) * 1000
+        Math.floor(Date.now()) - (pomodoro - seconds) * 1000
         : Date.now()
 
     setStartTime(newStartTime)
@@ -58,7 +56,7 @@ const Timer = () => {
   }
   const pauseTimer = () => setTimerState(ETimerStates.PAUSED)
   const stopTimer = () => {
-    setSeconds(secondsInOnePomodoro)
+    setSeconds(pomodoro)
     setTimerState(ETimerStates.STOPPED)
   }
 
