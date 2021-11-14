@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid'
 type TTaskStateItem = {
   plannedCount: number,
   passedCount: number,
+  index: number,
   name: string
 }
 
@@ -27,6 +28,12 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
     switch (type) {
       case ETaskActionTypes.TASK_ADD:
         const newTaskUuid = uuid()
+        const allCurrentTaskIndexes = [
+          0,
+          ...Object.keys(state.tasks)
+            .map(i => state.tasks[i].index),
+        ]
+        const maxTaskIndex = Math.max(...allCurrentTaskIndexes)
         return {
           ...state,
           tasks: {
@@ -35,6 +42,7 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
               name: action.payload.name,
               plannedCount: 1,
               passedCount: 0,
+              index: maxTaskIndex + 1,
             },
           },
           order: [...state.order, newTaskUuid],

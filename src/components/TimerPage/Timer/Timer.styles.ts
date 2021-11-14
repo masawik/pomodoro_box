@@ -3,6 +3,7 @@ import { StyledButton } from '../../forms'
 
 export const STimerContainer = styled.div`
   height: 507px;
+  width: 733px;
   ${({ theme: { colors } }) => css`
     background-color: ${colors.secondary.light};
   `}
