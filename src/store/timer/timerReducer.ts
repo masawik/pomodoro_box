@@ -1,8 +1,15 @@
 import { Reducer } from 'redux'
 import { ETimerActionTypes, TTimerActionTypes } from './timerTypes'
 
+export enum ETimerModes {
+  WORK = 'WORK',
+  BREAK = 'BREAK'
+}
+
 const initialState = {
-  count: 0,
+  //count of passed work cycles
+  mode: ETimerModes.WORK,
+  workCycles: 1,
 }
 type TTimerState = typeof initialState
 
@@ -12,7 +19,15 @@ export const timerReducer: Reducer<TTimerState, TTimerActionTypes> =
       case ETimerActionTypes.INCREASE_TOTAL_POMODORO_COUNT:
         return {
           ...state,
-          count: state.count + 1,
+          workCycles: state.workCycles + 1,
+        }
+
+      case ETimerActionTypes.SET_WORK_MODE:
+      case ETimerActionTypes.SET_BREAK_MODE:
+        return {
+          ...state,
+          mode: action.type === ETimerActionTypes.SET_WORK_MODE
+            ? ETimerModes.WORK : ETimerModes.BREAK,
         }
 
       default:
