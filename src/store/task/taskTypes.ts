@@ -4,7 +4,8 @@ export enum ETaskActionTypes {
   TASK_INCREASE_PLANNED_COUNT = 'TASK_INCREASE_PLANNED_COUNT',
   TASK_REDUCE_PLANNED_COUNT = 'TASK_REDUCE_PLANNED_COUNT',
   TASK_CHANGE_NAME = 'TASK_CHANGE_NAME',
-  TASK_CHANGE_ORDER = 'TASK_CHANGE_ORDER'
+  TASK_CHANGE_ORDER = 'TASK_CHANGE_ORDER',
+  TASK_INCREASE_CURRENT_PASSED_COUNT = 'TASK_INCREASE_CURRENT_PASSED_COUNT'
 }
 
 export type TTaskAdd =
@@ -13,13 +14,13 @@ export type TTaskAdd =
 export type TTaskDelete =
   { type: ETaskActionTypes.TASK_DELETE, payload: { id: string } }
 
-export type TTaskIncreaseCount =
+export type TTaskIncreasePlannedCount =
   {
     type: ETaskActionTypes.TASK_INCREASE_PLANNED_COUNT,
     payload: { id: string }
   }
 
-export type TTaskReduceCount =
+export type TTaskReducePlannedCount =
   { type: ETaskActionTypes.TASK_REDUCE_PLANNED_COUNT, payload: { id: string } }
 
 export type TTaskChangeName =
@@ -34,9 +35,13 @@ export type TTaskChangeOrder =
     payload: { oldIndex: number, newIndex: number }
   }
 
+export type TTaskIncreaseCurrentPassedCount =
+  { type: ETaskActionTypes.TASK_INCREASE_CURRENT_PASSED_COUNT }
+
 export type TTaskActionTypes = TTaskAdd
   | TTaskDelete
-  | TTaskIncreaseCount
-  | TTaskReduceCount
+  | TTaskIncreasePlannedCount
+  | TTaskReducePlannedCount
   | TTaskChangeName
   | TTaskChangeOrder
+  | TTaskIncreaseCurrentPassedCount

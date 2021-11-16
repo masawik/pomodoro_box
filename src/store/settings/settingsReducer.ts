@@ -2,10 +2,10 @@ import { Reducer } from 'redux'
 
 //all time in seconds
 const initialState = {
-  pomodoro: 1,
-  shortBreak: 2,
-  longBreak: 4,
-  longBreakInterval: 3,
+  pomodoro: 25 * 60,
+  shortBreak: 5 * 60,
+  longBreak: 20 * 60,
+  longBreakInterval: 4,
   timerSpeedRatio: 1
 }
 

@@ -24,6 +24,10 @@ import {
   timerSetWorkMode,
 } from '../../../store/timer/timerActions'
 import { ETimerModes } from '../../../store/timer/timerReducer'
+import {
+  taskDelete,
+  taskIncreaseCurrentPassedCount,
+} from '../../../store/task/taskActions'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -31,12 +35,13 @@ enum ETimerStates {
   PAUSED = 'PAUSED'
 }
 
-
 const Timer = () => {
   const dispatch = useDispatch()
 
+  const currentTaskId = useSelector((state: TRootState) =>
+    state.task.order[0])
   const currentTask = useSelector((state: TRootState) =>
-    state.task.tasks[state.task.order[0]])
+    state.task.tasks[currentTaskId])
 
   const {
     pomodoro, timerSpeedRatio,
@@ -85,8 +90,7 @@ const Timer = () => {
   }
 
   const onForceDoneClick = () => {
-    stopTimer()
-    console.log('done')
+    onTimerEnd()
   }
 
   const setUpBreak = () => {
@@ -106,10 +110,17 @@ const Timer = () => {
     dispatch(timerSetWorkMode())
   }
 
+  const onTaskFinish = () => {
+    //todo тут добавить ненавязчивую поздравлялку
+    dispatch(taskDelete(currentTaskId))
+  }
+
   const onTimerEnd = () => {
     stopTimer()
     if (mode === ETimerModes.WORK) {
       dispatch(timerIncreaseWorkCycles())
+      if (currentTask.plannedCount === 1) onTaskFinish()
+      else dispatch(taskIncreaseCurrentPassedCount())
       setUpBreak()
     } else setUpWork()
   }
@@ -127,7 +138,10 @@ const Timer = () => {
   let description = (<>Задач пока нет</>)
   if (currentTask) {
     taskName = currentTask.name
-    countOfPomodoros = `Помидор ${currentTask.passedCount + 1}`
+    countOfPomodoros = mode === ETimerModes.WORK
+      ? `Помидор ${currentTask.passedCount + 1}`
+      : `Перерыв ${currentTask.passedCount}`
+
     description = (
       <>
         <STimerDescriptionTaskCount>
@@ -153,7 +167,9 @@ const Timer = () => {
       : stopTimer
   const stopButtonText =
     timerState === ETimerStates.PAUSED
-      ? 'Сделано'
+      ? mode === ETimerModes.WORK
+        ? 'Сделано'
+        : 'Пропустить'
       : 'Стоп'
 
   const headerColor: keyof IColors =
