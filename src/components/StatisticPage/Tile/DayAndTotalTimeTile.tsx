@@ -25,7 +25,7 @@ const DayAndTotalTimeTile: React.FC<IDayAndTotalTimeTile> = ({
             <span>
               Вы работали над задачами в&nbsp;течении&nbsp;
               <HighlightedText>
-                {totalTime} минуты
+                {totalTime} минут
               </HighlightedText>
             </span>
           )

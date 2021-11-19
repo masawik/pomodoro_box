@@ -21,10 +21,9 @@ import { setDocumentTitle } from '../../utils/document'
 import { useSelector } from 'react-redux'
 import { TRootState } from '../../store/rootReducer'
 import {
-  getDayOfWeekByTime,
+  getDayOfWeekByTime, msToMin,
   splitMs,
 } from '../../utils/dateAndTime'
-
 
 const StatisticPage = () => {
   useEffect(() => {
@@ -34,12 +33,12 @@ const StatisticPage = () => {
   const { days, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
 
-  const secondsInOnePomodoro = useSelector((state: TRootState) =>
-    state.settings.onePomodoroTime)
+  const { onePomodoroTime } =
+    useSelector((state: TRootState) => state.settings)
 
   const {
-    workTime: countOfMinutes, countOfPomodoros,
-    pauseTime, countOfPauses,
+    workTime, countOfPomodoros,
+    pauseTime, countOfPauses
   } = days[selectedDay]
   || {
     workTime: 0, countOfPomodoros: 0,
@@ -47,26 +46,34 @@ const StatisticPage = () => {
   }
 
   const { long: dayOfWeek } = getDayOfWeekByTime(selectedDay)
+  const focus = countOfPomodoros
+    ? Math.floor( ((countOfPomodoros * onePomodoroTime) / workTime) * 100)
+    : 0
 
   //only render variables below
-  const focus = Math.floor(
-    ((countOfPomodoros * secondsInOnePomodoro) / (countOfMinutes * 60))
-    * 100)
+  const workTimeInMinutes = msToMin(workTime)
+
   const focusText = `${focus}%`
   const focusColor = focus === 0 ? 'secondary' : 'focus'
 
   let pauseTimeTileText = '0м'
+
   if (pauseTime !== 0) {
-    const { minutes, hours } = splitMs(pauseTime)
-    pauseTimeTileText = `${minutes}м`
+    const { minutes, hours, seconds } = splitMs(pauseTime)
+    pauseTimeTileText = ''
+    if (seconds) pauseTimeTileText = `${seconds}с`
+    if (minutes) pauseTimeTileText = `${minutes}м ${pauseTimeTileText}`
     if (hours) pauseTimeTileText = `${hours}ч ${pauseTimeTileText}`
   }
   const pauseTileColor =
     pauseTime === 0 ? 'secondary' : 'info'
+
   const pauseCountTileText =
-    countOfPauses === 0 ? '0' : String(countOfPauses)
+    !countOfPauses ? '0' : String(countOfPauses)
+
   const pauseCountTileColor =
-    countOfPauses === 0 ? 'secondary' : 'pauses'
+    !countOfPauses ? 'secondary' : 'pauses'
+
   return (
     <PageContentContainer>
       <SStatisticPageHeader>
@@ -86,7 +93,7 @@ const StatisticPage = () => {
           <SWidgetColumnContainer>
             <DayAndTotalTimeTile
               dayOfWeek={dayOfWeek}
-              totalTime={countOfMinutes}
+              totalTime={workTimeInMinutes}
             />
 
             <PomodoroCountTile count={countOfPomodoros} />

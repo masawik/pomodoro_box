@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 import { Reducer } from 'redux'
 import { EStatisticActionTypes, TStatisticActions } from './statisticTypes'
-import { getTodayAbsoluteTime } from '../../utils/dateAndTime'
+import { getTodayAbsoluteTime, minToMs } from '../../utils/dateAndTime'
 
 type TDayTimeInTimestamp = number
 type TMilliseconds = number
@@ -22,23 +22,23 @@ interface IStatisticState {
   selectedDay: keyof IStatisticState['days'] | 0
 }
 
-//test object
-// const initialState: IStatisticState = {
-//   minuteStatistic: {
-//     1637269200000: {
-//       workTime: 56,
-//       countOfPomodoros: 2,
-//       pauseTime: 9 * 60,
-//       countOfPauses: 5,
-//     },
-//   },
-//   selectedDay: 0,
-// }
-
+// test object
 const initialState: IStatisticState = {
-  days: {},
+  days: {
+    1637269200000: {
+      workTime: 30 * 60 * 1000,
+      countOfPomodoros: 1,
+      pauseTime: 15000,
+      countOfPauses: 2,
+    },
+  },
   selectedDay: 0,
 }
+
+// const initialState: IStatisticState = {
+//   days: {},
+//   selectedDay: 0,
+// }
 
 initialState.selectedDay = getTodayAbsoluteTime()
 
@@ -53,8 +53,11 @@ export const statisticReducer: Reducer<IStatisticState, TStatisticActions> =
       newState.days[todayTime] = { ...initialDayStatisticState }
 
     switch (action.type) {
-      case EStatisticActionTypes.STATISTIC_ADD_MINUTE:
-        newState.days[todayTime].workTime++
+      case EStatisticActionTypes.STATISTIC_ADD_MINUTE: {
+        const todayWorkTime = newState.days[todayTime].workTime
+        newState.days[todayTime].workTime =
+          todayWorkTime + minToMs(1)
+      }
         return newState
 
       case EStatisticActionTypes.STATISTIC_ADD_POMODORO:

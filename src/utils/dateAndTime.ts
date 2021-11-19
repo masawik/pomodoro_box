@@ -5,7 +5,8 @@ interface IsplitMs {
   seconds: number
 }
 
-export const minToMs = (min: number): number => min * 60 * 1000
+export const minToMs = (min: number): number => min * 60000
+export const msToMin = (ms: number): number => Math.floor(ms / 60000)
 
 export const splitMs = (ms: number): IsplitMs => {
   const seconds = Math.floor(ms / 1000)
@@ -26,7 +27,10 @@ export const getTodayAbsoluteTime = (): number => {
   return now.getTime()
 }
 
-export const getTimeInDaysFromToday =
+// функция возвращает день, через заданное число дней, от заданого дня
+// today - точка отсчета
+// howMuchDays - через сколько дней от заданной точки отсчета выбрть день
+export const getDayTimeInDaysFromDayTime =
   (today: number, howMuchDays: number): number => {
     const resultDate = new Date(today)
     resultDate.setDate(resultDate.getDate() + howMuchDays)
@@ -76,8 +80,8 @@ export const getDayOfWeekByTime = (time: number): IDayOfWeek => {
   return weekDays[day]
 }
 
-export const secondsToFormattedString = (seconds: number): string => {
-  const { days, hours, minutes } = splitMs(seconds)
+export const msToFormattedString = (ms: number): string => {
+  const { days, hours, minutes } = splitMs(ms)
   let result = ''
   if (minutes) result = `${minutes} мин`
   if (hours || days) result = `${hours} ч ${result}`

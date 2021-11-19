@@ -12,9 +12,9 @@ import {
 } from './StatisticChart.styles'
 import {
   getDayOfWeekByTime,
-  getTimeInDaysFromToday,
+  getDayTimeInDaysFromDayTime,
   getTodayAbsoluteTime,
-  secondsToFormattedString,
+  msToFormattedString,
 } from '../../../utils/dateAndTime'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
@@ -103,7 +103,7 @@ const CustomYAxisTick = (props: IAxisCustomTickerProps) => {
     payload: { value } = { value: '' },
   } = props
 
-  const processedValue = value ? secondsToFormattedString(+value) : ''
+  const processedValue = value ? msToFormattedString(+value) : ''
 
   return (
     <text
@@ -118,26 +118,30 @@ const CustomYAxisTick = (props: IAxisCustomTickerProps) => {
 
 const StatisticChart = () => {
   const dispatch = useDispatch()
+
   const { days, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
 
   const today = getTodayAbsoluteTime()
-  const firstDayOfCurrentWeek = getTimeInDaysFromToday(
-    today,
-    (new Date(today).getDay() - 1) * -1
-  )
-  const data: Array<IChartData> = new Array(7)
-    .fill({})
-    .map((i, index) => {
-      const currentDayTime =
-        getTimeInDaysFromToday(firstDayOfCurrentWeek, index)
-      const countOfMinutes = days[currentDayTime]?.workTime | 0
-      return {
-        dayOfWeek: getDayOfWeekByTime(currentDayTime).short,
-        time: countOfMinutes * 60,
-        dayTime: currentDayTime,
-      }
-    })
+
+  const firstDayOfCurrentWeek =
+    getDayTimeInDaysFromDayTime(today, -(new Date(today).getDay() - 1))
+
+  const data: Array<IChartData> =
+    new Array(7)
+      .fill({})
+      .map((i, index) => {
+        const currentDayTime =
+          getDayTimeInDaysFromDayTime(firstDayOfCurrentWeek, index)
+
+        const currentDayWorkTime = days[currentDayTime]?.workTime || 0
+
+        return {
+          dayOfWeek: getDayOfWeekByTime(currentDayTime).short,
+          time: currentDayWorkTime,
+          dayTime: currentDayTime,
+        }
+      })
 
   const barClickHandler = (barIndex: number) => {
     dispatch(statisticSetSelectedDay(data[barIndex].dayTime))

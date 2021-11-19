@@ -3,7 +3,7 @@ import { STaskListTotalTimeSum } from './TaskListTimeSum.styles'
 import { TTasksList } from '../../../../store/task/taskReducer'
 import { useSelector } from 'react-redux'
 import { TRootState } from '../../../../store/rootReducer'
-import { secondsToFormattedString } from '../../../../utils/dateAndTime'
+import { msToFormattedString } from '../../../../utils/dateAndTime'
 
 interface ISTaskListTotalTimeSumProps {
   tasks: TTasksList
@@ -19,7 +19,7 @@ const TaskListTimeSum: React.FC<ISTaskListTotalTimeSumProps> =
         .reduce((acc, cur) => acc + cur)
       * onePomodoroTime
 
-    const formattedSum = secondsToFormattedString(totalSeconds)
+    const formattedSum = msToFormattedString(totalSeconds)
 
     return (
       <STaskListTotalTimeSum>
