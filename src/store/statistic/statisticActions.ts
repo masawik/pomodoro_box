@@ -24,8 +24,8 @@ export const statisticSetSelectedDay =
     })
 
 export const statisticAddPauseTime =
-  (secondsToAdd: number): TStatisticAddPauseTime =>
+  (pauseDuration: number): TStatisticAddPauseTime =>
     ({
       type: EStatisticActionTypes.STATISTIC_ADD_PAUSE_TIME,
-      payload: { secondsToAdd },
+      payload: { pauseDuration: pauseDuration },
     })

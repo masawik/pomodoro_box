@@ -15,7 +15,7 @@ import {
   getTimeInDaysFromToday,
   getTodayAbsoluteTime,
   secondsToFormattedString,
-} from '../../../utils/date'
+} from '../../../utils/dateAndTime'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { statisticSetSelectedDay } from '../../../store/statistic/statisticActions'
@@ -118,7 +118,7 @@ const CustomYAxisTick = (props: IAxisCustomTickerProps) => {
 
 const StatisticChart = () => {
   const dispatch = useDispatch()
-  const { minuteStatistic, selectedDay } =
+  const { days, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
 
   const today = getTodayAbsoluteTime()
@@ -131,7 +131,7 @@ const StatisticChart = () => {
     .map((i, index) => {
       const currentDayTime =
         getTimeInDaysFromToday(firstDayOfCurrentWeek, index)
-      const countOfMinutes = minuteStatistic[currentDayTime]?.workTime | 0
+      const countOfMinutes = days[currentDayTime]?.workTime | 0
       return {
         dayOfWeek: getDayOfWeekByTime(currentDayTime).short,
         time: countOfMinutes * 60,

@@ -28,9 +28,10 @@ import {
   taskDelete,
   taskIncreaseCurrentPassedCount,
 } from '../../../store/task/taskActions'
-import { splitSeconds } from '../../../utils/date'
+import { splitMs } from '../../../utils/dateAndTime'
 import {
-  statisticAddMinute, statisticAddPause, statisticAddPauseTime,
+  statisticAddMinute, statisticAddPause,
+  statisticAddPauseTime,
   statisticAddPomodoro,
 } from '../../../store/statistic/statisticActions'
 
@@ -40,25 +41,30 @@ enum ETimerStates {
   PAUSED = 'PAUSED'
 }
 
+const SEC_IN_ONE_MINUTE = 60
+const MS_IN_ONE_SECOND = 1000
+
 const Timer = () => {
   const dispatch = useDispatch()
 
-  const currentTaskId = useSelector((state: TRootState) =>
-    state.task.order[0])
-  const currentTask = useSelector((state: TRootState) =>
-    state.task.tasks[currentTaskId])
+  const currentTaskId =
+    useSelector((state: TRootState) => state.task.order[0])
+  const currentTask =
+    useSelector((state: TRootState) => state.task.tasks[currentTaskId])
 
   const {
-    pomodoro, timerSpeedRatio,
-    shortBreak, longBreak, longBreakInterval,
-  } =
-    useSelector((state: TRootState) => state.settings)
+    onePomodoroTime,
+    timerSpeedRatio,
+    shortBreakTime,
+    longBreakTime,
+    longBreakInterval,
+  } = useSelector((state: TRootState) => state.settings)
 
-  const { workCycles, mode } = useSelector((state: TRootState) =>
-    state.timer)
+  const { workCycles, mode: timerMode } =
+    useSelector((state: TRootState) => state.timer)
 
   const [currentDuration, setCurrentDuration] = useState(0)
-  const [seconds, setSeconds] = useState(0)
+  const [timerValue, setTimerValue] = useState(0)
   const [startTimerTime, setStartTimerTime] = useState(0)
   const [startPauseTime, setStartPauseTime] = useState(0)
 
@@ -68,60 +74,61 @@ const Timer = () => {
 
   //timer logic
   useInterval(() => {
-      const delta = Math.floor((Date.now() - startTimerTime)
-        / (1000 / timerSpeedRatio))
+      const delta =
+        Math.floor(((Date.now() - startTimerTime) / MS_IN_ONE_SECOND)
+          * MS_IN_ONE_SECOND * timerSpeedRatio)
 
-      let newSecondsValue = currentDuration - delta
-      newSecondsValue = newSecondsValue <= 0 ? 0 : newSecondsValue
+      let newTimerValue = currentDuration - delta
+      newTimerValue = newTimerValue <= 0 ? 0 : newTimerValue
 
-      setSeconds(newSecondsValue)
-      if (newSecondsValue === 0) onTimerEnd()
+      setTimerValue(newTimerValue)
+      if (newTimerValue === 0) onTimerEnd()
     },
-    timerState === ETimerStates.STARTED ? 500 / timerSpeedRatio : null)
+    timerState === ETimerStates.STARTED ? (500 / timerSpeedRatio) : null)
 
   const startTimer = () => {
-    let newStartTime
+    let newTimerStartTime: number
     if (timerState === ETimerStates.PAUSED) {
-      const pauseTime = Math.floor((Date.now() - startPauseTime) / 1000)
+      newTimerStartTime =
+        Date.now() - (currentDuration - timerValue)
+
+      const pauseTime = Date.now() - startPauseTime
       dispatch(statisticAddPauseTime(pauseTime))
-      newStartTime =
-        Math.floor(Date.now()) - (currentDuration - seconds) * 1000
     } else {
-      newStartTime = Date.now()
+      newTimerStartTime = Date.now()
     }
 
-    setStartTimerTime(newStartTime)
+    setStartTimerTime(newTimerStartTime)
     setTimerState(ETimerStates.STARTED)
   }
 
   const pauseTimer = () => {
     setStartPauseTime(Date.now())
-    dispatch(statisticAddPause())
     setTimerState(ETimerStates.PAUSED)
+
+    timerMode === ETimerModes.WORK && dispatch(statisticAddPause())
   }
 
   const stopTimer = () => {
-    setSeconds(currentDuration)
+    setTimerValue(currentDuration)
     setTimerState(ETimerStates.STOPPED)
   }
 
-  const onForceDoneClick = () => {
-    onTimerEnd()
-  }
+  const onForceDoneClick = () => onTimerEnd()
 
   const setUpBreak = () => {
-    const breakDuration = workCycles !== 0
-    && workCycles % longBreakInterval === 0
-      ? longBreak
-      : shortBreak
+    const breakDuration =
+      workCycles !== 0 && workCycles % longBreakInterval === 0
+        ? longBreakTime
+        : shortBreakTime
     setCurrentDuration(breakDuration)
-    setSeconds(breakDuration)
+    setTimerValue(breakDuration)
     dispatch(timerSetBreakMode())
   }
 
   const setUpWork = () => {
-    setCurrentDuration(pomodoro)
-    setSeconds(pomodoro)
+    setCurrentDuration(onePomodoroTime)
+    setTimerValue(onePomodoroTime)
     dispatch(timerSetWorkMode())
   }
 
@@ -132,28 +139,31 @@ const Timer = () => {
 
   const onTimerEnd = () => {
     stopTimer()
-    if (mode === ETimerModes.WORK) {
+    if (timerMode === ETimerModes.WORK) {
       dispatch(timerIncreaseWorkCycles())
+
       dispatch(statisticAddPomodoro())
+
       if (currentTask.plannedCount === 1) onTaskFinish()
       else dispatch(taskIncreaseCurrentPassedCount())
+
       setUpBreak()
     } else setUpWork()
   }
 
   useEffect(() => {
-    mode === ETimerModes.WORK ? setUpWork() : setUpBreak()
+    timerMode === ETimerModes.WORK ? setUpWork() : setUpBreak()
   }, [])
 
   useEffect(() => {
-    mode === ETimerModes.WORK &&
-    timerState === ETimerStates.STARTED &&
-    seconds % 60 === 0 &&
-    dispatch(statisticAddMinute())
-  }, [seconds])
+    timerMode === ETimerModes.WORK
+    && timerState === ETimerStates.STARTED
+    && Math.floor(timerValue / MS_IN_ONE_SECOND) % SEC_IN_ONE_MINUTE === 0
+    && dispatch(statisticAddMinute())
+  }, [Math.floor(timerValue / MS_IN_ONE_SECOND)])
 
   //below only render variables
-  const splittedTime = splitSeconds(seconds)
+  const splittedTime = splitMs(timerValue)
   const time = `${splittedTime.minutes}:${addZero(splittedTime.seconds)}`
 
   let taskName = 'Задач пока нет'
@@ -161,7 +171,7 @@ const Timer = () => {
   let description = (<>Задач пока нет</>)
   if (currentTask) {
     taskName = currentTask.name
-    countOfPomodoros = mode === ETimerModes.WORK
+    countOfPomodoros = timerMode === ETimerModes.WORK
       ? `Помидор ${currentTask.passedCount + 1}`
       : `Перерыв ${currentTask.passedCount}`
 
@@ -190,7 +200,7 @@ const Timer = () => {
       : stopTimer
   const stopButtonText =
     timerState === ETimerStates.PAUSED
-      ? mode === ETimerModes.WORK
+      ? timerMode === ETimerModes.WORK
         ? 'Сделано'
         : 'Пропустить'
       : 'Стоп'
@@ -198,12 +208,12 @@ const Timer = () => {
   const headerColor: keyof IColors =
     timerState === ETimerStates.STOPPED
       ? 'secondary'
-      : mode === ETimerModes.WORK
+      : timerMode === ETimerModes.WORK
         ? 'danger'
         : 'primary'
 
   const timeColor: keyof IColors =
-    mode === ETimerModes.WORK
+    timerMode === ETimerModes.WORK
       ? 'danger'
       : 'primary'
 

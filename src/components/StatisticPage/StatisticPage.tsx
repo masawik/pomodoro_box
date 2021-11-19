@@ -22,8 +22,8 @@ import { useSelector } from 'react-redux'
 import { TRootState } from '../../store/rootReducer'
 import {
   getDayOfWeekByTime,
-  splitSeconds,
-} from '../../utils/date'
+  splitMs,
+} from '../../utils/dateAndTime'
 
 
 const StatisticPage = () => {
@@ -31,16 +31,16 @@ const StatisticPage = () => {
     setDocumentTitle('статистика')
   }, [])
 
-  const { minuteStatistic, selectedDay } =
+  const { days, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
 
   const secondsInOnePomodoro = useSelector((state: TRootState) =>
-    state.settings.pomodoro)
+    state.settings.onePomodoroTime)
 
   const {
     workTime: countOfMinutes, countOfPomodoros,
     pauseTime, countOfPauses,
-  } = minuteStatistic[selectedDay]
+  } = days[selectedDay]
   || {
     workTime: 0, countOfPomodoros: 0,
     countOfPauseMinutes: 0, pauseTime: 0,
@@ -57,7 +57,7 @@ const StatisticPage = () => {
 
   let pauseTimeTileText = '0м'
   if (pauseTime !== 0) {
-    const { minutes, hours } = splitSeconds(pauseTime)
+    const { minutes, hours } = splitMs(pauseTime)
     pauseTimeTileText = `${minutes}м`
     if (hours) pauseTimeTileText = `${hours}ч ${pauseTimeTileText}`
   }

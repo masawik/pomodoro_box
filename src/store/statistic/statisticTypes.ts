@@ -24,7 +24,7 @@ export type TStatisticSetSelectedDay =
 export type TStatisticAddPauseTime =
   {
     type: EStatisticActionTypes.STATISTIC_ADD_PAUSE_TIME,
-    payload: { secondsToAdd: number }
+    payload: { pauseDuration: number }
   }
 
 export type TStatisticActions =

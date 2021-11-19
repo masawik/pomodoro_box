@@ -1,12 +1,13 @@
 import { Action, Reducer } from 'redux'
+import { minToMs } from '../../utils/dateAndTime'
 
-//all time in seconds
+//all time in ms
 const initialState = {
-  pomodoro: 25 * 60,
-  shortBreak: 5 * 60,
-  longBreak: 20 * 60,
+  onePomodoroTime: minToMs(25),
+  shortBreakTime: minToMs(5),
+  longBreakTime: minToMs(20),
   longBreakInterval: 4,
-  timerSpeedRatio: 1,
+  timerSpeedRatio: 20,
 }
 
 type TSettingsState = typeof initialState

@@ -1,12 +1,14 @@
-interface IsplitSeconds {
+interface IsplitMs {
   days: number,
   hours: number,
   minutes: number,
   seconds: number
 }
 
-export const splitSeconds = (seconds: number): IsplitSeconds => {
+export const minToMs = (min: number): number => min * 60 * 1000
 
+export const splitMs = (ms: number): IsplitMs => {
+  const seconds = Math.floor(ms / 1000)
   const days = Math.floor(seconds / (3600 * 24))
   const hours = Math.floor(seconds % (3600 * 24) / 3600)
   const minutes = Math.floor(seconds % 3600 / 60)
@@ -14,7 +16,6 @@ export const splitSeconds = (seconds: number): IsplitSeconds => {
 
   return { days, hours, minutes, seconds: sec }
 }
-
 
 export const getTodayAbsoluteTime = (): number => {
   const now = new Date()
@@ -76,7 +77,7 @@ export const getDayOfWeekByTime = (time: number): IDayOfWeek => {
 }
 
 export const secondsToFormattedString = (seconds: number): string => {
-  const { days, hours, minutes } = splitSeconds(seconds)
+  const { days, hours, minutes } = splitMs(seconds)
   let result = ''
   if (minutes) result = `${minutes} мин`
   if (hours || days) result = `${hours} ч ${result}`

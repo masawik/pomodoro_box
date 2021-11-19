@@ -7,8 +7,9 @@ export enum ETimerModes {
 }
 
 const initialState = {
-  //count of passed work cycles
   mode: ETimerModes.WORK,
+
+  //count of passed work cycles
   workCycles: 1,
 }
 type TTimerState = typeof initialState
