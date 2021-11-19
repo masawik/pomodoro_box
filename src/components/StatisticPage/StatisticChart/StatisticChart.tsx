@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   BarChart,
   Bar,
@@ -10,17 +10,23 @@ import {
   SChartBarRectangle,
   SResponsiveContainer, SXAxisTickText,
 } from './StatisticChart.styles'
-import { secondsToFormattedString } from '../../../utils/date'
+import {
+  getDayOfWeekByTime,
+  getTimeInDaysFromToday,
+  getTodayAbsoluteTime,
+  secondsToFormattedString,
+} from '../../../utils/date'
+import { useDispatch, useSelector } from 'react-redux'
+import { TRootState } from '../../../store/rootReducer'
+import { statisticSetSelectedDay } from '../../../store/statistic/statisticActions'
 
-const data = [
-  { dayOfWeek: 'Пн', time: 51 * 60 },
-  { dayOfWeek: 'Вт', time: 84 * 60 },
-  { dayOfWeek: 'Ср', time: 50 * 60 },
-  { dayOfWeek: 'Чт', time: 110 * 60 },
-  { dayOfWeek: 'Пт', time: 46 * 60 },
-  { dayOfWeek: 'Сб', time: 0 },
-  { dayOfWeek: 'Вс', time: 0 },
-]
+type TTimeInSeconds = number
+
+interface IChartData {
+  dayOfWeek: string,
+  time: TTimeInSeconds,
+  dayTime: number
+}
 
 interface IBarAndTickerGenericProps {
   activeBarIndex?: number
@@ -47,7 +53,8 @@ const CustomXAxisTick = (props: IAxisCustomTickerProps) => {
     payload: { value } = { value: '' },
     activeBarIndex,
     index = 0,
-    clickHandler = () => {}
+    clickHandler = () => {
+    },
   } = props
 
   const isActive = activeBarIndex === index
@@ -70,7 +77,8 @@ const CustomBarShape = (props: ICustomBarShapeProps) => {
     activeBarIndex,
     index = 0,
     height,
-    clickHandler = () => {}
+    clickHandler = () => {
+    },
   } = props
 
   const isActive = activeBarIndex === index
@@ -109,9 +117,33 @@ const CustomYAxisTick = (props: IAxisCustomTickerProps) => {
 }
 
 const StatisticChart = () => {
-  const [activeBar, setActiveBar] = useState<number>(0)
-  const barClickHandler = (barIndex: number) => setActiveBar(barIndex)
+  const dispatch = useDispatch()
+  const { minuteStatistic, selectedDay } =
+    useSelector((state: TRootState) => state.statistic)
 
+  const today = getTodayAbsoluteTime()
+  const firstDayOfCurrentWeek = getTimeInDaysFromToday(
+    today,
+    (new Date(today).getDay() - 1) * -1
+  )
+  const data: Array<IChartData> = new Array(7)
+    .fill({})
+    .map((i, index) => {
+      const currentDayTime =
+        getTimeInDaysFromToday(firstDayOfCurrentWeek, index)
+      const countOfMinutes = minuteStatistic[currentDayTime]?.countOfMinutes | 0
+      return {
+        dayOfWeek: getDayOfWeekByTime(currentDayTime).short,
+        time: countOfMinutes * 60,
+        dayTime: currentDayTime,
+      }
+    })
+
+  const barClickHandler = (barIndex: number) => {
+    dispatch(statisticSetSelectedDay(data[barIndex].dayTime))
+  }
+
+  const activeBarIndex = data.findIndex(i => i.dayTime === selectedDay)
   return (
     <SResponsiveContainer height={''}>
       <BarChart
@@ -136,7 +168,7 @@ const StatisticChart = () => {
           tick={
             <CustomXAxisTick
               clickHandler={barClickHandler}
-              activeBarIndex={activeBar}
+              activeBarIndex={activeBarIndex}
             />
           }
           padding={{ left: 56, right: 56 }}
@@ -149,7 +181,7 @@ const StatisticChart = () => {
           shape={
             <CustomBarShape
               clickHandler={barClickHandler}
-              activeBarIndex={activeBar}
+              activeBarIndex={activeBarIndex}
             />
           }
         />

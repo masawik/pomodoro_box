@@ -18,12 +18,23 @@ import { ReactComponent as ClockSVG } from '../../assets/images/clock.svg'
 import { ReactComponent as StopSVG } from '../../assets/images/stop.svg'
 import StatisticChart from './StatisticChart/StatisticChart'
 import { setDocumentTitle } from '../../utils/document'
+import { useSelector } from 'react-redux'
+import { TRootState } from '../../store/rootReducer'
+import { getDayOfWeekByTime } from '../../utils/date'
 
 
 const StatisticPage = () => {
   useEffect(() => {
     setDocumentTitle('статистика')
   }, [])
+
+  const { minuteStatistic, selectedDay } =
+    useSelector((state: TRootState) => state.statistic)
+
+  const { countOfMinutes, countOfPomodoros } =
+  minuteStatistic[selectedDay] || { countOfMinutes: 0, countOfPomodoros: 0 }
+
+  const { long: dayOfWeek } = getDayOfWeekByTime(selectedDay)
 
   return (
     <PageContentContainer>
@@ -43,11 +54,11 @@ const StatisticPage = () => {
         <SWidgetColumnAndChart>
           <SWidgetColumnContainer>
             <DayAndTotalTimeTile
-              dayOfWeek='Суббота'
-              totalTime={51}
+              dayOfWeek={dayOfWeek}
+              totalTime={countOfMinutes}
             />
 
-            <PomodoroCountTile count={2}/>
+            <PomodoroCountTile count={countOfPomodoros} />
           </SWidgetColumnContainer>
 
           <StatisticChart />

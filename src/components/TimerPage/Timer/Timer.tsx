@@ -29,7 +29,10 @@ import {
   taskIncreaseCurrentPassedCount,
 } from '../../../store/task/taskActions'
 import { splitSeconds } from '../../../utils/date'
-import { statisticAddMinute } from '../../../store/statistic/statisticActions'
+import {
+  statisticAddMinute,
+  statisticAddPomodoro,
+} from '../../../store/statistic/statisticActions'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -120,6 +123,7 @@ const Timer = () => {
     stopTimer()
     if (mode === ETimerModes.WORK) {
       dispatch(timerIncreaseWorkCycles())
+      dispatch(statisticAddPomodoro())
       if (currentTask.plannedCount === 1) onTaskFinish()
       else dispatch(taskIncreaseCurrentPassedCount())
       setUpBreak()

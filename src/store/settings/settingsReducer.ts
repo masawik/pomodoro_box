@@ -6,7 +6,7 @@ const initialState = {
   shortBreak: 5 * 60,
   longBreak: 20 * 60,
   longBreakInterval: 4,
-  timerSpeedRatio: 1,
+  timerSpeedRatio: 10,
 }
 
 type TSettingsState = typeof initialState

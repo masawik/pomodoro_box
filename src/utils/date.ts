@@ -32,17 +32,44 @@ export const getTimeInDaysFromToday =
     return resultDate.getTime()
   }
 
-const weekDays = {
-  0: 'Вс',
-  1: 'Пн',
-  2: 'Вт',
-  3: 'Ср',
-  4: 'Чт',
-  5: 'Пт',
-  6: 'Сб',
+interface IDayOfWeek {
+  short: string,
+  long: string
 }
 
-export const getShortDayOfWeekByTime = (time: number): string => {
+const weekDays: { [key: number]: IDayOfWeek } = {
+  0: {
+    short: 'Вс',
+    long: 'Воскресенье',
+  },
+  1: {
+    short: 'Пн',
+    long: 'Понедельник',
+  },
+  2: {
+    short: 'Вт',
+    long: 'Вторник',
+  },
+  3: {
+    short: 'Ср',
+    long: 'Среда',
+  },
+  4: {
+    short: 'Чт',
+    long: 'Четверг',
+  },
+  5: {
+    short: 'Пт',
+    long: 'Пятница',
+  },
+  6: {
+    short: 'Сб',
+    long: 'Суббота',
+  },
+
+}
+
+export const getDayOfWeekByTime = (time: number): IDayOfWeek => {
   const date = new Date(time)
   const day = date.getDay() as 0 | 1 | 2 | 3 | 4 | 5 | 6
   return weekDays[day]
@@ -50,7 +77,8 @@ export const getShortDayOfWeekByTime = (time: number): string => {
 
 export const secondsToFormattedString = (seconds: number): string => {
   const { days, hours, minutes } = splitSeconds(seconds)
-  let result = `${minutes} мин`
+  let result = ''
+  if (minutes) result = `${minutes} мин`
   if (hours || days) result = `${hours} ч ${result}`
   if (days) result = `${days} д ${result}`
   return result
