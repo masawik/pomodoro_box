@@ -1,4 +1,4 @@
-import { Reducer } from 'redux'
+import { Action, Reducer } from 'redux'
 
 //all time in seconds
 const initialState = {
@@ -6,13 +6,13 @@ const initialState = {
   shortBreak: 5 * 60,
   longBreak: 20 * 60,
   longBreakInterval: 4,
-  timerSpeedRatio: 1
+  timerSpeedRatio: 1,
 }
 
 type TSettingsState = typeof initialState
+type TSettingsActions = Action
 
-// @ts-ignore
-export const settingsReducer: Reducer<TSettingsState, unknown> =
+export const settingsReducer: Reducer<TSettingsState, TSettingsActions> =
   (state = initialState): TSettingsState => {
     return state
   }

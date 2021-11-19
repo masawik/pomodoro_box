@@ -1,9 +1,9 @@
 import React from 'react'
 import { STaskListTotalTimeSum } from './TaskListTimeSum.styles'
 import { TTasksList } from '../../../../store/task/taskReducer'
-import { secondsToFormattedString } from '../../../../utils/stringProcessing'
 import { useSelector } from 'react-redux'
 import { TRootState } from '../../../../store/rootReducer'
+import { secondsToFormattedString } from '../../../../utils/date'
 
 interface ISTaskListTotalTimeSumProps {
   tasks: TTasksList

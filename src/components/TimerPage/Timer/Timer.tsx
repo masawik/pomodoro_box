@@ -16,7 +16,7 @@ import { StyledButton } from '../../forms'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { useInterval } from '../../../hooks/useInterval'
-import { addZero, splitSeconds } from '../../../utils/stringProcessing'
+import { addZero } from '../../../utils/stringProcessing'
 import { IColors } from '../../../utils/constants/themes.constants'
 import {
   timerIncreaseWorkCycles,
@@ -28,6 +28,8 @@ import {
   taskDelete,
   taskIncreaseCurrentPassedCount,
 } from '../../../store/task/taskActions'
+import { splitSeconds } from '../../../utils/date'
+import { statisticAddMinute } from '../../../store/statistic/statisticActions'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -70,7 +72,7 @@ const Timer = () => {
       setSeconds(newSecondsValue)
       if (newSecondsValue === 0) onTimerEnd()
     },
-    timerState === ETimerStates.STARTED ? 500 : null)
+    timerState === ETimerStates.STARTED ? 500 / timerSpeedRatio : null)
 
   const startTimer = () => {
     const newStartTime =
@@ -98,7 +100,6 @@ const Timer = () => {
     && workCycles % longBreakInterval === 0
       ? longBreak
       : shortBreak
-    console.log(`workCycles: ${workCycles} | breakDuration: ${breakDuration}`)
     setCurrentDuration(breakDuration)
     setSeconds(breakDuration)
     dispatch(timerSetBreakMode())
@@ -128,6 +129,13 @@ const Timer = () => {
   useEffect(() => {
     mode === ETimerModes.WORK ? setUpWork() : setUpBreak()
   }, [])
+
+  useEffect(() => {
+    mode === ETimerModes.WORK &&
+    timerState === ETimerStates.STARTED &&
+    seconds % 60 === 0 &&
+    dispatch(statisticAddMinute())
+  }, [seconds])
 
   //below only render variables
   const splittedTime = splitSeconds(seconds)

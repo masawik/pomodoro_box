@@ -6,11 +6,11 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts'
-import { secondsToFormattedString } from '../../../utils/stringProcessing'
 import {
   SChartBarRectangle,
   SResponsiveContainer, SXAxisTickText,
 } from './StatisticChart.styles'
+import { secondsToFormattedString } from '../../../utils/date'
 
 const data = [
   { dayOfWeek: 'Пн', time: 51 * 60 },
