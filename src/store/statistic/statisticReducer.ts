@@ -3,10 +3,14 @@ import { EStatisticActionTypes, TStatisticActions } from './statisticTypes'
 import { getTodayAbsoluteTime } from '../../utils/date'
 
 type TDayTimeInTimestamp = number
+type TMinutes = number
+type TSeconds = number
 
 interface IDailyMinuteStatistic {
-  countOfMinutes: number,
-  countOfPomodoros: number
+  workTime: TMinutes,
+  countOfPomodoros: number,
+  countOfPauses: number,
+  pauseTime: TSeconds
 }
 
 interface IStatisticState {
@@ -18,41 +22,25 @@ interface IStatisticState {
 
 
 //test object
+// const initialState: IStatisticState = {
+//   minuteStatistic: {
+//     1637269200000: {
+//       workTime: 56,
+//       countOfPomodoros: 2,
+//       pauseTime: 9 * 60,
+//       countOfPauses: 5,
+//     },
+//   },
+//   selectedDay: 0,
+// }
+
 const initialState: IStatisticState = {
-  minuteStatistic: {
-    1636837200000: {
-      countOfMinutes: 112,
-      countOfPomodoros: 3,
-    },
-    1636923600000: {
-      countOfMinutes: 51,
-      countOfPomodoros: 2,
-    },
-    1637010000000: {
-      countOfMinutes: 12,
-      countOfPomodoros: 0,
-    },
-    1637096400000: {
-      countOfMinutes: 6,
-      countOfPomodoros: 0,
-    },
-    1637182800000: {
-      countOfMinutes: 60,
-      countOfPomodoros: 6,
-    },
-    1637269200000: {
-      countOfMinutes: 0,
-      countOfPomodoros: 0,
-    },
-  },
+  minuteStatistic: {},
   selectedDay: 0,
 }
 
 initialState.selectedDay = getTodayAbsoluteTime()
 
-// const initialState: IStatisticState = {
-//   minuteStatistic: {},
-// }
 
 export const statisticReducer: Reducer<IStatisticState, TStatisticActions> =
   (
@@ -64,9 +52,9 @@ export const statisticReducer: Reducer<IStatisticState, TStatisticActions> =
         const newState = { ...state }
         const todayTime = getTodayAbsoluteTime()
         const todayMinutes = newState
-          .minuteStatistic[todayTime].countOfMinutes | 0
+          .minuteStatistic[todayTime].workTime | 0
 
-        newState.minuteStatistic[todayTime].countOfMinutes = todayMinutes + 1
+        newState.minuteStatistic[todayTime].workTime = todayMinutes + 1
         return newState
       }
 
@@ -78,6 +66,26 @@ export const statisticReducer: Reducer<IStatisticState, TStatisticActions> =
 
         newState.minuteStatistic[todayTime].countOfPomodoros =
           todayPomodoros + 1
+        return newState
+      }
+
+      case EStatisticActionTypes.STATISTIC_ADD_PAUSE: {
+        const newState = { ...state }
+        const todayTime = getTodayAbsoluteTime()
+        const todayPauses = newState
+          .minuteStatistic[todayTime].countOfPauses | 0
+        newState.minuteStatistic[todayTime].countOfPauses =
+          todayPauses + 1
+        return newState
+      }
+
+      case EStatisticActionTypes.STATISTIC_ADD_PAUSE_TIME: {
+        const newState = { ...state }
+        const todayTime = getTodayAbsoluteTime()
+        const todayPauseTime = newState
+          .minuteStatistic[todayTime].pauseTime | 0
+        newState.minuteStatistic[todayTime].pauseTime =
+          todayPauseTime + action.payload.secondsToAdd
         return newState
       }
 

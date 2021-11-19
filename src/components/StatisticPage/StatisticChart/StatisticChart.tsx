@@ -131,7 +131,7 @@ const StatisticChart = () => {
     .map((i, index) => {
       const currentDayTime =
         getTimeInDaysFromToday(firstDayOfCurrentWeek, index)
-      const countOfMinutes = minuteStatistic[currentDayTime]?.countOfMinutes | 0
+      const countOfMinutes = minuteStatistic[currentDayTime]?.workTime | 0
       return {
         dayOfWeek: getDayOfWeekByTime(currentDayTime).short,
         time: countOfMinutes * 60,

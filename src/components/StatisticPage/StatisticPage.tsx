@@ -20,7 +20,10 @@ import StatisticChart from './StatisticChart/StatisticChart'
 import { setDocumentTitle } from '../../utils/document'
 import { useSelector } from 'react-redux'
 import { TRootState } from '../../store/rootReducer'
-import { getDayOfWeekByTime } from '../../utils/date'
+import {
+  getDayOfWeekByTime,
+  splitSeconds,
+} from '../../utils/date'
 
 
 const StatisticPage = () => {
@@ -31,11 +34,39 @@ const StatisticPage = () => {
   const { minuteStatistic, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
 
-  const { countOfMinutes, countOfPomodoros } =
-  minuteStatistic[selectedDay] || { countOfMinutes: 0, countOfPomodoros: 0 }
+  const secondsInOnePomodoro = useSelector((state: TRootState) =>
+    state.settings.pomodoro)
+
+  const {
+    workTime: countOfMinutes, countOfPomodoros,
+    pauseTime, countOfPauses,
+  } = minuteStatistic[selectedDay]
+  || {
+    workTime: 0, countOfPomodoros: 0,
+    countOfPauseMinutes: 0, pauseTime: 0,
+  }
 
   const { long: dayOfWeek } = getDayOfWeekByTime(selectedDay)
 
+  //only render variables below
+  const focus = Math.floor(
+    ((countOfPomodoros * secondsInOnePomodoro) / (countOfMinutes * 60))
+    * 100)
+  const focusText = `${focus}%`
+  const focusColor = focus === 0 ? 'secondary' : 'focus'
+
+  let pauseTimeTileText = '0м'
+  if (pauseTime !== 0) {
+    const { minutes, hours } = splitSeconds(pauseTime)
+    pauseTimeTileText = `${minutes}м`
+    if (hours) pauseTimeTileText = `${hours}ч ${pauseTimeTileText}`
+  }
+  const pauseTileColor =
+    pauseTime === 0 ? 'secondary' : 'info'
+  const pauseCountTileText =
+    countOfPauses === 0 ? '0' : String(countOfPauses)
+  const pauseCountTileColor =
+    countOfPauses === 0 ? 'secondary' : 'pauses'
   return (
     <PageContentContainer>
       <SStatisticPageHeader>
@@ -68,22 +99,22 @@ const StatisticPage = () => {
         <SStatisticTilesRow>
           <StatisticTile
             title='Фокус'
-            text='35%'
-            color={'focus'}
+            text={focusText}
+            color={focusColor}
             svg={(<FocusSVG />)}
           />
 
           <StatisticTile
             title='Время на паузе'
-            text='9м'
-            color={'info'}
+            text={pauseTimeTileText}
+            color={pauseTileColor}
             svg={(<ClockSVG />)}
           />
 
           <StatisticTile
             title='Остановки'
-            text='3'
-            color={'pauses'}
+            text={pauseCountTileText}
+            color={pauseCountTileColor}
             svg={(<StopSVG />)}
           />
         </SStatisticTilesRow>

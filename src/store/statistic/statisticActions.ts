@@ -1,6 +1,9 @@
 import {
   EStatisticActionTypes,
-  TStatisticAddMinute, TStatisticAddPomodoro,
+  TStatisticAddMinute,
+  TStatisticAddPause,
+  TStatisticAddPauseTime,
+  TStatisticAddPomodoro,
   TStatisticSetSelectedDay,
 } from './statisticTypes'
 
@@ -10,9 +13,19 @@ export const statisticAddMinute = (): TStatisticAddMinute =>
 export const statisticAddPomodoro = (): TStatisticAddPomodoro =>
   ({ type: EStatisticActionTypes.STATISTIC_ADD_POMODORO })
 
+export const statisticAddPause = (): TStatisticAddPause =>
+  ({ type: EStatisticActionTypes.STATISTIC_ADD_PAUSE })
+
 export const statisticSetSelectedDay =
   (dayTime: number): TStatisticSetSelectedDay =>
     ({
       type: EStatisticActionTypes.STATISTIC_SET_SELECTED_DAY,
       payload: { dayTime },
+    })
+
+export const statisticAddPauseTime =
+  (secondsToAdd: number): TStatisticAddPauseTime =>
+    ({
+      type: EStatisticActionTypes.STATISTIC_ADD_PAUSE_TIME,
+      payload: { secondsToAdd },
     })

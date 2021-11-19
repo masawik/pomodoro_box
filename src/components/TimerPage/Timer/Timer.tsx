@@ -30,7 +30,7 @@ import {
 } from '../../../store/task/taskActions'
 import { splitSeconds } from '../../../utils/date'
 import {
-  statisticAddMinute,
+  statisticAddMinute, statisticAddPause, statisticAddPauseTime,
   statisticAddPomodoro,
 } from '../../../store/statistic/statisticActions'
 
@@ -59,14 +59,16 @@ const Timer = () => {
 
   const [currentDuration, setCurrentDuration] = useState(0)
   const [seconds, setSeconds] = useState(0)
-  const [startTime, setStartTime] = useState(0)
+  const [startTimerTime, setStartTimerTime] = useState(0)
+  const [startPauseTime, setStartPauseTime] = useState(0)
+
   const [timerState, setTimerState] =
     useState<ETimerStates>(ETimerStates.STOPPED)
 
 
   //timer logic
   useInterval(() => {
-      const delta = Math.floor((Date.now() - startTime)
+      const delta = Math.floor((Date.now() - startTimerTime)
         / (1000 / timerSpeedRatio))
 
       let newSecondsValue = currentDuration - delta
@@ -78,16 +80,25 @@ const Timer = () => {
     timerState === ETimerStates.STARTED ? 500 / timerSpeedRatio : null)
 
   const startTimer = () => {
-    const newStartTime =
-      timerState === ETimerStates.PAUSED ?
+    let newStartTime
+    if (timerState === ETimerStates.PAUSED) {
+      const pauseTime = Math.floor((Date.now() - startPauseTime) / 1000)
+      dispatch(statisticAddPauseTime(pauseTime))
+      newStartTime =
         Math.floor(Date.now()) - (currentDuration - seconds) * 1000
-        : Date.now()
+    } else {
+      newStartTime = Date.now()
+    }
 
-    setStartTime(newStartTime)
+    setStartTimerTime(newStartTime)
     setTimerState(ETimerStates.STARTED)
   }
 
-  const pauseTimer = () => setTimerState(ETimerStates.PAUSED)
+  const pauseTimer = () => {
+    setStartPauseTime(Date.now())
+    dispatch(statisticAddPause())
+    setTimerState(ETimerStates.PAUSED)
+  }
 
   const stopTimer = () => {
     setSeconds(currentDuration)
