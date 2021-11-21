@@ -124,15 +124,16 @@ const StatisticChart = () => {
 
   const today = getTodayAbsoluteTime()
 
-  const firstDayOfCurrentWeek =
-    getDayTimeInDaysFromDayTime(today, -(new Date(today).getDay() - 1))
+  //todo воскресенье не должно быть первым
+  const firstDayInChart =
+    getDayTimeInDaysFromDayTime(today, -(new Date(today).getDay()))
 
   const data: Array<IChartData> =
     new Array(7)
       .fill({})
       .map((i, index) => {
         const currentDayTime =
-          getDayTimeInDaysFromDayTime(firstDayOfCurrentWeek, index)
+          getDayTimeInDaysFromDayTime(firstDayInChart, index)
 
         const currentDayWorkTime = days[currentDayTime]?.workTime || 0
 

@@ -46,7 +46,7 @@ const StatisticPage = () => {
   }
 
   const { long: dayOfWeek } = getDayOfWeekByTime(selectedDay)
-  const focus = countOfPomodoros
+  const focus = countOfPomodoros && workTime
     ? Math.floor( ((countOfPomodoros * onePomodoroTime) / workTime) * 100)
     : 0
 
