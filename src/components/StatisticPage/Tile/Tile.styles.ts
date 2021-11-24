@@ -31,13 +31,14 @@ export const STileTitle = styled.div`
 export const SPomodoroCountContainer = styled(STileContainer)`
   display: flex;
   justify-content: center;
+  height: 179px;
 `
 
 export const SPomodoroCountBody = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 51px;
-
+  
   svg {
     height: 81px;
     width: 81px;

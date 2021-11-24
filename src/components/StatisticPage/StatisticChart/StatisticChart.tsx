@@ -124,16 +124,17 @@ const StatisticChart = () => {
 
   const today = getTodayAbsoluteTime()
 
-  //todo воскресенье не должно быть первым
-  const firstDayInChart =
-    getDayTimeInDaysFromDayTime(today, -(new Date(today).getDay()))
+  const todayWeekDay = new Date(today).getDay()
+  const offsetUntilSunday = todayWeekDay === 0 ? 0 : (7 - todayWeekDay)
+  const nearestSunday =
+    getDayTimeInDaysFromDayTime(today, offsetUntilSunday)
 
   const data: Array<IChartData> =
     new Array(7)
       .fill({})
       .map((i, index) => {
         const currentDayTime =
-          getDayTimeInDaysFromDayTime(firstDayInChart, index)
+          getDayTimeInDaysFromDayTime(nearestSunday, -(index))
 
         const currentDayWorkTime = days[currentDayTime]?.workTime || 0
 
@@ -143,6 +144,7 @@ const StatisticChart = () => {
           dayTime: currentDayTime,
         }
       })
+      .reverse()
 
   const barClickHandler = (barIndex: number) => {
     dispatch(statisticSetSelectedDay(data[barIndex].dayTime))
