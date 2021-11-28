@@ -9,6 +9,7 @@ import StatisticPage from './components/StatisticPage/StatisticPage'
 import TimerPage from './components/TimerPage/TimerPage'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
+//todo разобраться с ререндером стилей
 const App: React.FC = () => (
   <ThemeProvider theme={LIGHT_THEME}>
     <GlobalFonts />

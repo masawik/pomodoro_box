@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TaskListItem from './TaskListItem/TaskListItem'
 import { STaskListUl } from './TaskList.styles'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,10 +11,14 @@ import {
 } from 'react-beautiful-dnd'
 import { taskChangeOrder } from '../../../store/task/taskActions'
 import TaskListTimeSum from './TaskListTimeSum/TaskListTimeSum'
-
+import Modal from '../../Modal/Modal'
+// todo ограничить высоту списка, стилизовать скролл
 const TaskList = () => {
   const dispatch = useDispatch()
   const { tasks, order } = useSelector((state: TRootState) => state.task)
+
+  const [isDeleteModalVisible, setIsDeleteModalVisible] =
+    useState(true)
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result
@@ -70,6 +74,12 @@ const TaskList = () => {
         &&
         <TaskListTimeSum tasks={tasks} />
       }
+      {
+        isDeleteModalVisible
+        &&
+        <Modal onClose={() => console.log('close triggered')}/>
+      }
+
     </div>
   )
 }
