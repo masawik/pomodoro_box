@@ -6,8 +6,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    //todo убрать padding
-    padding-bottom: 500px;
     font-family: 'SF UI Display', sans-serif;
     ${({ theme: { textColor, backgroundColor } }) => css`
       color: ${textColor};

@@ -1,5 +1,11 @@
 import styled from 'styled-components'
 import { SSelect } from '../forms/Select/Select.styles'
+import PageContentContainer
+  from '../layout/PageContentContainer/PageContentContainer.styles'
+
+export const SStatisticPageContentContainer = styled(PageContentContainer)`
+  margin-top: 50px;
+`
 
 export const SStatisticPagePeriodSelector = styled(SSelect)`
   width: 370px;

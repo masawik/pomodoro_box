@@ -8,7 +8,7 @@ import {
   SStatisticPageBody,
   SStatisticTilesRow,
   SWidgetColumnContainer,
-  SWidgetColumnAndChart,
+  SWidgetColumnAndChart, SStatisticPageContentContainer,
 } from './StatisticPage.styles'
 import DayAndTotalTimeTile from './Tile/DayAndTotalTimeTile'
 import PomodoroCountTile from './Tile/PomodoroCountTile'
@@ -90,7 +90,7 @@ const StatisticPage = () => {
     !countOfPauses ? 'secondary' : 'pauses'
 
   return (
-    <PageContentContainer>
+    <SStatisticPageContentContainer>
       <SStatisticPageHeader>
         <SH1>
           Ваша активность
@@ -144,7 +144,7 @@ const StatisticPage = () => {
         </SStatisticTilesRow>
       </SStatisticPageBody>
 
-    </PageContentContainer>
+    </SStatisticPageContentContainer>
   )
 }
 
