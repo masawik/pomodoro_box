@@ -30,7 +30,8 @@ import {
 } from '../../../store/task/taskActions'
 import { splitMs } from '../../../utils/dateAndTime'
 import {
-  statisticAddMinute, statisticAddPause,
+  statisticAddMinute,
+  statisticAddPause,
   statisticAddPauseTime,
   statisticAddPomodoro,
 } from '../../../store/statistic/statisticActions'
@@ -41,17 +42,23 @@ enum ETimerStates {
   PAUSED = 'PAUSED'
 }
 
+const TIMER_VALUE_UPDATE_INTERVAL_MS = 500
 const SEC_IN_ONE_MINUTE = 60
 const MS_IN_ONE_SECOND = 1000
 
 const Timer = () => {
   const dispatch = useDispatch()
 
+
+  //task
   const currentTaskId =
     useSelector((state: TRootState) => state.task.order[0])
+
   const currentTask =
     useSelector((state: TRootState) => state.task.tasks[currentTaskId])
 
+
+  // settings
   const {
     onePomodoroTime,
     timerSpeedRatio,
@@ -60,12 +67,17 @@ const Timer = () => {
     longBreakInterval,
   } = useSelector((state: TRootState) => state.settings)
 
+
+  //timer state
   const { workCycles, mode: timerMode } =
     useSelector((state: TRootState) => state.timer)
 
   const [currentDuration, setCurrentDuration] = useState(0)
+
   const [timerValue, setTimerValue] = useState(0)
+
   const [startTimerTime, setStartTimerTime] = useState(0)
+
   const [startPauseTime, setStartPauseTime] = useState(0)
 
   const [timerState, setTimerState] =
@@ -84,16 +96,48 @@ const Timer = () => {
       setTimerValue(newTimerValue)
       if (newTimerValue === 0) onTimerEnd()
     },
-    timerState === ETimerStates.STARTED ? (500 / timerSpeedRatio) : null)
+    timerState === ETimerStates.STARTED
+      ? (TIMER_VALUE_UPDATE_INTERVAL_MS / timerSpeedRatio) : null)
 
+  const setUpBreak = () => {
+    const breakDuration =
+      workCycles !== 0 && workCycles % longBreakInterval === 0
+        ? longBreakTime
+        : shortBreakTime
+    setCurrentDuration(breakDuration)
+    setTimerValue(breakDuration)
+    dispatch(timerSetBreakMode())
+  }
+
+  const setUpWork = () => {
+    setCurrentDuration(onePomodoroTime)
+    setTimerValue(onePomodoroTime)
+    dispatch(timerSetWorkMode())
+  }
+
+  useEffect(() => {
+    timerMode === ETimerModes.WORK ? setUpWork() : setUpBreak()
+  }, [])
+
+  useEffect(() => {
+    timerMode === ETimerModes.WORK
+    && timerState === ETimerStates.STARTED
+    && Math.floor(timerValue / MS_IN_ONE_SECOND) % SEC_IN_ONE_MINUTE === 0
+    && dispatch(statisticAddMinute())
+  }, [Math.floor(timerValue / MS_IN_ONE_SECOND)])
+
+
+  //timer handlers
   const startTimer = () => {
     let newTimerStartTime: number
     if (timerState === ETimerStates.PAUSED) {
       newTimerStartTime =
         Date.now() - (currentDuration - timerValue)
 
-      const pauseTime = Date.now() - startPauseTime
-      dispatch(statisticAddPauseTime(pauseTime))
+      if (timerMode === ETimerModes.WORK) {
+        const pauseTime = Date.now() - startPauseTime
+        dispatch(statisticAddPauseTime(pauseTime))
+      }
     } else {
       newTimerStartTime = Date.now()
     }
@@ -114,29 +158,6 @@ const Timer = () => {
     setTimerState(ETimerStates.STOPPED)
   }
 
-  const onForceDoneClick = () => onTimerEnd()
-
-  const setUpBreak = () => {
-    const breakDuration =
-      workCycles !== 0 && workCycles % longBreakInterval === 0
-        ? longBreakTime
-        : shortBreakTime
-    setCurrentDuration(breakDuration)
-    setTimerValue(breakDuration)
-    dispatch(timerSetBreakMode())
-  }
-
-  const setUpWork = () => {
-    setCurrentDuration(onePomodoroTime)
-    setTimerValue(onePomodoroTime)
-    dispatch(timerSetWorkMode())
-  }
-
-  const onTaskFinish = () => {
-    //todo тут добавить ненавязчивую поздравлялку
-    dispatch(taskDelete(currentTaskId))
-  }
-
   const onTimerEnd = () => {
     stopTimer()
     if (timerMode === ETimerModes.WORK) {
@@ -151,16 +172,13 @@ const Timer = () => {
     } else setUpWork()
   }
 
-  useEffect(() => {
-    timerMode === ETimerModes.WORK ? setUpWork() : setUpBreak()
-  }, [])
+  const onForceDoneClick = () => onTimerEnd()
 
-  useEffect(() => {
-    timerMode === ETimerModes.WORK
-    && timerState === ETimerStates.STARTED
-    && Math.floor(timerValue / MS_IN_ONE_SECOND) % SEC_IN_ONE_MINUTE === 0
-    && dispatch(statisticAddMinute())
-  }, [Math.floor(timerValue / MS_IN_ONE_SECOND)])
+  const onTaskFinish = () => {
+    //todo тут добавить ненавязчивую поздравлялку
+    dispatch(taskDelete(currentTaskId))
+  }
+
 
   //below only render variables
   const splittedTime = splitMs(timerValue)

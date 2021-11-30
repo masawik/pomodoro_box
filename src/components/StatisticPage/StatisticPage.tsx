@@ -24,7 +24,7 @@ import {
   getDayOfWeekByTime, msToMin,
   splitMs,
 } from '../../utils/dateAndTime'
-
+// todo добавить анимации плиткам
 const StatisticPage = () => {
   useEffect(() => {
     setDocumentTitle('статистика')
