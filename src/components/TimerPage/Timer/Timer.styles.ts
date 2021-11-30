@@ -94,7 +94,7 @@ export const STimerStartButton = styled(SButton)`
   margin-right: 25px;
 `
 
-export const STimerTime = styled.span<IColorableComponent>`
+export const STimerWatchface = styled.span<IColorableComponent>`
   transition-property: color;
   width: 378px;
   ${({

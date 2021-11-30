@@ -9,7 +9,7 @@ import {
   STimerHeader,
   STimerHeaderTaskName,
   STimerStartButton,
-  STimerTime,
+  STimerWatchface,
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
 import { SButton } from '../../forms'
@@ -250,11 +250,11 @@ const Timer = () => {
 
       <STimerBody>
         <STimerDisplayContainer>
-          <STimerTime
+          <STimerWatchface
             color={timerState === ETimerStates.STARTED ? timeColor : undefined}
           >
             {time}
-          </STimerTime>
+          </STimerWatchface>
           {
             timerState === ETimerStates.STOPPED
             &&
