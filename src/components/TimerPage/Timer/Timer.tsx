@@ -12,7 +12,7 @@ import {
   STimerTime,
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
-import { StyledButton } from '../../forms'
+import { SButton } from '../../forms'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { useInterval } from '../../../hooks/useInterval'
@@ -262,14 +262,14 @@ const Timer = () => {
             {startButtonText}
           </STimerStartButton>
 
-          <StyledButton
+          <SButton
             onClick={stopButtonOnClick}
             color='danger'
             disabled={timerState === ETimerStates.STOPPED}
             transparent
           >
             {stopButtonText}
-          </StyledButton>
+          </SButton>
         </STimerControls>
       </STimerBody>
     </STimerContainer>

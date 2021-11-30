@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { StyledButton } from '../../forms'
+import { SButton } from '../../forms'
 import { IColors } from '../../../utils/constants/themes.constants'
 
 export const STimerContainer = styled.div`
@@ -90,7 +90,7 @@ export const STimerControls = styled.div`
   margin-top: 32px;
 `
 
-export const STimerStartButton = styled(StyledButton)`
+export const STimerStartButton = styled(SButton)`
   margin-right: 25px;
 `
 

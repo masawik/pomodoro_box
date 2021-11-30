@@ -7,21 +7,21 @@ interface StyledButtonProps {
   disabled?: boolean
 }
 
-export const StyledButton = styled.button<StyledButtonProps>`
+export const SButton = styled.button<StyledButtonProps>`
   padding: 19px 50px;
   border: none;
   font-size: 16px;
   font-weight: 500;
   transition-property: background-color, color, border-color;
   cursor: pointer;
-  
+
   ${({
        disabled,
        color = 'primary',
        theme: { colors, invertedTextColor, transitionDuration },
      }) => {
     if (disabled) color = 'secondary'
-    
+
     return css`
       transition-duration: ${transitionDuration}ms;
       color: ${invertedTextColor};
@@ -55,4 +55,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `
   }}
+`
+
+export const SUnderlinedButton = styled.button`
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  padding: 5px 10px;
 `

@@ -19,9 +19,9 @@ export const SModalWrapper = styled.div`
 
 export const SModalContainer = styled.div`
   position: relative;
-  min-width: 305px;
+  min-width: 350px;
   min-height: 175px;
-  padding: 12px;
+  padding: 25px;
   ${({ theme: { backgroundColor } }) => css`
     background-color: ${backgroundColor};
   `}
@@ -29,12 +29,12 @@ export const SModalContainer = styled.div`
 
 export const SModalCloseBtn = styled.button`
   position: absolute;
-  top: 5px;
+  top: 0;
   right: 0;
 
   border: none;
   background: none;
-  padding: 12px;
+  padding: 20px 14px;
   cursor: pointer;
 
   ::before, ::after {

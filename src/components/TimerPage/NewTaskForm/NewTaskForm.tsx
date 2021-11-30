@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import {
   NewTaskInput,
 } from './NewTaskForm.styles'
-import { StyledButton } from '../../forms'
+import { SButton } from '../../forms'
 import { useDispatch } from 'react-redux'
 import { taskAdd } from '../../../store/task/taskActions'
 
@@ -33,9 +33,9 @@ const NewTaskForm = () => {
         required
       />
 
-      <StyledButton type={'submit'}>
+      <SButton type={'submit'}>
         Добавить
-      </StyledButton>
+      </SButton>
     </form>
   )
 }

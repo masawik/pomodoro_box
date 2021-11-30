@@ -14,6 +14,8 @@ import {
   taskDelete,
   taskIncreasePlannedCount, taskReducePlannedCount,
 } from '../../../../../store/task/taskActions'
+import TaskDeleteConfirmationModal
+  from './TaskDeleteConfirmationModal/TaskDeleteConfirmationModal'
 
 enum ETaskListItemMenuButtonNames {
   increase = 'increase',
@@ -42,19 +44,30 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
      currentTaskPomodoroCount,
      editButtonClickHandler,
    }) => {
+    const dispatch = useDispatch()
     const [isMounted, setIsMounted] = useState(false)
+
     const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false)
     const openMenu = () => setIsMenuOpened(true)
     const closeMenu = () => setIsMenuOpened(false)
 
-    const dispatch = useDispatch()
+    const [isDeleteTaskModalVisible, setIsDeleteTaskModalVisible] =
+      useState(false)
+    const closeDeleteModal = () => setIsDeleteTaskModalVisible(false)
+    const openDeleteTaskModal = () => {
+      closeMenu()
+      setIsDeleteTaskModalVisible(true)
+    }
+    const deleteCurrentTask = () => dispatch(taskDelete(id))
+
+
     const increaseCount = () => dispatch(taskIncreasePlannedCount(id))
     const reduceCount = () => dispatch(taskReducePlannedCount(id))
+
     const edit = () => {
       closeMenu()
       editButtonClickHandler()
     }
-    const deleteTask = () => dispatch(taskDelete(id))
 
     useEffect(() => {
       setIsMounted(true)
@@ -62,55 +75,63 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
     }, [])
 
     return isMounted ? (
-      <Popup
-        button={$menuBtn}
-        outerIsOpened={isMenuOpened}
-        onOpen={openMenu}
-        onClose={closeMenu}
-      >
-        <SClearUl>
-          <SClearLi>
-            <SMenuItemBtn
-              onClick={increaseCount}
-              name={ETaskListItemMenuButtonNames.increase}
-            >
-              <PlusSVG />
-              Увеличить
-            </SMenuItemBtn>
-          </SClearLi>
+      <>
+        <Popup
+          button={$menuBtn}
+          outerIsOpened={isMenuOpened}
+          onOpen={openMenu}
+          onClose={closeMenu}
+        >
+          <SClearUl>
+            <SClearLi>
+              <SMenuItemBtn
+                onClick={increaseCount}
+                name={ETaskListItemMenuButtonNames.increase}
+              >
+                <PlusSVG />
+                Увеличить
+              </SMenuItemBtn>
+            </SClearLi>
 
-          <SClearLi>
-            <SMenuItemBtn
-              onClick={reduceCount}
-              disabled={currentTaskPomodoroCount === 1}
-              name={ETaskListItemMenuButtonNames.reduce}
-            >
-              <MinusSVG />
-              Уменьшить
-            </SMenuItemBtn>
-          </SClearLi>
+            <SClearLi>
+              <SMenuItemBtn
+                onClick={reduceCount}
+                disabled={currentTaskPomodoroCount === 1}
+                name={ETaskListItemMenuButtonNames.reduce}
+              >
+                <MinusSVG />
+                Уменьшить
+              </SMenuItemBtn>
+            </SClearLi>
 
-          <SClearLi>
-            <SMenuItemBtn
-              onClick={edit}
-              name={ETaskListItemMenuButtonNames.edit}
-            >
-              <PencilSVG />
-              Редактировать
-            </SMenuItemBtn>
-          </SClearLi>
+            <SClearLi>
+              <SMenuItemBtn
+                onClick={edit}
+                name={ETaskListItemMenuButtonNames.edit}
+              >
+                <PencilSVG />
+                Редактировать
+              </SMenuItemBtn>
+            </SClearLi>
 
-          <SClearLi>
-            <SMenuItemBtn
-              onClick={deleteTask}
-              name={ETaskListItemMenuButtonNames.delete}
-            >
-              <TrashBinSVG />
-              Удалить
-            </SMenuItemBtn>
-          </SClearLi>
-        </SClearUl>
-      </Popup>
+            <SClearLi>
+              <SMenuItemBtn
+                onClick={openDeleteTaskModal}
+                name={ETaskListItemMenuButtonNames.delete}
+              >
+                <TrashBinSVG />
+                Удалить
+              </SMenuItemBtn>
+            </SClearLi>
+          </SClearUl>
+        </Popup>
+
+        {isDeleteTaskModalVisible &&
+        (<TaskDeleteConfirmationModal
+          onClose={closeDeleteModal}
+          onDelete={deleteCurrentTask}
+        />)}
+      </>
     ) : null
   }
 
