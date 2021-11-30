@@ -96,6 +96,7 @@ export const STimerStartButton = styled(SButton)`
 
 export const STimerTime = styled.span<IColorableComponent>`
   transition-property: color;
+  width: 378px;
   ${({
        color,
        theme: { colors, textColor, transitionDuration },
