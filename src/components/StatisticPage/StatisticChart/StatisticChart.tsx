@@ -13,7 +13,6 @@ import {
 import {
   getDayOfWeekByTime,
   getDayTimeInDaysFromDayTime,
-  getTodayAbsoluteTime,
   msToFormattedString,
 } from '../../../utils/dateAndTime'
 import { useDispatch, useSelector } from 'react-redux'
@@ -122,12 +121,10 @@ const StatisticChart = () => {
   const { days, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
 
-  const today = getTodayAbsoluteTime()
-
-  const todayWeekDay = new Date(today).getDay()
-  const offsetUntilSunday = todayWeekDay === 0 ? 0 : (7 - todayWeekDay)
+  const selectedWeekDay = new Date(selectedDay).getDay()
+  const offsetUntilSunday = selectedWeekDay === 0 ? 0 : (7 - selectedWeekDay)
   const nearestSunday =
-    getDayTimeInDaysFromDayTime(today, offsetUntilSunday)
+    getDayTimeInDaysFromDayTime(selectedDay, offsetUntilSunday)
 
   const data: Array<IChartData> =
     new Array(7)

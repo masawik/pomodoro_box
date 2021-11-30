@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 import PageContentContainer
   from '../layout/PageContentContainer/PageContentContainer.styles'
 import SH1 from '../typography/H1/H1.styles'
@@ -18,17 +18,23 @@ import { ReactComponent as ClockSVG } from '../../assets/images/clock.svg'
 import { ReactComponent as StopSVG } from '../../assets/images/stop.svg'
 import StatisticChart from './StatisticChart/StatisticChart'
 import { setDocumentTitle } from '../../utils/document'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../store/rootReducer'
 import {
-  getDayOfWeekByTime, msToMin,
+  getDayOfWeekByTime,
+  getDayTimeInDaysFromDayTime,
+  getTodayAbsoluteTime,
+  msToMin,
   splitMs,
 } from '../../utils/dateAndTime'
+import { statisticSetSelectedDay } from '../../store/statistic/statisticActions'
 // todo добавить анимации плиткам
 const StatisticPage = () => {
   useEffect(() => {
     setDocumentTitle('статистика')
   }, [])
+
+  const dispatch = useDispatch()
 
   const { days, selectedDay } =
     useSelector((state: TRootState) => state.statistic)
@@ -36,19 +42,28 @@ const StatisticPage = () => {
   const { onePomodoroTime } =
     useSelector((state: TRootState) => state.settings)
 
+  const currentDayData = days[selectedDay]
+    || {
+      workTime: 0, countOfPomodoros: 0,
+      countOfPauseMinutes: 0, pauseTime: 0,
+    }
+
   const {
     workTime, countOfPomodoros,
-    pauseTime, countOfPauses
-  } = days[selectedDay]
-  || {
-    workTime: 0, countOfPomodoros: 0,
-    countOfPauseMinutes: 0, pauseTime: 0,
-  }
+    pauseTime, countOfPauses,
+  } = currentDayData
 
   const { long: dayOfWeek } = getDayOfWeekByTime(selectedDay)
   const focus = countOfPomodoros && workTime
-    ? Math.floor( ((countOfPomodoros * onePomodoroTime) / workTime) * 100)
+    ? Math.floor(((countOfPomodoros * onePomodoroTime) / workTime) * 100)
     : 0
+
+  const weekSelectorHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    const weekOffset = Number(e.target.value) || 0
+    const selectedWeek =
+      getDayTimeInDaysFromDayTime(getTodayAbsoluteTime(), weekOffset)
+    dispatch(statisticSetSelectedDay(selectedWeek))
+  }
 
   //only render variables below
   const workTimeInMinutes = msToMin(workTime)
@@ -81,10 +96,12 @@ const StatisticPage = () => {
           Ваша активность
         </SH1>
 
-        <SStatisticPagePeriodSelector name='' id=''>
-          <option value=''>эта неделя</option>
-          <option value=''>прошедшая неделя</option>
-          <option value=''>2 недели назад</option>
+        <SStatisticPagePeriodSelector
+          onChange={weekSelectorHandler}
+        >
+          <option value={0}>эта неделя</option>
+          <option value={-7}>прошедшая неделя</option>
+          <option value={-14}>2 недели назад</option>
         </SStatisticPagePeriodSelector>
       </SStatisticPageHeader>
 
