@@ -25,7 +25,6 @@ import {
 } from '../../../store/timer/timerActions'
 import { ETimerModes } from '../../../store/timer/timerReducer'
 import {
-  taskDelete,
   taskIncreaseCurrentPassedCount,
 } from '../../../store/task/taskActions'
 import { splitMs } from '../../../utils/dateAndTime'
@@ -167,23 +166,13 @@ const Timer = () => {
     stopTimer()
     if (timerMode === ETimerModes.WORK) {
       dispatch(timerIncreaseWorkCycles())
-
       dispatch(statisticAddPomodoro())
-
-      if (currentTask.plannedCount === 1) onTaskFinish()
-      else dispatch(taskIncreaseCurrentPassedCount())
-
+      dispatch(taskIncreaseCurrentPassedCount())
       setUpBreak()
     } else setUpWork()
   }
 
   const onForceDoneClick = () => onTimerEnd()
-
-  const onTaskFinish = () => {
-    //todo тут добавить ненавязчивую поздравлялку
-    dispatch(taskDelete(currentTaskId))
-  }
-
 
   //below only render variables
   const splittedTime = splitMs(timerValue)

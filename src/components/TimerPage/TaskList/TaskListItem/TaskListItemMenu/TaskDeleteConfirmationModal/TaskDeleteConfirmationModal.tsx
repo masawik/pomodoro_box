@@ -1,10 +1,10 @@
 import React from 'react'
 import Modal from '../../../../../Modal/Modal'
 import {
-  STaskDeleteModalBody, STaskDeleteModalDeleteButton,
-  STaskDeleteModalTitle,
+  STaskDeleteModalDeleteButton,
 } from './TaskDeleteConfirmationModal.styles'
 import { SUnderlinedButton } from '../../../../../forms/Button/Button.styles'
+import { SModalBody, SModalTitle } from '../../../../../Modal/Modal.styles'
 
 interface ITaskDeleteConfirmationModalProps {
   onClose: () => void
@@ -17,10 +17,10 @@ const TaskDeleteConfirmationModal: React.FC<ITaskDeleteConfirmationModalProps> =
       <Modal
         onClose={onClose}
       >
-        <STaskDeleteModalBody>
-          <STaskDeleteModalTitle>
+        <SModalBody>
+          <SModalTitle>
             Удалить задачу?
-          </STaskDeleteModalTitle>
+          </SModalTitle>
 
           <STaskDeleteModalDeleteButton
             color={'danger'}
@@ -34,7 +34,7 @@ const TaskDeleteConfirmationModal: React.FC<ITaskDeleteConfirmationModalProps> =
           >
             Отмена
           </SUnderlinedButton>
-        </STaskDeleteModalBody>
+        </SModalBody>
       </Modal>
     )
   }

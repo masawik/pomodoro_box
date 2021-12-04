@@ -55,3 +55,16 @@ export const SModalCloseBtn = styled.button`
     transform: rotate(135deg) translate(-2px, 2px);
   }
 `
+
+export const SModalTitle = styled.div`
+  font-size: 24px;
+  ${({ theme: { textColor } }) => css`
+    color: ${textColor};
+  `}
+`
+
+export const SModalBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`

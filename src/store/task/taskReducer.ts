@@ -1,7 +1,6 @@
 import { Reducer } from 'redux'
 import { ETaskActionTypes, TTaskActionTypes } from './taskTypes'
 import { v4 as uuid } from 'uuid'
-import { taskDelete } from './taskActions'
 
 type TTaskStateItem = {
   plannedCount: number,
@@ -101,14 +100,6 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
         const currentTaskId = state.order[0]
         const currenTask = state.tasks[currentTaskId]
 
-        //предохранение на всякий случай
-        if (
-          currenTask.plannedCount === 1
-          || currenTask.plannedCount <= 0
-        ) {
-          return taskReducer(state, taskDelete(currentTaskId))
-        }
-        
         return {
           ...state,
           tasks: {

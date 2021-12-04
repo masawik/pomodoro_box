@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TaskListItem from './TaskListItem/TaskListItem'
 import { STaskListUl } from './TaskList.styles'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,13 +9,39 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd'
-import { taskChangeOrder } from '../../../store/task/taskActions'
+import {
+  taskChangeOrder,
+  taskDelete,
+  taskIncreasePlannedCount,
+} from '../../../store/task/taskActions'
 import TaskListTimeSum from './TaskListTimeSum/TaskListTimeSum'
+import TaskFinishConfirm from './TaskFinishConfirm/TaskFinishConfirm'
 
 // todo ограничить высоту списка, стилизовать скролл
 const TaskList = () => {
   const dispatch = useDispatch()
   const { tasks, order } = useSelector((state: TRootState) => state.task)
+  const currentTaskId = order[0]
+  const currentTask = tasks[currentTaskId]
+  const [isTaskFinishConfirmVisible, setIsTaskFinishConfirmVisible] =
+    useState(false)
+
+  const deleteCurrentTask = () => {
+    if (!currentTaskId) return
+    dispatch(taskDelete(currentTaskId))
+    setIsTaskFinishConfirmVisible(false)
+  }
+  const extendCurrentTask = () => {
+    if (!currentTaskId) return
+    dispatch(taskIncreasePlannedCount(currentTaskId))
+    setIsTaskFinishConfirmVisible(false)
+  }
+
+
+  useEffect(() => {
+    currentTask?.plannedCount === 0 &&
+    setIsTaskFinishConfirmVisible(true)
+  }, [currentTask])
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result
@@ -49,29 +75,38 @@ const TaskList = () => {
   })
 
   return (
-    <div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable
-          droppableId={'droppable'}
-        >
-          {(provided) => (
-            <STaskListUl
-              ref={provided.innerRef}
-            >
-              {$tasksListItems}
-              {provided.placeholder}
-            </STaskListUl>
-          )}
-        </Droppable>
+    <>
+      <div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            droppableId={'droppable'}
+          >
+            {(provided) => (
+              <STaskListUl
+                ref={provided.innerRef}
+              >
+                {$tasksListItems}
+                {provided.placeholder}
+              </STaskListUl>
+            )}
+          </Droppable>
 
-      </DragDropContext>
+        </DragDropContext>
 
+        {
+          !!order.length
+          &&
+          <TaskListTimeSum tasks={tasks} />
+        }
+      </div>
       {
-        !!order.length
-        &&
-        <TaskListTimeSum tasks={tasks} />
+        isTaskFinishConfirmVisible &&
+        <TaskFinishConfirm
+          onTaskDelete={deleteCurrentTask}
+          onTaskExtension={extendCurrentTask}
+        />
       }
-    </div>
+    </>
   )
 }
 
