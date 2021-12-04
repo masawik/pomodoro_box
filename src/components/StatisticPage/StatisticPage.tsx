@@ -1,6 +1,4 @@
 import React, { ChangeEvent, useEffect } from 'react'
-import PageContentContainer
-  from '../layout/PageContentContainer/PageContentContainer.styles'
 import SH1 from '../typography/H1/H1.styles'
 import {
   SStatisticPagePeriodSelector,

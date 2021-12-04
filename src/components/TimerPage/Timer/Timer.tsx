@@ -117,14 +117,19 @@ const Timer = () => {
 
   useEffect(() => {
     timerMode === ETimerModes.WORK ? setUpWork() : setUpBreak()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+
+
+  const currentTimerValueInSeconds = Math.floor(timerValue / MS_IN_ONE_SECOND)
   useEffect(() => {
     timerMode === ETimerModes.WORK
     && timerState === ETimerStates.STARTED
     && Math.floor(timerValue / MS_IN_ONE_SECOND) % SEC_IN_ONE_MINUTE === 0
     && dispatch(statisticAddMinute())
-  }, [Math.floor(timerValue / MS_IN_ONE_SECOND)])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTimerValueInSeconds])
 
 
   //timer handlers
