@@ -71,7 +71,7 @@ const Timer = () => {
 
   const [currentDuration, setCurrentDuration] = useState(0)
 
-  const [timerValue, setTimerValue] = useState(0)
+  const [timerValue, setTimerValue] = useState(onePomodoroTime)
 
   const [startTimerTime, setStartTimerTime] = useState(0)
 
