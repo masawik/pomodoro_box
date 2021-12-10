@@ -18,6 +18,9 @@ export const splitMs = (ms: number): IsplitMs => {
   return { days, hours, minutes, seconds: sec }
 }
 
+export const getTensOfNumber = (n: number) => Math.floor(n / 10)
+export const getUnitsOfNumber = (n: number) => n % 10
+
 export const getTodayAbsoluteTime = (): number => {
   const now = new Date()
   now.setHours(0)

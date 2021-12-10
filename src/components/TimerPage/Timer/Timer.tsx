@@ -9,14 +9,12 @@ import {
   STimerHeader,
   STimerHeaderTaskName,
   STimerStartButton,
-  STimerWatchface,
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
 import { SButton } from '../../forms'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { useInterval } from '../../../hooks/useInterval'
-import { addZero } from '../../../utils/stringProcessing'
 import { IColors } from '../../../utils/constants/themes.constants'
 import {
   timerIncreaseWorkCycles,
@@ -27,13 +25,13 @@ import { ETimerModes } from '../../../store/timer/timerReducer'
 import {
   taskIncreaseCurrentPassedCount,
 } from '../../../store/task/taskActions'
-import { splitMs } from '../../../utils/dateAndTime'
 import {
   statisticAddMinute,
   statisticAddPause,
   statisticAddPauseTime,
   statisticAddPomodoro,
 } from '../../../store/statistic/statisticActions'
+import Watchface from './Watchface/Watchface'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -175,9 +173,6 @@ const Timer = () => {
   const onForceDoneClick = () => onTimerEnd()
 
   //below only render variables
-  const splittedTime = splitMs(timerValue)
-  const time = `${splittedTime.minutes}:${addZero(splittedTime.seconds)}`
-
   let taskName = 'Задач пока нет'
   let countOfPomodoros = ''
   let description = (<>Задач пока нет</>)
@@ -244,11 +239,10 @@ const Timer = () => {
 
       <STimerBody>
         <STimerDisplayContainer>
-          <STimerWatchface
+          <Watchface
             color={timerState === ETimerStates.STARTED ? timeColor : undefined}
-          >
-            {time}
-          </STimerWatchface>
+            time={timerValue}
+          />
           {
             timerState === ETimerStates.STOPPED
             &&
