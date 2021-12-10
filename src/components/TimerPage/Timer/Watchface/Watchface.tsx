@@ -18,9 +18,9 @@ interface IWatchFaceNumberProps {
 }
 
 const watchFaceNumberVariants = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: -30 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -30 },
+  exit: { opacity: 0, y: 30 },
 }
 
 const WatchFaceNumber: React.FC<IWatchFaceNumberProps> =
@@ -32,7 +32,10 @@ const WatchFaceNumber: React.FC<IWatchFaceNumberProps> =
           initial={watchFaceNumberVariants.initial}
           animate={watchFaceNumberVariants.animate}
           exit={watchFaceNumberVariants.exit}
-          transition={{ duration: .1 }}
+          transition={{
+            duration: .2,
+            ease: 'easeOut'
+          }}
         >
           {number}
         </motion.div>
