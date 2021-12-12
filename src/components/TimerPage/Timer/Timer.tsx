@@ -22,9 +22,7 @@ import {
   timerSetWorkMode,
 } from '../../../store/timer/timerActions'
 import { ETimerModes } from '../../../store/timer/timerReducer'
-import {
-  taskIncreaseCurrentPassedCount,
-} from '../../../store/task/taskActions'
+import { taskIncreaseCurrentPassedCount } from '../../../store/task/taskActions'
 import {
   statisticAddMinute,
   statisticAddPause,
@@ -71,7 +69,13 @@ const Timer = () => {
 
   const [currentDuration, setCurrentDuration] = useState(0)
 
-  const [timerValue, setTimerValue] = useState(onePomodoroTime)
+  const initialTimerValue =
+    timerMode === ETimerModes.WORK
+      ? onePomodoroTime
+      : workCycles !== 0 && workCycles % longBreakInterval === 0
+        ? longBreakTime
+        : shortBreakTime
+  const [timerValue, setTimerValue] = useState(initialTimerValue)
 
   const [startTimerTime, setStartTimerTime] = useState(0)
 
@@ -116,7 +120,6 @@ const Timer = () => {
     timerMode === ETimerModes.WORK ? setUpWork() : setUpBreak()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
 
 
   const currentTimerValueInSeconds = Math.floor(timerValue / MS_IN_ONE_SECOND)

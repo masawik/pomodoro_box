@@ -16,6 +16,20 @@ export interface ITaskListItemProps {
   count: number
 }
 
+const STaskListLiInitialVariant = {
+  x: -100,
+  opacity: 0
+}
+
+const STaskListLiVariants = {
+  initial: STaskListLiInitialVariant,
+  animate: {
+    x: 0,
+    opacity: 1
+  },
+  exit: STaskListLiInitialVariant
+}
+
 const TaskListItem = ({ count, name, id }: ITaskListItemProps) => {
   const [isEditModeOn, setIsEditModeOn] = useState(false)
   const [newTaskName, setNewTaskName] = useState<string>(name)
@@ -51,7 +65,13 @@ const TaskListItem = ({ count, name, id }: ITaskListItemProps) => {
   }, [isEditModeOn, saveNewNameAndHideInput])
 
   return (
-    <STaskListLi>
+    <STaskListLi
+      initial={'initial'}
+      animate={'animate'}
+      exit={'exit'}
+      variants={STaskListLiVariants}
+      transition={{ duration: .15 }}
+    >
       <STaskListItemCount>
         {count}
       </STaskListItemCount>

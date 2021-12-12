@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
-export const STaskListLi = styled.li`
+export const STaskListLi = styled(motion.li)`
   display: flex;
   align-items: center;
   padding: 15px 0;

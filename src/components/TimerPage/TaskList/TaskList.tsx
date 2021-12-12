@@ -16,6 +16,7 @@ import {
 } from '../../../store/task/taskActions'
 import TaskListTimeSum from './TaskListTimeSum/TaskListTimeSum'
 import TaskFinishConfirm from './TaskFinishConfirm/TaskFinishConfirm'
+import { AnimatePresence } from 'framer-motion'
 
 // todo ограничить высоту списка, стилизовать скролл
 const TaskList = () => {
@@ -85,7 +86,9 @@ const TaskList = () => {
               <STaskListUl
                 ref={provided.innerRef}
               >
-                {$tasksListItems}
+                <AnimatePresence>
+                  {$tasksListItems}
+                </AnimatePresence>
                 {provided.placeholder}
               </STaskListUl>
             )}
