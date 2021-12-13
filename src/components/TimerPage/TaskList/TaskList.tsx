@@ -18,7 +18,6 @@ import TaskListTimeSum from './TaskListTimeSum/TaskListTimeSum'
 import TaskFinishConfirm from './TaskFinishConfirm/TaskFinishConfirm'
 import { AnimatePresence } from 'framer-motion'
 
-// todo ограничить высоту списка, стилизовать скролл
 const TaskList = () => {
   const dispatch = useDispatch()
   const { tasks, order } = useSelector((state: TRootState) => state.task)
