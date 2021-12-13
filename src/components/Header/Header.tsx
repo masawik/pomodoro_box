@@ -22,7 +22,6 @@ const Header = () => {
         <StatisticContainer
           as={Link}
           to={'/statistic'}
-          // hoverPaintItem={{ selector: 'svg path', property: 'fill' }}
         >
           <StatisticSVG />
           Статистика

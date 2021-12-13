@@ -1,6 +1,6 @@
 import React from 'react'
 import 'normalize.css'
-import { LIGHT_THEME } from './utils/constants/themes.constants'
+import { DARK_THEME, LIGHT_THEME } from './utils/constants/themes.constants'
 import { ThemeProvider } from 'styled-components'
 import Header from './components/Header/Header'
 import GlobalStyle from './globalStyles/globalStyles'
@@ -11,7 +11,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
 //todo разобраться с ререндером стилей
 const App: React.FC = () => (
-  <ThemeProvider theme={LIGHT_THEME}>
+  <ThemeProvider theme={DARK_THEME}>
     <GlobalFonts />
     <GlobalStyle />
 

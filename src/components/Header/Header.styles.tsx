@@ -3,7 +3,7 @@ import { SLink } from '../typography'
 
 export const HeaderWrapper = styled.div`
   height: 70px;
-  box-shadow: 0 2px 40px 50px #f6f6f6;
+  box-shadow: 0 2px 40px 50px ${({ theme: { shadowColor } }) => shadowColor};
 `
 
 export const HeaderContainer = styled.div`
@@ -25,14 +25,11 @@ export const StatisticContainer = styled(SLink)`
       transition-duration: ${transitionDuration}ms;
       transition-property: fill;
     }
-    
+
     :hover svg path {
       fill: ${colors[linkColor].dark};
     }
   `}
-  
-  
-  
 `
 
 export const LogoContainer = styled(SLink)`
