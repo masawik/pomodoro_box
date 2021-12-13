@@ -48,6 +48,10 @@ export const SMenuItemBtn = styled.button<ISMenuItemBtnProps>`
     :hover {
       background-color: ${colors.secondary.light};
     }
+    
+    svg path {
+      fill: ${colors.primary.normal};
+    }
 
     ${disabled && css`
       svg path {

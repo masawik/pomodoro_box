@@ -9,6 +9,7 @@ export const SStatisticPageContentContainer = styled(PageContentContainer)`
 
 export const SStatisticPagePeriodSelector = styled(SSelect)`
   width: 370px;
+  color: ${({ theme: { textColor } }) => textColor}
 `
 
 export const SStatisticPageHeader = styled.div`

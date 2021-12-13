@@ -27,7 +27,7 @@ const PomodoroCountTile: React.FC<IPomodoroCountTile> = ({ count }) => {
                 <span>x {count}</span>
 
                 <SPomodoroCountFooter>
-                  {count} помидора
+                  {count} помидор(ов)
                 </SPomodoroCountFooter>
               </SPomodoroCountBody>
             )
