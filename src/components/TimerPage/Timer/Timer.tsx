@@ -45,7 +45,6 @@ const SEC_IN_ONE_MINUTE = 60
 const MS_IN_ONE_SECOND = 1000
 
 
-//todo убрать дергание кнопок таймера при изменении кнопки стоп
 const Timer = () => {
   const dispatch = useDispatch()
 
@@ -209,8 +208,10 @@ const Timer = () => {
       ? startTimer : pauseTimer
   const startButtonText =
     timerState === ETimerStates.STOPPED
-    || timerState === ETimerStates.PAUSED
-      ? 'Старт' : 'Пауза'
+      ? 'Старт'
+      : timerState === ETimerStates.PAUSED
+        ? 'Продолжить'
+        : 'Пауза'
 
   const stopButtonOnClick =
     timerState === ETimerStates.PAUSED
