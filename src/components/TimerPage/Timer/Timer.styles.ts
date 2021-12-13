@@ -54,7 +54,11 @@ export const STimerDisplayContainer = styled.div`
   font-weight: 200;
 `
 
-export const SPlusBtn = styled.button`
+interface ISPlusBtnProps {
+  disabled?: boolean
+}
+
+export const SPlusBtn = styled.button<ISPlusBtnProps>`
   position: absolute;
   top: calc(50% - 25px);
   right: -82px;
@@ -67,7 +71,10 @@ export const SPlusBtn = styled.button`
     width: 62px;
   }
 
-  ${({ theme: { colors, transitionDuration } }) => css`
+  ${({
+       theme: { colors, transitionDuration },
+       disabled = false,
+     }) => css`
     svg circle {
       transition-duration: ${transitionDuration}ms;
       transition-property: fill;
@@ -76,7 +83,7 @@ export const SPlusBtn = styled.button`
 
     :hover {
       svg circle {
-        fill: ${colors.primary.dark}
+        fill: ${disabled ? colors.secondary.dark : colors.primary.dark}
       }
     }
   `}

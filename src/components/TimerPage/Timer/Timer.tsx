@@ -22,7 +22,10 @@ import {
   timerSetWorkMode,
 } from '../../../store/timer/timerActions'
 import { ETimerModes } from '../../../store/timer/timerReducer'
-import { taskIncreaseCurrentPassedCount } from '../../../store/task/taskActions'
+import {
+  taskIncreaseCurrentPassedCount,
+  taskIncreasePlannedCount,
+} from '../../../store/task/taskActions'
 import {
   statisticAddMinute,
   statisticAddPause,
@@ -41,6 +44,8 @@ const TIMER_VALUE_UPDATE_INTERVAL_MS = 500
 const SEC_IN_ONE_MINUTE = 60
 const MS_IN_ONE_SECOND = 1000
 
+
+//todo убрать дергание кнопок таймера при изменении кнопки стоп
 const Timer = () => {
   const dispatch = useDispatch()
 
@@ -175,6 +180,9 @@ const Timer = () => {
 
   const onForceDoneClick = () => onTimerEnd()
 
+  const increaseCurrentTaskPlannedPomodoroCount =
+    () => dispatch(taskIncreasePlannedCount(currentTaskId))
+
   //below only render variables
   let taskName = 'Задач пока нет'
   let countOfPomodoros = ''
@@ -250,7 +258,10 @@ const Timer = () => {
             timerState === ETimerStates.STOPPED
             &&
             (
-              <SPlusBtn>
+              <SPlusBtn
+                disabled={!currentTaskId}
+                onClick={increaseCurrentTaskPlannedPomodoroCount}
+              >
                 <FilledPlusSVG />
               </SPlusBtn>
             )
