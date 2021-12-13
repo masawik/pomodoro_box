@@ -10,12 +10,11 @@ import {
   STimerHeaderTaskName,
   STimerStartButton,
 } from './Timer.styles'
-import { ReactComponent as FilledPlusSVG } from '../../../assets/images/circle_plus_filled.svg'
+import { ReactComponent as FilledPlusSVG } from '../../../assets/images/svg_icons/circle_plus_filled.svg'
 import { SButton } from '../../forms'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { useInterval } from '../../../hooks/useInterval'
-import { IColors } from '../../../theme/constants/lightTheme'
 import {
   timerIncreaseWorkCycles,
   timerSetBreakMode,
@@ -33,6 +32,7 @@ import {
   statisticAddPomodoro,
 } from '../../../store/statistic/statisticActions'
 import Watchface from './Watchface/Watchface'
+import { IColors } from '../../../theme/themeTypes'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',

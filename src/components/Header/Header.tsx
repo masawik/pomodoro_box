@@ -3,9 +3,10 @@ import {
   HeaderWrapper,
   HeaderContainer, StatisticContainer, LogoContainer,
 } from './Header.styles'
-import { ReactComponent as TomatoSVG } from '../../assets/images/tomato.svg'
-import { ReactComponent as StatisticSVG } from '../../assets/images/statistic.svg'
+import { ReactComponent as TomatoSVG } from '../../assets/images/svg_icons/tomato.svg'
+import { ReactComponent as StatisticSVG } from '../../assets/images/svg_icons/statistic.svg'
 import { Link } from 'react-router-dom'
+import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher'
 
 const Header = () => {
   return (
@@ -18,6 +19,8 @@ const Header = () => {
           <TomatoSVG />
           pomodoro_box
         </LogoContainer>
+
+        <ThemeSwitcher />
 
         <StatisticContainer
           as={Link}

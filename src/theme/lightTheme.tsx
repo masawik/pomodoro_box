@@ -1,28 +1,4 @@
-interface IColor {
-  dark?: string,
-  normal: string,
-  light?: string
-}
-
-export interface IColors {
-  primary: IColor,
-  danger: IColor,
-  secondary: IColor,
-  focus: IColor,
-  info: IColor,
-  pauses: IColor
-}
-
-export interface Theme {
-  colors: IColors,
-  textColor: string,
-  invertedTextColor: string,
-  layoutWidth: number,
-  linkColor: keyof IColors,
-  transitionDuration: number,
-  backgroundColor: string,
-  shadowColor: string
-}
+import { EThemeNames, IColors, Theme } from './themeTypes'
 
 const LIGHT_THEME_COLORS: IColors = {
   primary: {
@@ -54,6 +30,7 @@ const LIGHT_THEME_COLORS: IColors = {
 }
 
 export const LIGHT_THEME: Theme = {
+  name: EThemeNames.LIGHT,
   colors: LIGHT_THEME_COLORS,
   textColor: '#333',
   invertedTextColor: '#fff',

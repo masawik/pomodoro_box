@@ -1,12 +1,12 @@
 import React from 'react'
 import { STimerWatchface } from './Watchface.styles'
-import { IColors } from '../../../../theme/constants/lightTheme'
 import {
   getTensOfNumber,
   getUnitsOfNumber,
   splitMs,
 } from '../../../../utils/dateAndTime'
 import { AnimatePresence, motion } from 'framer-motion'
+import { IColors } from '../../../../theme/themeTypes'
 
 interface IWatchfaceProps {
   color: keyof IColors | undefined

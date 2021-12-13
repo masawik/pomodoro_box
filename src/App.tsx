@@ -1,6 +1,5 @@
 import React from 'react'
 import 'normalize.css'
-import { LIGHT_THEME } from './theme/constants/lightTheme'
 import { ThemeProvider } from 'styled-components'
 import Header from './components/Header/Header'
 import GlobalStyle from './globalStyles/globalStyles'
@@ -8,24 +7,29 @@ import GlobalFonts from './globalStyles/globalFonts'
 import StatisticPage from './components/StatisticPage/StatisticPage'
 import TimerPage from './components/TimerPage/TimerPage'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { DARK_THEME } from './theme/constants/darkTheme'
+import { useSelector } from 'react-redux'
+import { TRootState } from './store/rootReducer'
 
 //todo разобраться с ререндером стилей
-const App: React.FC = () => (
-  <ThemeProvider theme={DARK_THEME}>
-    <GlobalFonts />
-    <GlobalStyle />
+const App: React.FC = () => {
+  const theme = useSelector((state: TRootState) => state.settings.theme)
 
-    <Header />
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalFonts />
+      <GlobalStyle />
 
-    <Routes>
-      <Route path='/' element={<TimerPage />} />
+      <Header />
 
-      <Route path='/statistic' element={<StatisticPage />} />
+      <Routes>
+        <Route path='/' element={<TimerPage />} />
 
-      <Route path='*' element={<Navigate to='/' />} />
-    </Routes>
-  </ThemeProvider>
-)
+        <Route path='/statistic' element={<StatisticPage />} />
+
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
+    </ThemeProvider>
+  )
+}
 
 export default App

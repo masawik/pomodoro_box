@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { IColors } from '../../../theme/constants/lightTheme'
+import { IColors } from '../../../theme/themeTypes'
 
 interface StyledButtonProps {
   color?: keyof IColors,

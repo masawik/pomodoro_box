@@ -1,8 +1,8 @@
 import React from 'react'
 import { SStatisticTile, STileTitle } from './Tile.styles'
-import { IColors } from '../../../theme/constants/lightTheme'
 import AnimateContentUpdate
   from '../../layout/AnimateContentUpdate/AnimateContentUpdate'
+import { IColors } from '../../../theme/themeTypes'
 
 interface IStatisticTile {
   title: string,

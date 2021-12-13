@@ -18,8 +18,6 @@ export const HeaderContainer = styled.div`
 `
 
 export const StatisticContainer = styled(SLink)`
-  margin-left: auto;
-
   ${({ theme: { colors, linkColor, transitionDuration } }) => css`
     svg path {
       transition-duration: ${transitionDuration}ms;

@@ -1,4 +1,4 @@
-import { IColors, Theme } from './lightTheme'
+import { EThemeNames, IColors, Theme } from './themeTypes'
 
 const DARK_THEME_COLORS: IColors = {
   primary: {
@@ -30,6 +30,7 @@ const DARK_THEME_COLORS: IColors = {
 }
 
 export const DARK_THEME: Theme = {
+  name: EThemeNames.DARK,
   colors: DARK_THEME_COLORS,
   textColor: '#fffff8',
   invertedTextColor: '#0c71bd',
