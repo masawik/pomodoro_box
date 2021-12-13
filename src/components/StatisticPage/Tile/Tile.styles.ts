@@ -38,7 +38,7 @@ export const SPomodoroCountBody = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 51px;
-  
+
   svg {
     height: 81px;
     width: 81px;
@@ -63,7 +63,7 @@ export const SPomodoroCountFooter = styled.div`
   height: 51px;
   font-size: 24px;
   font-weight: bold;
-  
+
   ${({ theme: { colors, invertedTextColor } }) => css`
     background-color: ${colors.danger.normal};
     color: ${invertedTextColor};
@@ -82,28 +82,39 @@ export const SStatisticTile = styled(STileContainer)<ISStatisticTileProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
+  transition-property: background-color;
+
   svg {
     position: absolute;
     right: 25px;
     top: 35px;
   }
-  
+
   span {
     font-size: 64px;
     line-height: 50px;
   }
 
+  svg path {
+    transition-property: stroke;
+  }
+
   ${STileTitle} {
     margin-bottom: 20px;
   }
-  
+
+  ${({ theme: { transitionDuration } }) => css`
+    &, svg path {
+      transition-duration: ${transitionDuration}ms;
+    }
+  `}
+
   ${({ color = 'secondary', theme: { colors } }) => css`
     background-color: ${colors[color].light};
-    
+
     svg path {
       stroke: ${colors[color].normal};
     }
-    
+
   `}
 `

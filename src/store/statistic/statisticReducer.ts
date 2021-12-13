@@ -25,7 +25,7 @@ interface IStatisticState {
 // test object
 const initialState: IStatisticState = {
   days: {
-    1637269200000: {
+    1639342800000: {
       workTime: 30 * 60 * 1000,
       countOfPomodoros: 1,
       pauseTime: 15000,

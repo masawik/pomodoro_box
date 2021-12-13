@@ -6,35 +6,39 @@ import {
   SPomodoroCountContainer,
   SPomodoroCountFooter,
 } from './Tile.styles'
+import AnimateContentUpdate
+  from '../../layout/AnimateContentUpdate/AnimateContentUpdate'
 
 interface IPomodoroCountTile {
   count: number;
 }
 
+
 const PomodoroCountTile: React.FC<IPomodoroCountTile> = ({ count }) => {
   return (
     <SPomodoroCountContainer>
-      {
-        count ?
-          (
-            <SPomodoroCountBody>
+      <AnimateContentUpdate updateKey={count}>
+        {
+          count ?
+            (
+              <SPomodoroCountBody>
+                <TomatoSVG />
 
-              <TomatoSVG/>
-              <span>
-                x {count}
-              </span>
+                <span>x {count}</span>
 
-              <SPomodoroCountFooter>
-                {count} помидора
-              </SPomodoroCountFooter>
-            </SPomodoroCountBody>
-          )
-          :
-          (
-            <SmileTomatoSVG/>
-          )
-      }
+                <SPomodoroCountFooter>
+                  {count} помидора
+                </SPomodoroCountFooter>
+              </SPomodoroCountBody>
+            )
+            :
+            (
+              <SmileTomatoSVG />
+            )
+        }
+      </AnimateContentUpdate>
     </SPomodoroCountContainer>
+
   )
 }
 

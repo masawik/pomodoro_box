@@ -1,6 +1,8 @@
 import React from 'react'
 import { SStatisticTile, STileTitle } from './Tile.styles'
 import { IColors } from '../../../utils/constants/themes.constants'
+import AnimateContentUpdate
+  from '../../layout/AnimateContentUpdate/AnimateContentUpdate'
 
 interface IStatisticTile {
   title: string,
@@ -17,12 +19,14 @@ const StatisticTile: React.FC<IStatisticTile> = ({
                                                  }) => {
   return (
     <SStatisticTile color={color}>
-      <STileTitle>
-        {title}
-      </STileTitle>
-      <span>
+      <AnimateContentUpdate updateKey={text}>
+        <STileTitle>
+          {title}
+        </STileTitle>
+        <span>
         {text}
       </span>
+      </AnimateContentUpdate>
       {svg}
     </SStatisticTile>
   )

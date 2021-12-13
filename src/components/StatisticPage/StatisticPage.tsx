@@ -26,7 +26,6 @@ import {
   splitMs,
 } from '../../utils/dateAndTime'
 import { statisticSetSelectedDay } from '../../store/statistic/statisticActions'
-// todo добавить анимации плиткам
 const StatisticPage = () => {
   useEffect(() => {
     setDocumentTitle('статистика')

@@ -55,7 +55,12 @@ export const SXAxisTickText = styled.text<ISXAxisTickTextProps>`
   font-size: 24px;
   cursor: pointer;
   text-anchor: middle;
-  fill: ${({ theme: { colors } }) => colors.secondary.dark};
+  transition-property: fill;
+
+  ${({ theme: { colors, transitionDuration } }) => css`
+    transition-duration: ${transitionDuration}ms;
+    fill: ${colors.secondary.dark};
+  `};
 
   ${({ active, theme: { colors } }) => active && css`
     fill: ${colors.danger.normal};

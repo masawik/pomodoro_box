@@ -4,6 +4,8 @@ import {
   STileTitle,
 } from './Tile.styles'
 import { HighlightedText } from '../../typography/highlightedText/HighlightedText.styles'
+import AnimateContentUpdate
+  from '../../layout/AnimateContentUpdate/AnimateContentUpdate'
 
 interface IDayAndTotalTimeTile {
   dayOfWeek: string,
@@ -16,27 +18,30 @@ const DayAndTotalTimeTile: React.FC<IDayAndTotalTimeTile> = ({
                                                              }) => {
   return (
     <DayAndTotalTimeTileContainer>
-      <STileTitle>
-        {dayOfWeek}
-      </STileTitle>
-      {
-        totalTime > 0 ?
-          (
-            <span>
+      <AnimateContentUpdate
+        updateKey={dayOfWeek}
+      >
+        <STileTitle>
+          {dayOfWeek}
+        </STileTitle>
+        {
+          totalTime > 0 ?
+            (
+              <span>
               Вы работали над задачами в&nbsp;течении&nbsp;
-              <HighlightedText>
+                <HighlightedText>
                 {totalTime} минут
               </HighlightedText>
             </span>
-          )
-          :
-          (
-            <span>
+            )
+            :
+            (
+              <span>
               Нет данных
             </span>
-          )
-      }
-
+            )
+        }
+      </AnimateContentUpdate>
     </DayAndTotalTimeTileContainer>
   )
 }
