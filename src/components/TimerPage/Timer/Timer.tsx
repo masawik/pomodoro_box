@@ -15,7 +15,7 @@ import { SButton } from '../../forms'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
 import { useInterval } from '../../../hooks/useInterval'
-import { IColors } from '../../../utils/constants/themes.constants'
+import { IColors } from '../../../theme/constants/lightTheme'
 import {
   timerIncreaseWorkCycles,
   timerSetBreakMode,

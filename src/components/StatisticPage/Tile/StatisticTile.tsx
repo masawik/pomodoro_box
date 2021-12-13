@@ -1,6 +1,6 @@
 import React from 'react'
 import { SStatisticTile, STileTitle } from './Tile.styles'
-import { IColors } from '../../../utils/constants/themes.constants'
+import { IColors } from '../../../theme/constants/lightTheme'
 import AnimateContentUpdate
   from '../../layout/AnimateContentUpdate/AnimateContentUpdate'
 

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { IColors } from '../../../utils/constants/themes.constants'
+import { IColors } from '../../../theme/constants/lightTheme'
 
 export const STileContainer = styled.div`
   position: relative;

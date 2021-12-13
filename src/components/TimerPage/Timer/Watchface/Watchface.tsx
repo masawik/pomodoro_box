@@ -1,6 +1,6 @@
 import React from 'react'
 import { STimerWatchface } from './Watchface.styles'
-import { IColors } from '../../../../utils/constants/themes.constants'
+import { IColors } from '../../../../theme/constants/lightTheme'
 import {
   getTensOfNumber,
   getUnitsOfNumber,
