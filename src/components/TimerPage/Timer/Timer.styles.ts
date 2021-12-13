@@ -42,7 +42,7 @@ export const STimerBody = styled.div`
   align-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 75px 175px;
+  padding: 75px 0;
   height: 100%;
 `
 
