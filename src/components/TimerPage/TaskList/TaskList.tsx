@@ -102,13 +102,12 @@ const TaskList = () => {
           <TaskListTimeSum tasks={tasks} />
         }
       </div>
-      {
-        isTaskFinishConfirmVisible &&
-        <TaskFinishConfirm
-          onTaskDelete={deleteCurrentTask}
-          onTaskExtension={extendCurrentTask}
-        />
-      }
+
+      <TaskFinishConfirm
+        isVisible={isTaskFinishConfirmVisible}
+        onTaskDelete={deleteCurrentTask}
+        onTaskExtension={extendCurrentTask}
+      />
     </>
   )
 }

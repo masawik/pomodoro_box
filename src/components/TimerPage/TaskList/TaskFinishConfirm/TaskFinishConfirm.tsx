@@ -5,15 +5,17 @@ import { SButton } from '../../../forms'
 import { STaskFinishConfirmDeleteButton } from './TaskFinishConfirm.styles'
 
 interface ITaskFinishConfirmProps {
-  onTaskDelete: () => void,
+  onTaskDelete: () => void
   onTaskExtension: () => void
+  isVisible: boolean
 }
 
 const TaskFinishConfirm: React.FC<ITaskFinishConfirmProps> =
-  ({ onTaskDelete, onTaskExtension }) => {
+  ({ onTaskDelete, onTaskExtension, isVisible }) => {
 
     return (
       <Modal
+        isVisible={isVisible}
         onClose={onTaskDelete}
       >
         <SModalBody>

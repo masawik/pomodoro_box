@@ -9,12 +9,14 @@ import { SModalBody, SModalTitle } from '../../../../../Modal/Modal.styles'
 interface ITaskDeleteConfirmationModalProps {
   onClose: () => void
   onDelete: () => void
+  isVisible: boolean
 }
 
 const TaskDeleteConfirmationModal: React.FC<ITaskDeleteConfirmationModalProps> =
-  ({ onClose, onDelete }) => {
+  ({ onClose, onDelete, isVisible }) => {
     return (
       <Modal
+        isVisible={isVisible}
         onClose={onClose}
       >
         <SModalBody>

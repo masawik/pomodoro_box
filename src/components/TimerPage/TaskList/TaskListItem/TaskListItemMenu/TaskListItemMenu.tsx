@@ -126,11 +126,11 @@ const TaskListItemMenu: React.FC<ITaskListItemMenuProps> =
           </SClearUl>
         </Popup>
 
-        {isDeleteTaskModalVisible &&
-        (<TaskDeleteConfirmationModal
+        <TaskDeleteConfirmationModal
+          isVisible={isDeleteTaskModalVisible}
           onClose={closeDeleteModal}
           onDelete={deleteCurrentTask}
-        />)}
+        />
       </>
     ) : null
   }

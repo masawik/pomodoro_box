@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { BtnWrapper, StyledPopup } from './Popup.styles'
+import { BtnWrapper, SPopupContainer } from './Popup.styles'
 import ReactDOM from 'react-dom'
 
 const $popupRoot = document.querySelector('#popup-root') || document.body
@@ -82,12 +82,12 @@ const Popup: React.FC<IPopupProps> = ({
         isOpened
         &&
         ReactDOM.createPortal((
-          <StyledPopup
+          <SPopupContainer
             style={btnPosition}
             ref={popupRef}
           >
             {children}
-          </StyledPopup>
+          </SPopupContainer>
         ), $popupRoot)
       }
     </>

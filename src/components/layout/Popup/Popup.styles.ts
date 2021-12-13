@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const StyledPopup = styled.div`
+export const SPopupContainer = styled.div`
   position: absolute;
   padding: 6px 0;
   

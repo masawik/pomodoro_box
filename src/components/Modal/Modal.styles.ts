@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
-export const SModalWrapper = styled.div`
+export const SModalWrapper = styled(motion.div)`
   position: fixed;
   top: 0;
   right: 0;
@@ -17,7 +18,7 @@ export const SModalWrapper = styled.div`
   }
 `
 
-export const SModalContainer = styled.div`
+export const SModalContainer = styled(motion.div)`
   position: relative;
   min-width: 350px;
   min-height: 175px;
