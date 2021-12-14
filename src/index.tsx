@@ -11,7 +11,7 @@ const rootElement = document.getElementById('root')
 const app = (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <React.StrictMode>
           <App />
         </React.StrictMode>
