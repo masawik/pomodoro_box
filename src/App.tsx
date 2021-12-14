@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux'
 import { TRootState } from './store/rootReducer'
 import themes from './theme'
 
-//todo разобраться с ререндером стилей
 const App: React.FC = () => {
   const currentThemeName =
     useSelector((state: TRootState) => state.settings.theme)
