@@ -5,12 +5,13 @@ import { ESettingsTypes, TSettingsActions } from './settingsTypes'
 
 //all time in ms
 const initialState = {
-  onePomodoroTime: minToMs(25),
-  shortBreakTime: minToMs(5),
-  longBreakTime: minToMs(20),
+  onePomodoroTime: minToMs(1),
+  shortBreakTime: minToMs(1),
+  longBreakTime: minToMs(1),
   longBreakInterval: 4,
-  timerSpeedRatio: 1,
+  timerSpeedRatio: 20,
   theme: 'LIGHT_THEME' as TThemeNames,
+  timerEndNotificationEnabled: true
 }
 
 type TSettingsState = typeof initialState

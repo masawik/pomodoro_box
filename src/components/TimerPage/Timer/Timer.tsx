@@ -33,6 +33,11 @@ import {
 } from '../../../store/statistic/statisticActions'
 import Watchface from './Watchface/Watchface'
 import { IColors } from '../../../theme/themeTypes'
+// @ts-ignore
+import alarmSound from './../../../assets/sounds/alarm.mp3'
+import useSound from 'use-sound'
+import Modal from '../../Modal/Modal'
+import { SModalBody, SModalTitle } from '../../Modal/Modal.styles'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -44,10 +49,16 @@ const TIMER_VALUE_UPDATE_INTERVAL_MS = 500
 const SEC_IN_ONE_MINUTE = 60
 const MS_IN_ONE_SECOND = 1000
 
-
+// todo разгрузить модуль
 const Timer = () => {
   const dispatch = useDispatch()
 
+  //timer finish notification
+  const [playNotificationSound,
+    { stop: stopNotificationSound }] = useSound(alarmSound)
+  const [
+    isTimerFinishNotificationVisible, setIsTimerFinishNotificationVisible,
+  ] = useState(false)
 
   //task
   const currentTaskId =
@@ -64,6 +75,7 @@ const Timer = () => {
     shortBreakTime,
     longBreakTime,
     longBreakInterval,
+    timerEndNotificationEnabled,
   } = useSelector((state: TRootState) => state.settings)
 
 
@@ -167,7 +179,7 @@ const Timer = () => {
     setTimerState(ETimerStates.STOPPED)
   }
 
-  const onTimerEnd = () => {
+  const onTimerEnd = (isForced: boolean = false) => {
     stopTimer()
     if (timerMode === ETimerModes.WORK) {
       dispatch(timerIncreaseWorkCycles())
@@ -175,12 +187,27 @@ const Timer = () => {
       dispatch(taskIncreaseCurrentPassedCount())
       setUpBreak()
     } else setUpWork()
+    timerEndNotificationEnabled
+    && !isForced
+    && startNotification()
   }
 
-  const onForceDoneClick = () => onTimerEnd()
+  const onForceDoneClick = () => onTimerEnd(true)
 
   const increaseCurrentTaskPlannedPomodoroCount =
     () => dispatch(taskIncreasePlannedCount(currentTaskId))
+
+
+  //notification functions
+  const startNotification = () => {
+    playNotificationSound()
+    setIsTimerFinishNotificationVisible(true)
+  }
+
+  const closeFinishNotification = () => {
+    stopNotificationSound()
+    setIsTimerFinishNotificationVisible(false)
+  }
 
   //below only render variables
   let taskName = 'Задач пока нет'
@@ -236,64 +263,91 @@ const Timer = () => {
       ? 'danger'
       : 'primary'
 
+  const finishNotificationText =
+    timerMode === ETimerModes.WORK
+      ? 'Перерыв окончен('
+      : 'Помидор завершен, время отдохнуть!'
+
   return (
-    <STimerContainer>
-      <STimerHeader
-        color={headerColor}
-      >
-        <STimerHeaderTaskName>
-          {taskName}
-        </STimerHeaderTaskName>
-        <span>
+    <>
+      <STimerContainer>
+        <STimerHeader
+          color={headerColor}
+        >
+          <STimerHeaderTaskName>
+            {taskName}
+          </STimerHeaderTaskName>
+          <span>
           {countOfPomodoros}
         </span>
-      </STimerHeader>
+        </STimerHeader>
 
-      <STimerBody>
-        <STimerDisplayContainer>
-          <Watchface
-            color={timerState === ETimerStates.STARTED ? timeColor : undefined}
-            time={timerValue}
-          />
-          {
-            timerState === ETimerStates.STOPPED
-            &&
-            (
-              <SPlusBtn
-                disabled={!currentTaskId}
-                onClick={increaseCurrentTaskPlannedPomodoroCount}
-              >
-                <FilledPlusSVG />
-              </SPlusBtn>
-            )
-          }
+        <STimerBody>
+          <STimerDisplayContainer>
+            <Watchface
+              color={
+                timerState === ETimerStates.STARTED
+                  ? timeColor
+                  : undefined
+              }
+              time={timerValue}
+            />
+            {
+              timerState === ETimerStates.STOPPED
+              &&
+              (
+                <SPlusBtn
+                  disabled={!currentTaskId}
+                  onClick={increaseCurrentTaskPlannedPomodoroCount}
+                >
+                  <FilledPlusSVG />
+                </SPlusBtn>
+              )
+            }
 
-        </STimerDisplayContainer>
+          </STimerDisplayContainer>
 
-        <div>
-          {description}
-        </div>
+          <div>
+            {description}
+          </div>
 
-        <STimerControls>
-          <STimerStartButton
-            onClick={startButtonOnClick}
-            disabled={!currentTask}
-            transparent={!currentTask}
-          >
-            {startButtonText}
-          </STimerStartButton>
+          <STimerControls>
+            <STimerStartButton
+              onClick={startButtonOnClick}
+              disabled={!currentTask}
+              transparent={!currentTask}
+            >
+              {startButtonText}
+            </STimerStartButton>
+
+            <SButton
+              onClick={stopButtonOnClick}
+              color='danger'
+              disabled={timerState === ETimerStates.STOPPED}
+              transparent
+            >
+              {stopButtonText}
+            </SButton>
+          </STimerControls>
+        </STimerBody>
+      </STimerContainer>
+      <Modal
+        isVisible={isTimerFinishNotificationVisible}
+        onClose={closeFinishNotification}
+      >
+        <SModalBody>
+          <SModalTitle>
+            {finishNotificationText}
+          </SModalTitle>
 
           <SButton
-            onClick={stopButtonOnClick}
-            color='danger'
-            disabled={timerState === ETimerStates.STOPPED}
-            transparent
-          >
-            {stopButtonText}
-          </SButton>
-        </STimerControls>
-      </STimerBody>
-    </STimerContainer>
+            style={{ marginTop: '20px' }}
+            color={'primary'}
+            onClick={closeFinishNotification}
+          >ОК</SButton>
+        </SModalBody>
+      </Modal>
+    </>
   )
 }
 
