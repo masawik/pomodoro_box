@@ -35,6 +35,7 @@ import Watchface from './Watchface/Watchface'
 import { IColors } from '../../../theme/themeTypes'
 import TimerFinishNotification
   from './TimerFinishNotification/TimerFinishNotification'
+import TimerSettings from './TimerSettings/TimerSettings'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -322,6 +323,8 @@ const Timer = () => {
         onClose={closeFinishNotification}
         timerMode={timerMode}
       />
+
+      <TimerSettings/>
     </>
   )
 }
