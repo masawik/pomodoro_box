@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import { minToMs } from '../../utils/dateAndTime'
-import { DARK_THEME, LIGHT_THEME, TThemes } from '../../theme'
+import { TThemeNames } from '../../theme'
 import { ESettingsTypes, TSettingsActions } from './settingsTypes'
 
 //all time in ms
@@ -10,7 +10,7 @@ const initialState = {
   longBreakTime: minToMs(20),
   longBreakInterval: 4,
   timerSpeedRatio: 1,
-  theme: LIGHT_THEME as TThemes,
+  theme: 'LIGHT_THEME' as TThemeNames,
 }
 
 type TSettingsState = typeof initialState
@@ -24,11 +24,11 @@ export const settingsReducer: Reducer<TSettingsState, TSettingsActions> =
 
     switch (action.type) {
       case ESettingsTypes.THEME_SET_DARK:
-        newState.theme = DARK_THEME
+        newState.theme = 'DARK_THEME'
         break
 
       case ESettingsTypes.THEME_SET_LIGHT:
-        newState.theme = LIGHT_THEME
+        newState.theme = 'LIGHT_THEME'
         break
     }
 

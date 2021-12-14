@@ -1,4 +1,4 @@
-import { EThemeNames, IColors, Theme } from './themeTypes'
+import { IColors, Theme } from './themeTypes'
 
 const LIGHT_THEME_COLORS: IColors = {
   primary: {
@@ -30,7 +30,6 @@ const LIGHT_THEME_COLORS: IColors = {
 }
 
 export const LIGHT_THEME: Theme = {
-  name: EThemeNames.LIGHT,
   colors: LIGHT_THEME_COLORS,
   textColor: '#333',
   invertedTextColor: '#fff',

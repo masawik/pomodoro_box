@@ -1,8 +1,3 @@
-export enum EThemeNames {
-  DARK = 'DARK',
-  LIGHT = 'LIGHT'
-}
-
 interface IColor {
   dark?: string,
   normal: string,
@@ -19,7 +14,6 @@ export interface IColors {
 }
 
 export interface Theme {
-  name: EThemeNames,
   colors: IColors,
   textColor: string,
   invertedTextColor: string,

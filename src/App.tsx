@@ -9,13 +9,15 @@ import TimerPage from './components/TimerPage/TimerPage'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { TRootState } from './store/rootReducer'
+import themes from './theme'
 
 //todo разобраться с ререндером стилей
 const App: React.FC = () => {
-  const theme = useSelector((state: TRootState) => state.settings.theme)
+  const currentThemeName =
+    useSelector((state: TRootState) => state.settings.theme)
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themes[currentThemeName]}>
       <GlobalFonts />
       <GlobalStyle />
 

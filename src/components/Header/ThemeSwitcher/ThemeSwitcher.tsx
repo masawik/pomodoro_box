@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SThemeSwitchButton } from './ThemeSwitcher.styles'
 import { TRootState } from '../../../store/rootReducer'
-import { EThemeNames } from '../../../theme/themeTypes'
 import {
   settingsThemeSetDark,
   settingsThemeSetLight,
@@ -10,17 +9,17 @@ import {
 
 const ThemeSwitcher = () => {
   const currentThemeName =
-    useSelector((state: TRootState) => state.settings.theme.name)
+    useSelector((state: TRootState) => state.settings.theme)
 
   const dispatch = useDispatch()
 
   const toggleTheme = () => {
-    currentThemeName === EThemeNames.LIGHT
+    currentThemeName === 'LIGHT_THEME'
       ? dispatch(settingsThemeSetDark())
       : dispatch(settingsThemeSetLight())
   }
 
-  const btnTheme = currentThemeName === EThemeNames.LIGHT
+  const btnTheme = currentThemeName === 'LIGHT_THEME'
     ? 'moon'
     : 'sun'
 
