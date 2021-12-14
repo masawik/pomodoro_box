@@ -65,6 +65,9 @@ export const statisticReducer: Reducer<IStatisticState, TStatisticActions> =
       case EStatisticActionTypes.STATISTIC_SET_SELECTED_DAY:
         newState.selectedDay = action.payload.dayTime
         break
+
+      default:
+        return state
     }
 
     return newState

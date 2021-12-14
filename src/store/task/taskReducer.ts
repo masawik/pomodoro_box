@@ -84,6 +84,9 @@ export const taskReducer: Reducer<ITaskState, TTaskActionTypes> =
         newState.tasks[currentTaskId].passedCount++
         break
       }
+
+      default:
+        return state
     }
 
     return newState

@@ -6,19 +6,30 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { rootReducer } from './store/rootReducer'
 import { devToolsEnhancer } from 'redux-devtools-extension'
-import { ls } from './utils/localStorage'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const rootElement = document.getElementById('root')
-const store = createStore(rootReducer, devToolsEnhancer({}))
-store.subscribe(() => ls.saveState(store.getState()))
+
+const persistConfig = {
+  key: 'POMODORO_APP_STORE',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+const store = createStore(persistedReducer, devToolsEnhancer({}))
+const persistor = persistStore(store)
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </BrowserRouter>
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>
 )
 

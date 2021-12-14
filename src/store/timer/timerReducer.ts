@@ -31,6 +31,9 @@ export const timerReducer: Reducer<TTimerState, TTimerActionTypes> =
             ? ETimerModes.WORK
             : ETimerModes.BREAK
         break
+
+      default:
+        return state
     }
 
     return newState

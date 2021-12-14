@@ -30,6 +30,9 @@ export const settingsReducer: Reducer<TSettingsState, TSettingsActions> =
       case ESettingsTypes.THEME_SET_LIGHT:
         newState.theme = 'LIGHT_THEME'
         break
+
+      default:
+        return state
     }
 
     return newState
