@@ -1,16 +1,11 @@
 {
   "files": {
     "main.js": "/pomodoro_box/static/js/main.c539716a.chunk.js",
-    "main.js.map": "/pomodoro_box/static/js/main.c539716a.chunk.js.map",
     "runtime-main.js": "/pomodoro_box/static/js/runtime-main.1ad624b9.js",
-    "runtime-main.js.map": "/pomodoro_box/static/js/runtime-main.1ad624b9.js.map",
-    "static/css/2.679831fc.chunk.css": "/pomodoro_box/static/css/2.679831fc.chunk.css",
+    "static/css/2.24bf1742.chunk.css": "/pomodoro_box/static/css/2.24bf1742.chunk.css",
     "static/js/2.2a0c0cc9.chunk.js": "/pomodoro_box/static/js/2.2a0c0cc9.chunk.js",
-    "static/js/2.2a0c0cc9.chunk.js.map": "/pomodoro_box/static/js/2.2a0c0cc9.chunk.js.map",
     "static/js/3.ecdcf112.chunk.js": "/pomodoro_box/static/js/3.ecdcf112.chunk.js",
-    "static/js/3.ecdcf112.chunk.js.map": "/pomodoro_box/static/js/3.ecdcf112.chunk.js.map",
     "index.html": "/pomodoro_box/index.html",
-    "static/css/2.679831fc.chunk.css.map": "/pomodoro_box/static/css/2.679831fc.chunk.css.map",
     "static/js/2.2a0c0cc9.chunk.js.LICENSE.txt": "/pomodoro_box/static/js/2.2a0c0cc9.chunk.js.LICENSE.txt",
     "static/js/3.ecdcf112.chunk.js.LICENSE.txt": "/pomodoro_box/static/js/3.ecdcf112.chunk.js.LICENSE.txt",
     "static/media/SFUIDisplay-Bold.111df019.woff": "/pomodoro_box/static/media/SFUIDisplay-Bold.111df019.woff",
@@ -38,7 +33,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.1ad624b9.js",
-    "static/css/2.679831fc.chunk.css",
+    "static/css/2.24bf1742.chunk.css",
     "static/js/2.2a0c0cc9.chunk.js",
     "static/js/main.c539716a.chunk.js"
   ]
