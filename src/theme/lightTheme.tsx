@@ -16,6 +16,7 @@ const LIGHT_THEME_COLORS: IColors = {
     light: '#F4F4F4'
   },
   focus: {
+    dark: '#DB8300',
     normal: '#FFAE35',
     light: '#FFDDA9'
   },
