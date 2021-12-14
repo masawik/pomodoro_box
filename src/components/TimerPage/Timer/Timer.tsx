@@ -33,11 +33,8 @@ import {
 } from '../../../store/statistic/statisticActions'
 import Watchface from './Watchface/Watchface'
 import { IColors } from '../../../theme/themeTypes'
-// @ts-ignore
-import alarmSound from './../../../assets/sounds/alarm.mp3'
-import useSound from 'use-sound'
-import Modal from '../../Modal/Modal'
-import { SModalBody, SModalTitle } from '../../Modal/Modal.styles'
+import TimerFinishNotification
+  from './TimerFinishNotification/TimerFinishNotification'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',
@@ -49,13 +46,10 @@ const TIMER_VALUE_UPDATE_INTERVAL_MS = 500
 const SEC_IN_ONE_MINUTE = 60
 const MS_IN_ONE_SECOND = 1000
 
-// todo разгрузить модуль
 const Timer = () => {
   const dispatch = useDispatch()
 
   //timer finish notification
-  const [playNotificationSound,
-    { stop: stopNotificationSound }] = useSound(alarmSound)
   const [
     isTimerFinishNotificationVisible, setIsTimerFinishNotificationVisible,
   ] = useState(false)
@@ -189,7 +183,7 @@ const Timer = () => {
     } else setUpWork()
     timerEndNotificationEnabled
     && !isForced
-    && startNotification()
+    && setIsTimerFinishNotificationVisible(true)
   }
 
   const onForceDoneClick = () => onTimerEnd(true)
@@ -199,15 +193,8 @@ const Timer = () => {
 
 
   //notification functions
-  const startNotification = () => {
-    playNotificationSound()
-    setIsTimerFinishNotificationVisible(true)
-  }
-
-  const closeFinishNotification = () => {
-    stopNotificationSound()
-    setIsTimerFinishNotificationVisible(false)
-  }
+  const closeFinishNotification =
+    () => setIsTimerFinishNotificationVisible(false)
 
   //below only render variables
   let taskName = 'Задач пока нет'
@@ -233,6 +220,7 @@ const Timer = () => {
     timerState === ETimerStates.STOPPED
     || timerState === ETimerStates.PAUSED
       ? startTimer : pauseTimer
+
   const startButtonText =
     timerState === ETimerStates.STOPPED
       ? 'Старт'
@@ -244,6 +232,7 @@ const Timer = () => {
     timerState === ETimerStates.PAUSED
       ? onForceDoneClick
       : stopTimer
+
   const stopButtonText =
     timerState === ETimerStates.PAUSED
       ? timerMode === ETimerModes.WORK
@@ -263,10 +252,6 @@ const Timer = () => {
       ? 'danger'
       : 'primary'
 
-  const finishNotificationText =
-    timerMode === ETimerModes.WORK
-      ? 'Перерыв окончен('
-      : 'Помидор завершен, время отдохнуть!'
 
   return (
     <>
@@ -331,22 +316,12 @@ const Timer = () => {
           </STimerControls>
         </STimerBody>
       </STimerContainer>
-      <Modal
+
+      <TimerFinishNotification
         isVisible={isTimerFinishNotificationVisible}
         onClose={closeFinishNotification}
-      >
-        <SModalBody>
-          <SModalTitle>
-            {finishNotificationText}
-          </SModalTitle>
-
-          <SButton
-            style={{ marginTop: '20px' }}
-            color={'primary'}
-            onClick={closeFinishNotification}
-          >ОК</SButton>
-        </SModalBody>
-      </Modal>
+        timerMode={timerMode}
+      />
     </>
   )
 }
