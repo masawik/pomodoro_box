@@ -20,20 +20,17 @@ export const settingsReducer: Reducer<TSettingsState, TSettingsActions> =
     state = initialState,
     action
   ): TSettingsState => {
+    const newState = { ...state }
+
     switch (action.type) {
       case ESettingsTypes.THEME_SET_DARK:
-        return {
-          ...state,
-          theme: DARK_THEME,
-        }
+        newState.theme = DARK_THEME
+        break
 
       case ESettingsTypes.THEME_SET_LIGHT:
-        return {
-          ...state,
-          theme: LIGHT_THEME,
-        }
-        
-      default:
-        return state
+        newState.theme = LIGHT_THEME
+        break
     }
+
+    return newState
   }

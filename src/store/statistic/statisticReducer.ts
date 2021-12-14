@@ -22,23 +22,10 @@ interface IStatisticState {
   selectedDay: keyof IStatisticState['days'] | 0
 }
 
-// test object
 const initialState: IStatisticState = {
-  days: {
-    1639342800000: {
-      workTime: 30 * 60 * 1000,
-      countOfPomodoros: 1,
-      pauseTime: 15000,
-      countOfPauses: 2,
-    },
-  },
+  days: {},
   selectedDay: 0,
 }
-
-// const initialState: IStatisticState = {
-//   days: {},
-//   selectedDay: 0,
-// }
 
 initialState.selectedDay = getTodayAbsoluteTime()
 
@@ -54,34 +41,31 @@ export const statisticReducer: Reducer<IStatisticState, TStatisticActions> =
 
     switch (action.type) {
       case EStatisticActionTypes.STATISTIC_ADD_MINUTE: {
-        const todayWorkTime = newState.days[todayTime].workTime
+        const todayWorkTimeSum = newState.days[todayTime].workTime
         newState.days[todayTime].workTime =
-          todayWorkTime + minToMs(1)
+          todayWorkTimeSum + minToMs(1)
+        break
       }
-        return newState
 
       case EStatisticActionTypes.STATISTIC_ADD_POMODORO:
         newState.days[todayTime].countOfPomodoros++
-        return newState
+        break
 
       case EStatisticActionTypes.STATISTIC_ADD_PAUSE:
         newState.days[todayTime].countOfPauses++
-        return newState
+        break
 
       case EStatisticActionTypes.STATISTIC_ADD_PAUSE_TIME: {
         let todayPauseTime = newState.days[todayTime].pauseTime
         newState.days[todayTime].pauseTime =
           todayPauseTime + action.payload.pauseDuration
-        return newState
+        break
       }
 
       case EStatisticActionTypes.STATISTIC_SET_SELECTED_DAY:
-        return {
-          ...state,
-          selectedDay: action.payload.dayTime,
-        }
-
-      default:
-        return state
+        newState.selectedDay = action.payload.dayTime
+        break
     }
+
+    return newState
   }
