@@ -73,6 +73,7 @@ const Timer = () => {
 
 
   // settings
+  const { settings } = useSelector((state: TRootState) => state)
   const {
     onePomodoroTime,
     timerSpeedRatio,
@@ -80,8 +81,7 @@ const Timer = () => {
     longBreakTime,
     longBreakInterval,
     timerEndNotificationEnabled,
-  } = useSelector((state: TRootState) => state.settings)
-
+  } = settings
 
   //timer state
   const { workCycles, mode: timerMode } =
@@ -89,13 +89,14 @@ const Timer = () => {
 
   const [currentDuration, setCurrentDuration] = useState(0)
 
-  const initialTimerValue =
-    timerMode === ETimerModes.WORK
+  const getInitialTimerValue = () => {
+    return timerMode === ETimerModes.WORK
       ? onePomodoroTime
       : workCycles !== 0 && workCycles % longBreakInterval === 0
         ? longBreakTime
         : shortBreakTime
-  const [timerValue, setTimerValue] = useState(initialTimerValue)
+  }
+  const [timerValue, setTimerValue] = useState(getInitialTimerValue())
 
   const [startTimerTime, setStartTimerTime] = useState(0)
 
@@ -205,6 +206,13 @@ const Timer = () => {
   //notification functions
   const closeFinishNotification =
     () => setIsTimerFinishNotificationVisible(false)
+
+
+  //settings effect
+  useEffect(() => {
+    setTimerValue(getInitialTimerValue())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings])
 
   //below only render variables
   let taskName = 'Задач пока нет'
