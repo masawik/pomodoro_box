@@ -29,6 +29,8 @@ import { statisticSetSelectedDay } from '../../store/statistic/statisticActions'
 const StatisticPage = () => {
   useEffect(() => {
     setDocumentTitle('статистика')
+    dispatch(statisticSetSelectedDay(getTodayAbsoluteTime()))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const dispatch = useDispatch()
