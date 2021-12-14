@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { SButton } from '../../forms'
 import { IColors } from '../../../theme/themeTypes'
+import { SEmptyButton } from '../../forms/Button/Button.styles'
 
 export const STimerContainer = styled.div`
   height: 507px;
@@ -38,6 +39,7 @@ export const STimerHeaderTaskName = styled.span`
 `
 
 export const STimerBody = styled.div`
+  position: relative;
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -58,14 +60,12 @@ interface ISPlusBtnProps {
   disabled?: boolean
 }
 
-export const SPlusBtn = styled.button<ISPlusBtnProps>`
+export const SPlusBtn = styled(SEmptyButton)<ISPlusBtnProps>`
   position: absolute;
   top: calc(50% - 25px);
   right: -82px;
   display: flex;
-  border: none;
-  background: none;
-  cursor: pointer;
+  
 
   &, svg {
     width: 62px;
@@ -84,6 +84,33 @@ export const SPlusBtn = styled.button<ISPlusBtnProps>`
     :hover {
       svg circle {
         fill: ${disabled ? colors.secondary.dark : colors.primary.dark}
+      }
+    }
+  `}
+`
+
+export const SGearBtn = styled(SEmptyButton)`
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  
+  &, svg {
+    width: 40px;
+  }
+
+  ${({
+       theme: { colors, transitionDuration },
+       disabled = false,
+     }) => css`
+    svg path {
+      transition-duration: ${transitionDuration}ms;
+      transition-property: fill;
+      fill: ${colors.secondary.normal}
+    }
+
+    :hover {
+      svg path {
+        fill: ${disabled ? colors.secondary.dark : colors.focus.dark}
       }
     }
   `}

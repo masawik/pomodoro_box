@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { AnimatePresence } from 'framer-motion'
 
 
-interface IModalProps {
+export interface IModalProps {
   isVisible: boolean
   onClose: () => void
 }

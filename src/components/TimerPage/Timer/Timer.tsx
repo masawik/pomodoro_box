@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  SGearBtn,
   SPlusBtn,
   STimerBody,
   STimerContainer,
@@ -11,6 +12,7 @@ import {
   STimerStartButton,
 } from './Timer.styles'
 import { ReactComponent as FilledPlusSVG } from '../../../assets/images/svg_icons/circle_plus_filled.svg'
+import { ReactComponent as GearSVG } from '../../../assets/images/svg_icons/gear.svg'
 import { SButton } from '../../forms'
 import { useDispatch, useSelector } from 'react-redux'
 import { TRootState } from '../../../store/rootReducer'
@@ -49,6 +51,13 @@ const MS_IN_ONE_SECOND = 1000
 
 const Timer = () => {
   const dispatch = useDispatch()
+
+  //timer settings form
+  const [isSettingsFormVisible, setIsSettingsFormVisible] =
+    useState(false)
+
+  const openSettingsForm = () => setIsSettingsFormVisible(true)
+  const closeSettingsForm = () => setIsSettingsFormVisible(false)
 
   //timer finish notification
   const [
@@ -269,6 +278,12 @@ const Timer = () => {
         </STimerHeader>
 
         <STimerBody>
+          <SGearBtn
+            onClick={openSettingsForm}
+          >
+            <GearSVG />
+          </SGearBtn>
+
           <STimerDisplayContainer>
             <Watchface
               color={
@@ -290,6 +305,7 @@ const Timer = () => {
                 </SPlusBtn>
               )
             }
+
 
           </STimerDisplayContainer>
 
@@ -324,7 +340,10 @@ const Timer = () => {
         timerMode={timerMode}
       />
 
-      <TimerSettings/>
+      <TimerSettings
+        isVisible={isSettingsFormVisible}
+        onClose={closeSettingsForm}
+      />
     </>
   )
 }

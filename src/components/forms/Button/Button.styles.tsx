@@ -64,3 +64,9 @@ export const SUnderlinedButton = styled.button`
   text-decoration: underline;
   padding: 5px 10px;
 `
+
+export const SEmptyButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`

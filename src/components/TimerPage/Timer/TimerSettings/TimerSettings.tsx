@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import Modal from '../../../Modal/Modal'
+import Modal, { IModalProps } from '../../../Modal/Modal'
 import { SModalBody, SModalTitle } from '../../../Modal/Modal.styles'
 import {
   SSettingsForm, SSettingsFormButtons, SSettingsFormCheckbox,
@@ -11,7 +11,8 @@ import { TRootState } from '../../../../store/rootReducer'
 import { msToMin } from '../../../../utils/dateAndTime'
 import { SButton } from '../../../forms'
 
-const TimerSettings = () => {
+const TimerSettings: React.FC<IModalProps> =
+  ({ isVisible, onClose }) => {
   const {
     onePomodoroTime,
     shortBreakTime,
@@ -86,9 +87,8 @@ const TimerSettings = () => {
 
   return (
     <Modal
-      isVisible={true}
-      onClose={() => {
-      }}
+      isVisible={isVisible}
+      onClose={onClose}
     >
       <SModalBody>
         <SModalTitle>
@@ -113,8 +113,7 @@ const TimerSettings = () => {
           <SSettingsFormButtons>
             <SButton
               color={'danger'}
-              onClick={() => {
-              }}
+              onClick={onClose}
             >
               Отмена
             </SButton>
