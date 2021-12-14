@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { STimerWatchface } from './Watchface.styles'
 import {
   getTensOfNumber,
@@ -17,8 +17,8 @@ interface IWatchFaceNumberProps {
   number: number
 }
 
-const watchFaceNumberVariants = {
-  initial: { opacity: 0, y: -30 },
+let watchFaceNumberVariants = {
+  initial: { opacity: 1, y: 0 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 30 },
 }
@@ -44,8 +44,12 @@ const WatchFaceNumber: React.FC<IWatchFaceNumberProps> =
   }
 
 const Watchface: React.FC<IWatchfaceProps> = ({ color, time }) => {
-  const { minutes, seconds } = splitMs(time)
+  useEffect(() => {
+    watchFaceNumberVariants.initial.y = -30
+    watchFaceNumberVariants.initial.opacity = 0
+  }, [])
 
+  const { minutes, seconds } = splitMs(time)
   const tensOfMinutes = getTensOfNumber(minutes)
   const unitsOfMinutes = getUnitsOfNumber(minutes)
   const tensOfSeconds = getTensOfNumber(seconds)

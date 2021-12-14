@@ -16,9 +16,9 @@ export interface ITaskListItemProps {
   count: number
 }
 
-const STaskListLiInitialVariant = {
-  x: -100,
-  opacity: 0
+let STaskListLiInitialVariant = {
+  x: 0,
+  opacity: 1
 }
 
 const STaskListLiVariants = {
@@ -31,6 +31,12 @@ const STaskListLiVariants = {
 }
 
 const TaskListItem = ({ count, name, id }: ITaskListItemProps) => {
+
+  useEffect(() => {
+    STaskListLiInitialVariant.x = -100
+    STaskListLiInitialVariant.opacity = 0
+  }, [])
+
   const [isEditModeOn, setIsEditModeOn] = useState(false)
   const [newTaskName, setNewTaskName] = useState<string>(name)
   const changeNameInputRef = useRef<HTMLInputElement>(null)
