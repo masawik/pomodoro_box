@@ -286,11 +286,15 @@ const Timer = () => {
         </STimerHeader>
 
         <STimerBody>
-          <SGearBtn
-            onClick={openSettingsForm}
-          >
-            <GearSVG />
-          </SGearBtn>
+          {
+            timerState === ETimerStates.STOPPED
+            &&
+            <SGearBtn
+              onClick={openSettingsForm}
+            >
+              <GearSVG />
+            </SGearBtn>
+          }
 
           <STimerDisplayContainer>
             <Watchface

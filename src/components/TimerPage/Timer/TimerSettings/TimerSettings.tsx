@@ -134,6 +134,7 @@ const TimerSettings: React.FC<IModalProps> =
               <SButton
                 color={'danger'}
                 onClick={onClose}
+                type={'button'}
               >
                 Отмена
               </SButton>
