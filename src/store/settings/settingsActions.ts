@@ -1,7 +1,7 @@
 import {
-  ESettingsTypes,
+  ESettingsTypes, TNewSettings, TSettingsReset,
   TSettingsThemeSetDark,
-  TSettingsThemeSetLight,
+  TSettingsThemeSetLight, TSettingsUpdate,
 } from './settingsTypes'
 
 export const settingsThemeSetDark = (): TSettingsThemeSetDark =>
@@ -9,3 +9,9 @@ export const settingsThemeSetDark = (): TSettingsThemeSetDark =>
 
 export const settingsThemeSetLight = (): TSettingsThemeSetLight =>
   ({ type: ESettingsTypes.THEME_SET_LIGHT })
+
+export const settingsReset = (): TSettingsReset =>
+  ({ type: ESettingsTypes.SETTINGS_RESET })
+
+export const settingsUpdate = (newSettings: TNewSettings): TSettingsUpdate =>
+  ({ type: ESettingsTypes.SETTINGS_UPDATE, payload: newSettings })
