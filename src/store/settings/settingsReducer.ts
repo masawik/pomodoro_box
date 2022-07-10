@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import { minToMs } from '../../utils/dateAndTime'
-import { TThemeNames } from '../../theme'
+import { TThemeNames } from '../../styles/theme'
 import { ESettingsTypes, TSettingsActions } from './settingsTypes'
 
 //all time in ms

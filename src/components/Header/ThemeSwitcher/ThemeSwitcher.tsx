@@ -1,16 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SThemeSwitchButton } from './ThemeSwitcher.styles'
-import { TRootState } from '../../../store/rootReducer'
 import {
   settingsThemeSetDark,
   settingsThemeSetLight,
 } from '../../../store/settings/settingsActions'
+import { selectTheme } from '../../../store/settings/settingsSelectors'
+
 
 const ThemeSwitcher = () => {
-  const currentThemeName =
-    useSelector((state: TRootState) => state.settings.theme)
-
+  const currentThemeName = useSelector(selectTheme)
   const dispatch = useDispatch()
 
   const toggleTheme = () => {

@@ -32,7 +32,7 @@ export const getTodayAbsoluteTime = (): number => {
 
 // функция возвращает день, через заданное число дней, от заданого дня
 // today - точка отсчета
-// howMuchDays - через сколько дней от заданной точки отсчета выбрть день
+// howMuchDays - через сколько дней от заданной точки отсчета выбрать день
 export const getDayTimeInDaysFromDayTime =
   (today: number, howMuchDays: number): number => {
     const resultDate = new Date(today)
@@ -74,7 +74,6 @@ const weekDays: { [key: number]: IDayOfWeek } = {
     short: 'Сб',
     long: 'Суббота',
   },
-
 }
 
 export const getDayOfWeekByTime = (time: number): IDayOfWeek => {

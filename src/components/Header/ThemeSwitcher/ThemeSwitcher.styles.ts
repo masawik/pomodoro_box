@@ -10,6 +10,8 @@ export const SThemeSwitchButton = styled.button<ISThemeSwitchButtonProps>`
   margin-left: auto;
   margin-right: 30px;
 
+  cursor: pointer;
+
   border: none;
   background-color: transparent;
   height: 40px;
