@@ -1,19 +1,21 @@
-interface IsplitMs {
+export const minToMs = (min: number): number => min * 60000
+export const msToMin = (ms: number): number => Math.floor(ms / 60000)
+
+interface ISplitMsResult {
   days: number,
   hours: number,
   minutes: number,
   seconds: number
 }
 
-export const minToMs = (min: number): number => min * 60000
-export const msToMin = (ms: number): number => Math.floor(ms / 60000)
+export const splitMs = (ms: number): ISplitMsResult => {
+  const roundingFunction = ms >= 0 ? Math.floor : Math.ceil
 
-export const splitMs = (ms: number): IsplitMs => {
-  const seconds = Math.floor(ms / 1000)
-  const days = Math.floor(seconds / (3600 * 24))
-  const hours = Math.floor(seconds % (3600 * 24) / 3600)
-  const minutes = Math.floor(seconds % 3600 / 60)
-  const sec = Math.floor(seconds % 60)
+  const seconds = roundingFunction(ms / 1000)
+  const days = roundingFunction(seconds / (3600 * 24))
+  const hours = roundingFunction(seconds % (3600 * 24) / 3600)
+  const minutes = roundingFunction(seconds % 3600 / 60)
+  const sec = roundingFunction(seconds % 60)
 
   return { days, hours, minutes, seconds: sec }
 }
@@ -45,7 +47,7 @@ interface IDayOfWeek {
   long: string
 }
 
-const weekDays: { [key: number]: IDayOfWeek } = {
+export const weekDays: { [key: number]: IDayOfWeek } = {
   0: {
     short: 'Вс',
     long: 'Воскресенье',
