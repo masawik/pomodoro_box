@@ -7,7 +7,7 @@ import {
   SSettingsFormLabel,
 } from './TimerSettings.styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { minToMs, msToMin } from '../../../../../utils/dateAndTime'
+import { minToMs, msToMin } from '../../../../../utils/dateAndTime/dateAndTime'
 import { SButton } from '../../../../forms'
 import {
   settingsReset,

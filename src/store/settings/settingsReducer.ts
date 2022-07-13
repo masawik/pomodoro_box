@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { minToMs } from '../../utils/dateAndTime'
+import { minToMs } from '../../utils/dateAndTime/dateAndTime'
 import { TThemeNames } from '../../styles/theme'
 import { ESettingsTypes, TSettingsActions } from './settingsTypes'
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 import { Reducer } from 'redux'
 import { EStatisticActionTypes, TStatisticActions } from './statisticTypes'
-import { getTodayAbsoluteTime, minToMs } from '../../utils/dateAndTime'
+import { getTodayAbsoluteTime, minToMs } from '../../utils/dateAndTime/dateAndTime'
 
 type TDayTimeInTimestamp = number
 type TMilliseconds = number

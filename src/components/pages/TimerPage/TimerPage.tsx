@@ -8,7 +8,7 @@ import TaskList from './TaskList/TaskList'
 import Instruction from './Instruction/Instruction'
 import Timer from './Timer/Timer'
 import NewTaskForm from './NewTaskForm/NewTaskForm'
-import { setDocumentTitle } from '../../../utils/document'
+import { setDocumentTitle } from '../../../utils/documnet/document'
 
 const TimerPage = () => {
   useEffect(() => {

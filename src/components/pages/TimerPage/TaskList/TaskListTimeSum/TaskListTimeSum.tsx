@@ -2,7 +2,7 @@ import React from 'react'
 import { STaskListTotalTimeSum } from './TaskListTimeSum.styles'
 import { TTasksList } from '../../../../../store/task/taskReducer'
 import { useSelector } from 'react-redux'
-import { msToFormattedString } from '../../../../../utils/dateAndTime'
+import { msToFormattedString } from '../../../../../utils/dateAndTime/dateAndTime'
 import { selectSettings } from '../../../../../store/settings/settingsSelectors'
 
 interface ISTaskListTotalTimeSumProps {

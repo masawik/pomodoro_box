@@ -15,7 +15,7 @@ import { ReactComponent as FocusSVG } from '../../../assets/images/svg_icons/foc
 import { ReactComponent as ClockSVG } from '../../../assets/images/svg_icons/clock.svg'
 import { ReactComponent as StopSVG } from '../../../assets/images/svg_icons/stop.svg'
 import StatisticChart from './StatisticChart/StatisticChart'
-import { setDocumentTitle } from '../../../utils/document'
+import { setDocumentTitle } from '../../../utils/documnet/document'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getDayOfWeekByTime,
@@ -23,7 +23,7 @@ import {
   getTodayAbsoluteTime,
   msToMin,
   splitMs,
-} from '../../../utils/dateAndTime'
+} from '../../../utils/dateAndTime/dateAndTime'
 import { statisticSetSelectedDay } from '../../../store/statistic/statisticActions'
 import { selectSettings } from '../../../store/settings/settingsSelectors'
 import { selectStatistic } from '../../../store/statistic/statisticSelectors'

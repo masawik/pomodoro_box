@@ -14,7 +14,7 @@ import {
   getDayOfWeekByTime,
   getDayTimeInDaysFromDayTime,
   msToFormattedString,
-} from '../../../../utils/dateAndTime'
+} from '../../../../utils/dateAndTime/dateAndTime'
 import { useDispatch, useSelector } from 'react-redux'
 import { statisticSetSelectedDay } from '../../../../store/statistic/statisticActions'
 import { selectStatistic } from '../../../../store/statistic/statisticSelectors'

@@ -7,7 +7,7 @@ import {
   msToMin,
   splitMs,
   weekDays,
-} from '../dateAndTime'
+} from './dateAndTime'
 
 describe('minToMs & msToMin', () => {
   interface ITestItem {

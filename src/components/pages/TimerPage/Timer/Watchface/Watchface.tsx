@@ -4,7 +4,7 @@ import {
   getTensOfNumber,
   getUnitsOfNumber,
   splitMs,
-} from '../../../../../utils/dateAndTime'
+} from '../../../../../utils/dateAndTime/dateAndTime'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IColors } from '../../../../../styles/theme/themeTypes'
 

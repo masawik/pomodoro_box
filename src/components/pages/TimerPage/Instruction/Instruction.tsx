@@ -3,7 +3,7 @@ import SH1 from '../../../typography/H1/H1.styles'
 import { SUl } from '../../../typography/List/List.styles'
 import { InstructionLi } from './Instruction.styles'
 import { useSelector } from 'react-redux'
-import { msToMin } from '../../../../utils/dateAndTime'
+import { msToMin } from '../../../../utils/dateAndTime/dateAndTime'
 import { selectSettings } from '../../../../store/settings/settingsSelectors'
 
 
