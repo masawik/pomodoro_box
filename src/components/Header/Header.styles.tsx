@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { SLink } from '../typography'
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.header`
   height: 70px;
   box-shadow: 0 2px 40px 50px ${({ theme: { shadowColor } }) => shadowColor};
 `
@@ -17,7 +17,7 @@ export const HeaderContainer = styled.div`
   `}
 `
 
-export const StatisticContainer = styled(SLink)`
+export const StatisticButton = styled(SLink)`
   ${({ theme: { colors, linkColor, transitionDuration } }) => css`
     svg path {
       transition-duration: ${transitionDuration}ms;

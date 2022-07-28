@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   HeaderWrapper,
-  HeaderContainer, StatisticContainer, LogoContainer,
+  HeaderContainer, StatisticButton, LogoContainer,
 } from './Header.styles'
 import { ReactComponent as TomatoSVG } from '../../assets/images/svg_icons/tomato.svg'
 import { ReactComponent as StatisticSVG } from '../../assets/images/svg_icons/statistic.svg'
@@ -22,13 +22,13 @@ const Header = () => {
 
         <ThemeSwitcher />
 
-        <StatisticContainer
+        <StatisticButton
           as={Link}
           to={'/statistic'}
         >
           <StatisticSVG />
           Статистика
-        </StatisticContainer>
+        </StatisticButton>
       </HeaderContainer>
     </HeaderWrapper>
   )
