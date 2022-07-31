@@ -11,6 +11,11 @@ import { useSelector } from 'react-redux'
 import themes from './styles/theme'
 import { selectTheme } from './store/settings/settingsSelectors'
 
+//todo убрать неиспользуемые пути из tsconfig.paths.json
+// todo bugs:
+//  - при изменении настроек таймера, он запускается со старым временем
+//  - при изменении названия текущей задачи в таймере она остается прежней
+
 const App: React.FC = () => {
   const currentThemeName = useSelector(selectTheme)
 

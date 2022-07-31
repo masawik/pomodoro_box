@@ -6,15 +6,15 @@ import {
   SSettingsFormInputNumber,
   SSettingsFormLabel,
 } from './TimerSettings.styles'
-import { minToMs, msToMin } from '../../../../utils/dateAndTime/dateAndTime'
-import { SButton } from '../../../../components/forms'
+import { minToMs, msToMin } from '@src/utils/dateAndTime/dateAndTime'
+import { SButton } from '@src/components/forms'
 import {
   settingsReset,
   settingsUpdate,
-} from '../../../../store/settings/settingsActions'
-import { TNewSettings } from '../../../../store/settings/settingsTypes'
-import { TSettingsState } from '../../../../store/settings/settingsReducer'
-import { selectSettings } from '../../../../store/settings/settingsSelectors'
+} from '@src/store/settings/settingsActions'
+import { TNewSettings } from '@src/store/settings/settingsTypes'
+import { TSettingsState } from '@src/store/settings/settingsReducer'
+import { selectSettings } from '@src/store/settings/settingsSelectors'
 
 import { IModalProps } from '@shared/ui/Modal/props'
 import { Modal } from '@shared/ui'
