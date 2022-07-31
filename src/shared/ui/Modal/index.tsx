@@ -1,16 +1,11 @@
 import React, { useRef } from 'react'
-import { SModalCloseBtn, SModalContainer, SModalWrapper } from './Modal.styles'
 import ReactDOM from 'react-dom'
 import { AnimatePresence } from 'framer-motion'
 
+import { SModalCloseBtn, SModalContainer, SModalWrapper } from './styles'
+import { IModalProps } from './props'
 
-export interface IModalProps {
-  isVisible: boolean
-  onClose: () => void
-}
-
-const $modalRootEl = document.querySelector('#modal-root') || document.body
-
+const $modalRootEl = document.querySelector('#modal-root') ?? document.body
 
 const motionProps = {
   initial: { opacity: 0 },

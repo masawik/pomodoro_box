@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
-import SFUIDisplayRegularWoff from '../../assets/fonts/SFUI/SFUIDisplay-Regular.woff'
-import SFUIDisplayRegularWoff2 from '../../assets/fonts/SFUI/SFUIDisplay-Regular.woff2'
-import SFUIDisplayBoldWoff from '../../assets/fonts/SFUI/SFUIDisplay-Bold.woff'
-import SFUIDisplayBoldWoff2 from '../../assets/fonts/SFUI/SFUIDisplay-Bold.woff2'
-import SFUIDisplayLightWoff from '../../assets/fonts/SFUI/SFUIDisplay-Light.woff'
-import SFUIDisplayLightWoff2 from '../../assets/fonts/SFUI/SFUIDisplay-Light.woff2'
-import SFUIDisplayThinWoff from '../../assets/fonts/SFUI/SFUIDisplay-Thin.woff'
-import SFUIDisplayThinWoff2 from '../../assets/fonts/SFUI/SFUIDisplay-Thin.woff2'
+import SFUIDisplayRegularWoff from '../../shared/assets/fonts/SFUI/SFUIDisplay-Regular.woff'
+import SFUIDisplayRegularWoff2 from '../../shared/assets/fonts/SFUI/SFUIDisplay-Regular.woff2'
+import SFUIDisplayBoldWoff from '../../shared/assets/fonts/SFUI/SFUIDisplay-Bold.woff'
+import SFUIDisplayBoldWoff2 from '../../shared/assets/fonts/SFUI/SFUIDisplay-Bold.woff2'
+import SFUIDisplayLightWoff from '../../shared/assets/fonts/SFUI/SFUIDisplay-Light.woff'
+import SFUIDisplayLightWoff2 from '../../shared/assets/fonts/SFUI/SFUIDisplay-Light.woff2'
+import SFUIDisplayThinWoff from '../../shared/assets/fonts/SFUI/SFUIDisplay-Thin.woff'
+import SFUIDisplayThinWoff2 from '../../shared/assets/fonts/SFUI/SFUIDisplay-Thin.woff2'
 
 
 const GlobalFonts = createGlobalStyle`

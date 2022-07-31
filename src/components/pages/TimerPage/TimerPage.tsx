@@ -6,9 +6,9 @@ import {
 } from './TimerPage.styles'
 import TaskList from './TaskList/TaskList'
 import Instruction from './Instruction/Instruction'
-import Timer from './Timer/Timer'
 import NewTaskForm from './NewTaskForm/NewTaskForm'
 import { setDocumentTitle } from '../../../utils/documnet/document'
+import { Timer } from '../../../widgets/Timer'
 
 const TimerPage = () => {
   useEffect(() => {

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { SModalBody, SModalTitle } from '../../../../Modal/Modal.styles'
-import { SButton } from '../../../../forms'
-import Modal from '../../../../Modal/Modal'
+import { SModalBody, SModalTitle } from '../../../../shared/ui/Modal/styles'
+import { SButton } from '../../../../components/forms'
+import Modal from '../../../../shared/ui/Modal'
 // @ts-ignore
-import alarmSound from '../../../../../assets/sounds/alarm.mp3'
+import alarmSound from '../../../../shared/assets/sounds/alarm.mp3'
 import useSound from 'use-sound'
-import { ETimerModes } from '../../../../../store/timer/timerReducer'
+import { ETimerModes } from '../../../../store/timer/timerReducer'
 
 interface ITimerFinishNotificationProps {
   isVisible: boolean

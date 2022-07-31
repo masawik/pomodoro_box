@@ -10,39 +10,39 @@ import {
   STimerHeader,
   STimerHeaderTaskName,
   STimerStartButton,
-} from './Timer.styles'
-import { ReactComponent as FilledPlusSVG } from '../../../../assets/images/svg_icons/circle_plus_filled.svg'
-import { ReactComponent as GearSVG } from '../../../../assets/images/svg_icons/gear.svg'
-import { SButton } from '../../../forms'
+} from './index.styles'
+import { ReactComponent as FilledPlusSVG } from '../../../shared/assets/images/svg_icons/circle_plus_filled.svg'
+import { ReactComponent as GearSVG } from '../../../shared/assets/images/svg_icons/gear.svg'
+import { SButton } from '../../../components/forms'
 import { useDispatch, useSelector } from 'react-redux'
-import { useInterval } from '../../../../hooks/useInterval'
+import { useInterval } from '../../../hooks/useInterval'
 import {
   timerIncreaseWorkCycles,
   timerSetBreakMode,
   timerSetWorkMode,
-} from '../../../../store/timer/timerActions'
-import { ETimerModes } from '../../../../store/timer/timerReducer'
+} from '../../../store/timer/timerActions'
+import { ETimerModes } from '../../../store/timer/timerReducer'
 import {
   taskIncreaseCurrentPassedCount,
   taskIncreasePlannedCount,
-} from '../../../../store/task/taskActions'
+} from '../../../store/task/taskActions'
 import {
   statisticAddMinute,
   statisticAddPause,
   statisticAddPauseTime,
   statisticAddPomodoro,
-} from '../../../../store/statistic/statisticActions'
+} from '../../../store/statistic/statisticActions'
 import Watchface from './Watchface/Watchface'
-import { IColors } from '../../../../styles/theme/themeTypes'
+import { IColors } from '../../../styles/theme/themeTypes'
 import TimerFinishNotification
   from './TimerFinishNotification/TimerFinishNotification'
 import TimerSettings from './TimerSettings/TimerSettings'
 import {
   selectCurrentTask,
   selectCurrentTaskId,
-} from '../../../../store/task/taskSelectors'
-import { selectSettings } from '../../../../store/settings/settingsSelectors'
-import { selectTimerState } from '../../../../store/timer/timerSelectors'
+} from '../../../store/task/taskSelectors'
+import { selectSettings } from '../../../store/settings/settingsSelectors'
+import { selectTimerState } from '../../../store/timer/timerSelectors'
 
 enum ETimerStates {
   STOPPED = 'STOPPED',

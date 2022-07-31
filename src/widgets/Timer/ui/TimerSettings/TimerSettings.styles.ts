@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { SButton, StyledInput } from '../../../../forms'
+import { SButton, StyledInput } from '../../../../components/forms'
 
 export const SSettingsForm = styled.form`
   display: flex;

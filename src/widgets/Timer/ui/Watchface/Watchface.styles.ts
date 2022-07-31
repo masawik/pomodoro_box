@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { IColorableComponent } from '../Timer.styles'
+import { IColorableComponent } from '../index.styles'
 
 export const STimerWatchface = styled.span<IColorableComponent>`
   transition-property: color;

@@ -1,10 +1,10 @@
 import React from 'react'
-import Modal from '../../../../../../Modal/Modal'
+import Modal from '../../../../../../../shared/ui/Modal'
 import {
   STaskDeleteModalDeleteButton,
 } from './TaskDeleteConfirmationModal.styles'
 import { SUnderlinedButton } from '../../../../../../forms/Button/Button.styles'
-import { SModalBody, SModalTitle } from '../../../../../../Modal/Modal.styles'
+import { SModalBody, SModalTitle } from '../../../../../../../shared/ui/Modal/styles'
 
 interface ITaskDeleteConfirmationModalProps {
   onClose: () => void

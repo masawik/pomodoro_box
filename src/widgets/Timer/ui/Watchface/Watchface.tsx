@@ -4,9 +4,9 @@ import {
   getTensOfNumber,
   getUnitsOfNumber,
   splitMs,
-} from '../../../../../utils/dateAndTime/dateAndTime'
+} from '../../../../utils/dateAndTime/dateAndTime'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IColors } from '../../../../../styles/theme/themeTypes'
+import { IColors } from '../../../../styles/theme/themeTypes'
 
 interface IWatchfaceProps {
   color: keyof IColors | undefined

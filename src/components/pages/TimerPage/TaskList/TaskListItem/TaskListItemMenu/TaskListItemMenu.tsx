@@ -5,10 +5,10 @@ import {
   SClearLi,
   SClearUl,
 } from '../../../../../typography/List/ClearList.styles'
-import { ReactComponent as PlusSVG } from '../../../../../../assets/images/svg_icons/circle_plus.svg'
-import { ReactComponent as MinusSVG } from '../../../../../../assets/images/svg_icons/circle_minus.svg'
-import { ReactComponent as PencilSVG } from '../../../../../../assets/images/svg_icons/pencil.svg'
-import { ReactComponent as TrashBinSVG } from '../../../../../../assets/images/svg_icons/trash_bin.svg'
+import { ReactComponent as PlusSVG } from '../../../../../../shared/assets/images/svg_icons/circle_plus.svg'
+import { ReactComponent as MinusSVG } from '../../../../../../shared/assets/images/svg_icons/circle_minus.svg'
+import { ReactComponent as PencilSVG } from '../../../../../../shared/assets/images/svg_icons/pencil.svg'
+import { ReactComponent as TrashBinSVG } from '../../../../../../shared/assets/images/svg_icons/trash_bin.svg'
 import { useDispatch } from 'react-redux'
 import {
   taskDelete,

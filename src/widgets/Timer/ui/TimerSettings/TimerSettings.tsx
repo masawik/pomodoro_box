@@ -1,21 +1,24 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import Modal, { IModalProps } from '../../../../Modal/Modal'
-import { SModalBody, SModalTitle } from '../../../../Modal/Modal.styles'
+import { useDispatch, useSelector } from 'react-redux'
+
 import {
   SSettingsForm, SSettingsFormButtons, SSettingsFormCheckbox,
   SSettingsFormInputNumber,
   SSettingsFormLabel,
 } from './TimerSettings.styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { minToMs, msToMin } from '../../../../../utils/dateAndTime/dateAndTime'
-import { SButton } from '../../../../forms'
+import { minToMs, msToMin } from '../../../../utils/dateAndTime/dateAndTime'
+import { SButton } from '../../../../components/forms'
 import {
   settingsReset,
   settingsUpdate,
-} from '../../../../../store/settings/settingsActions'
-import { TNewSettings } from '../../../../../store/settings/settingsTypes'
-import { TSettingsState } from '../../../../../store/settings/settingsReducer'
-import { selectSettings } from '../../../../../store/settings/settingsSelectors'
+} from '../../../../store/settings/settingsActions'
+import { TNewSettings } from '../../../../store/settings/settingsTypes'
+import { TSettingsState } from '../../../../store/settings/settingsReducer'
+import { selectSettings } from '../../../../store/settings/settingsSelectors'
+
+import { IModalProps } from '@shared/ui/Modal/props'
+import { Modal } from '@shared/ui'
+
 
 const serializeStateObjectMsToMin = (stateObj: TSettingsState) => ({
   onePomodoroTime: msToMin(stateObj.onePomodoroTime),
@@ -106,14 +109,14 @@ const TimerSettings: React.FC<IModalProps> =
     }, [settings])
 
     return (
-      <Modal
+      <Modal.Modal
         isVisible={isVisible}
         onClose={onClose}
       >
-        <SModalBody>
-          <SModalTitle>
+        <Modal.Styles.SModalBody>
+          <Modal.Styles.SModalTitle>
             Настройки
-          </SModalTitle>
+          </Modal.Styles.SModalTitle>
 
           <SSettingsForm
             onSubmit={onSubmit}
@@ -155,8 +158,8 @@ const TimerSettings: React.FC<IModalProps> =
               </SButton>
             </SSettingsFormButtons>
           </SSettingsForm>
-        </SModalBody>
-      </Modal>
+        </Modal.Styles.SModalBody>
+      </Modal.Modal>
     )
   }
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import Modal from '../../../../Modal/Modal'
-import { SModalBody, SModalTitle } from '../../../../Modal/Modal.styles'
+import Modal from '../../../../../shared/ui/Modal'
+import { SModalBody, SModalTitle } from '../../../../../shared/ui/Modal/styles'
 import { SButton } from '../../../../forms'
 import { STaskFinishConfirmDeleteButton } from './TaskFinishConfirm.styles'
 

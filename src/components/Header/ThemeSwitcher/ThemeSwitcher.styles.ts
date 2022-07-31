@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import moonIMG from '../../../assets/images/theme_switcher/moon.png'
-import sunIMG from '../../../assets/images/theme_switcher/sun.png'
+import moonIMG from '../../../shared/assets/images/theme_switcher/moon.png'
+import sunIMG from '../../../shared/assets/images/theme_switcher/sun.png'
 
 interface ISThemeSwitchButtonProps {
   btnTheme: 'sun' | 'moon'

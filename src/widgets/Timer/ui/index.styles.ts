@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import { SButton } from '../../../forms'
-import { IColors } from '../../../../styles/theme/themeTypes'
-import { SEmptyButton } from '../../../forms/Button/Button.styles'
+import { SButton } from '../../../components/forms'
+import { IColors } from '../../../styles/theme/themeTypes'
+import { SEmptyButton } from '../../../components/forms/Button/Button.styles'
 
 export const STimerContainer = styled.div`
   height: 507px;

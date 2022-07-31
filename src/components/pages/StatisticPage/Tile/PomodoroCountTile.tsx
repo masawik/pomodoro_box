@@ -1,6 +1,6 @@
 import React from 'react'
-import { ReactComponent as SmileTomatoSVG } from '../../../../assets/images/svg_icons/smile_tomato.svg'
-import { ReactComponent as TomatoSVG } from '../../../../assets/images/svg_icons/tomato.svg'
+import { ReactComponent as SmileTomatoSVG } from '../../../../shared/assets/images/svg_icons/smile_tomato.svg'
+import { ReactComponent as TomatoSVG } from '../../../../shared/assets/images/svg_icons/tomato.svg'
 import {
   SPomodoroCountBody,
   SPomodoroCountContainer,

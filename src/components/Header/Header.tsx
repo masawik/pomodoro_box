@@ -3,8 +3,8 @@ import {
   HeaderWrapper,
   HeaderContainer, StatisticButton, LogoContainer,
 } from './Header.styles'
-import { ReactComponent as TomatoSVG } from '../../assets/images/svg_icons/tomato.svg'
-import { ReactComponent as StatisticSVG } from '../../assets/images/svg_icons/statistic.svg'
+import { ReactComponent as TomatoSVG } from '../../shared/assets/images/svg_icons/tomato.svg'
+import { ReactComponent as StatisticSVG } from '../../shared/assets/images/svg_icons/statistic.svg'
 import { Link } from 'react-router-dom'
 import ThemeSwitcher from './ThemeSwitcher/ThemeSwitcher'
 
